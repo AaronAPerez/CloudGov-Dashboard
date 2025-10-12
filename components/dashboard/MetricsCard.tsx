@@ -128,16 +128,16 @@ export function MetricsCard({
       )}
     >
       <CardBody>
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between gap-3">
           {/* Left side: Title and value */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             {/* Title */}
-            <p className="text-sm font-semibold text-neutral-700">{title}</p>
+            <p className="text-sm font-semibold text-neutral-700 truncate">{title}</p>
 
             {/* Value */}
             <p
               className={cn(
-                'mt-2 text-3xl font-bold',
+                'mt-2 text-2xl sm:text-3xl font-bold break-words',
                 iconVariant === 'primary' && 'text-primary-900',
                 iconVariant === 'success' && 'text-success-900',
                 iconVariant === 'warning' && 'text-warning-900',
@@ -150,7 +150,7 @@ export function MetricsCard({
 
             {/* Change indicator */}
             {change !== undefined && (
-              <div className="mt-2 flex items-center gap-2">
+              <div className="mt-2 flex flex-wrap items-center gap-2">
                 {/* Trend badge */}
                 <div
                   className={cn(
@@ -171,7 +171,7 @@ export function MetricsCard({
                 </div>
 
                 {/* Description */}
-                <span className="text-xs text-neutral-500">{description}</span>
+                <span className="text-xs text-neutral-500 whitespace-nowrap">{description}</span>
               </div>
             )}
           </div>

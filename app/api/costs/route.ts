@@ -56,13 +56,13 @@ interface CostSummary {
  * Generate mock cost data
  * In production, this would call AWS Cost Explorer API
  */
-function generateMockCosts(range: string, groupBy: string): { costs: CostDataPoint[], summary: CostSummary } {
+function generateMockCosts(range: string, _groupBy: string): { costs: CostDataPoint[], summary: CostSummary } {
   const costs: CostDataPoint[] = [];
   const now = new Date();
 
   // Determine number of data points based on range
   let dataPoints = 30;
-  let baselineCost = 12000;
+  const baselineCost = 12000;
 
   switch (range) {
     case '7d':
@@ -181,19 +181,17 @@ export async function GET(request: NextRequest) {
     );
 
     // Prepare response data
-    let responseData: any = {
+    const responseData = {
       costs,
       summary,
       range: validatedParams.range,
       groupBy: validatedParams.groupBy,
+      breakdown: validatedParams.groupBy === 'service'
+        ? generateServiceBreakdown()
+        : validatedParams.groupBy === 'region'
+        ? generateRegionBreakdown()
+        : undefined,
     };
-
-    // Add breakdown data based on groupBy parameter
-    if (validatedParams.groupBy === 'service') {
-      responseData.breakdown = generateServiceBreakdown();
-    } else if (validatedParams.groupBy === 'region') {
-      responseData.breakdown = generateRegionBreakdown();
-    }
 
     // Return response with metadata
     return NextResponse.json(
@@ -203,6 +201,8 @@ export async function GET(request: NextRequest) {
         metadata: {
           count: costs.length,
           totalCost: costs.reduce((sum, item) => sum + item.cost, 0),
+          mock: true,
+          note: 'This is mock data. In production, this would connect to AWS Cost Explorer API.',
         },
         timestamp: new Date().toISOString(),
       },
@@ -221,7 +221,7 @@ export async function GET(request: NextRequest) {
         {
           success: false,
           error: 'Invalid query parameters',
-          details: error.errors,
+          details: error.issues,
           timestamp: new Date().toISOString(),
         },
         { status: 400 }
@@ -246,7 +246,7 @@ export async function GET(request: NextRequest) {
  *
  * Create cost alert or budget (for future implementation)
  */
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   return NextResponse.json(
     {
       success: false,

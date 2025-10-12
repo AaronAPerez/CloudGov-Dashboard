@@ -155,6 +155,8 @@ export async function GET(request: NextRequest) {
           offset,
           limit,
           count: resources.length,
+          mock: true,
+          note: 'This is mock data. In production, this would connect to AWS SDK (EC2, S3, Lambda, etc.).',
         },
         timestamp: new Date().toISOString(),
       },
@@ -168,7 +170,7 @@ export async function GET(request: NextRequest) {
         {
           success: false,
           error: 'Invalid query parameters',
-          details: error.errors,
+          details: error.issues,
           timestamp: new Date().toISOString(),
         },
         { status: 400 }
@@ -193,7 +195,7 @@ export async function GET(request: NextRequest) {
  * 
  * Create or update resource (for future implementation)
  */
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   return NextResponse.json(
     {
       success: false,

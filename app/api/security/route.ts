@@ -249,6 +249,8 @@ export async function GET(request: NextRequest) {
         metadata: {
           total: findings.length,
           filtered: !!validatedParams.severity || !!validatedParams.status,
+          mock: true,
+          note: 'This is mock data. In production, this would connect to AWS Security Hub and compliance scanners.',
         },
         timestamp: new Date().toISOString(),
       },
@@ -262,7 +264,7 @@ export async function GET(request: NextRequest) {
         {
           success: false,
           error: 'Invalid query parameters',
-          details: error.errors,
+          details: error.issues,
           timestamp: new Date().toISOString(),
         },
         { status: 400 }

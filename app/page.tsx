@@ -68,7 +68,6 @@ export default function DashboardPage() {
   } = useCosts({ range: '30d' });
 
   const {
-    findings,
     compliance,
     priorityFindings,
     isLoading: securityLoading,
@@ -96,22 +95,28 @@ export default function DashboardPage() {
   return (
     <DashboardLayout activeRoute="/">
       {/* Page header with refresh button */}
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-neutral-900">
-            Dashboard Overview
-          </h1>
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex-1">
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="text-2xl font-bold text-neutral-900 sm:text-3xl">
+              Dashboard Overview
+            </h1>
+            <Badge variant="warning" size="sm">
+              Demo Mode
+            </Badge>
+          </div>
           <p className="mt-1 text-sm text-neutral-600">
-            Real-time monitoring of your AWS infrastructure
+            Real-time monitoring of your AWS infrastructure • Using mock data
           </p>
         </div>
-        
+
         <Button
           variant="ghost"
           size="sm"
           onClick={handleRefreshAll}
           leftIcon={<RefreshCw className="h-4 w-4" />}
           aria-label="Refresh all data"
+          className="self-start sm:self-auto"
         >
           Refresh
         </Button>
@@ -228,9 +233,9 @@ export default function DashboardPage() {
       </section>
 
       {/* Two-column layout for tables and insights */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 xl:grid-cols-3">
         {/* Recent Resources - 2/3 width */}
-        <section className="lg:col-span-2" aria-labelledby="resources-heading">
+        <section className="xl:col-span-2" aria-labelledby="resources-heading">
           <h2 id="resources-heading" className="sr-only">
             Recent Resources
           </h2>

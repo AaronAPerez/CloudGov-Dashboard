@@ -87,7 +87,7 @@ function generateCostData(range: string): CostDataPoint[] {
 /**
  * Generate service-level cost breakdown
  */
-function generateServiceCosts(range: string): CostDataPoint[] {
+function generateServiceCosts(_range: string): CostDataPoint[] {
   const services = ['EC2', 'S3', 'RDS', 'Lambda', 'DynamoDB'];
   const data: CostDataPoint[] = [];
   
@@ -201,7 +201,7 @@ export async function GET(request: NextRequest) {
         {
           success: false,
           error: 'Invalid query parameters',
-          details: error.errors,
+          details: error.issues,
           timestamp: new Date().toISOString(),
         },
         { status: 400 }
@@ -226,7 +226,7 @@ export async function GET(request: NextRequest) {
  * 
  * Get cost forecast for next 30 days (future enhancement)
  */
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   return NextResponse.json(
     {
       success: false,
