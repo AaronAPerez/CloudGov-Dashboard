@@ -65,6 +65,50 @@ export interface ResourceTableProps {
 type SortDirection = 'asc' | 'desc' | null;
 
 /**
+ * Resource type color variants
+ */
+const typeVariants: Record<string, 'primary' | 'success' | 'warning' | 'error' | 'info' | 'neutral'> = {
+  'EC2': 'primary',
+  'S3': 'success',
+  'Lambda': 'warning',
+  'RDS': 'error',
+  'DynamoDB': 'info',
+  'ECS': 'primary',
+  'EKS': 'primary',
+  'CloudFront': 'success',
+  'API Gateway': 'warning',
+  'WorkSpaces': 'neutral',
+};
+
+/**
+ * Region color variants
+ */
+const regionVariants: Record<string, { color: string; bg: string }> = {
+  'us-east-1': { color: 'text-blue-700', bg: 'bg-blue-50' },
+  'us-west-2': { color: 'text-purple-700', bg: 'bg-purple-50' },
+  'eu-west-1': { color: 'text-green-700', bg: 'bg-green-50' },
+  'ap-southeast-1': { color: 'text-orange-700', bg: 'bg-orange-50' },
+};
+
+/**
+ * Generate consistent color for owner name
+ */
+function getOwnerColor(name: string): string {
+  const colors = [
+    'bg-blue-500',
+    'bg-purple-500',
+    'bg-pink-500',
+    'bg-green-500',
+    'bg-yellow-500',
+    'bg-indigo-500',
+    'bg-red-500',
+    'bg-orange-500',
+  ];
+  const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return colors[hash % colors.length];
+}
+
+/**
  * Sort configuration
  */
 interface SortConfig {
@@ -267,7 +311,7 @@ export function ResourceTable({
 
                   {/* Type */}
                   <td className="px-4 py-3">
-                    <Badge variant="neutral" size="sm">
+                    <Badge variant={typeVariants[resource.type] || 'neutral'} size="sm">
                       {resource.type}
                     </Badge>
                   </td>
@@ -280,20 +324,53 @@ export function ResourceTable({
                   </td>
 
                   {/* Region */}
-                  <td className="px-4 py-3 text-sm text-neutral-700">
-                    {resource.region}
+                  <td className="px-4 py-3">
+                    <span
+                      className={cn(
+                        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
+                        regionVariants[resource.region]?.bg || 'bg-neutral-100',
+                        regionVariants[resource.region]?.color || 'text-neutral-700'
+                      )}
+                    >
+                      {resource.region}
+                    </span>
                   </td>
 
                   {/* Monthly Cost */}
                   <td className="px-4 py-3 text-right">
-                    <span className="font-medium text-neutral-900">
+                    <span
+                      className={cn(
+                        'font-medium',
+                        resource.monthlyCost >= 500
+                          ? 'text-error-700'
+                          : resource.monthlyCost >= 200
+                          ? 'text-warning-700'
+                          : 'text-success-700'
+                      )}
+                    >
                       {formatCurrency(resource.monthlyCost)}
                     </span>
                   </td>
 
                   {/* Owner */}
-                  <td className="px-4 py-3 text-sm text-neutral-700">
-                    {resource.owner}
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <div
+                        className={cn(
+                          'h-6 w-6 flex-shrink-0 rounded-full flex items-center justify-center text-[10px] font-semibold text-white',
+                          getOwnerColor(resource.owner)
+                        )}
+                      >
+                        {resource.owner
+                          .split(' ')
+                          .map(n => n[0])
+                          .join('')
+                          .toUpperCase()}
+                      </div>
+                      <span className="text-sm text-neutral-700">
+                        {resource.owner}
+                      </span>
+                    </div>
                   </td>
 
                   {/* Last Accessed */}

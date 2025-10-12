@@ -154,7 +154,7 @@ export function Header({
               <div
                 className={cn(
                   'absolute right-0 mt-2 w-80 rounded-lg border border-neutral-200',
-                  'bg-white shadow-lg animate-slide-down'
+                  'bg-gray-100 shadow-lg animate-slide-down'
                 )}
                 role="menu"
               >

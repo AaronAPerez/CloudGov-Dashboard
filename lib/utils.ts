@@ -105,9 +105,10 @@ export function formatBytes(bytes: number, decimals: number = 2): string {
  * @example
  * formatRelativeTime(new Date(Date.now() - 3600000)) // Returns: '1 hour ago'
  */
-export function formatRelativeTime(date: Date): string {
+export function formatRelativeTime(date: Date | string): string {
   const now = new Date();
-  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
+  const diffInSeconds = Math.floor((now.getTime() - dateObj.getTime()) / 1000);
 
   const intervals = {
     year: 31536000,

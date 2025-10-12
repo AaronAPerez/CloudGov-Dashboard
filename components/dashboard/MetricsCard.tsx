@@ -74,6 +74,17 @@ const iconVariants = {
 };
 
 /**
+ * Card border and accent color variants
+ */
+const cardVariants = {
+  primary: 'border-l-4 border-l-primary-500 bg-gradient-to-br from-primary-50/50 to-white hover:shadow-lg hover:shadow-primary-100/50',
+  success: 'border-l-4 border-l-success-500 bg-gradient-to-br from-success-50/50 to-white hover:shadow-lg hover:shadow-success-100/50',
+  warning: 'border-l-4 border-l-warning-500 bg-gradient-to-br from-warning-50/50 to-white hover:shadow-lg hover:shadow-warning-100/50',
+  error: 'border-l-4 border-l-error-500 bg-gradient-to-br from-error-50/50 to-white hover:shadow-lg hover:shadow-error-100/50',
+  neutral: 'border-l-4 border-l-neutral-300 bg-gradient-to-br from-neutral-50/50 to-white hover:shadow-lg hover:shadow-neutral-100/50',
+};
+
+/**
  * MetricsCard Component
  * 
  * Displays a single metric with trend information
@@ -111,17 +122,29 @@ export function MetricsCard({
       interactive={!!onClick}
       onClick={onClick}
       isLoading={isLoading}
-      className="transition-all duration-200"
+      className={cn(
+        'transition-all duration-200',
+        cardVariants[iconVariant]
+      )}
     >
       <CardBody>
         <div className="flex items-start justify-between">
           {/* Left side: Title and value */}
           <div className="flex-1">
             {/* Title */}
-            <p className="text-sm font-medium text-neutral-600">{title}</p>
+            <p className="text-sm font-semibold text-neutral-700">{title}</p>
 
             {/* Value */}
-            <p className="mt-2 text-3xl font-bold text-neutral-900">
+            <p
+              className={cn(
+                'mt-2 text-3xl font-bold',
+                iconVariant === 'primary' && 'text-primary-900',
+                iconVariant === 'success' && 'text-success-900',
+                iconVariant === 'warning' && 'text-warning-900',
+                iconVariant === 'error' && 'text-error-900',
+                iconVariant === 'neutral' && 'text-neutral-900'
+              )}
+            >
               {typeof value === 'number' ? formatNumber(value) : value}
             </p>
 
@@ -157,8 +180,14 @@ export function MetricsCard({
           {icon && (
             <div
               className={cn(
-                'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg',
-                iconVariants[iconVariant]
+                'flex h-8 w-8 flex-shrink-0 items-center',
+                'transition-all',
+                iconVariants[iconVariant],
+                iconVariant === 'primary' && 'ring-primary-200/50',
+                iconVariant === 'success' && 'ring-success-200/50',
+                iconVariant === 'warning' && 'ring-warning-200/50',
+                iconVariant === 'error' && 'ring-error-200/50',
+                iconVariant === 'neutral' && 'ring-neutral-200/50'
               )}
               aria-hidden="true"
             >

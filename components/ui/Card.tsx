@@ -93,7 +93,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={cn(
           // Base styles
-          'bg-white rounded-lg border border-neutral-200 shadow-sm',
+          'rounded-lg border border-neutral-200 shadow-sm',
+          // Default background (can be overridden by className)
+          !className?.includes('bg-') && 'bg-white',
           // Hover effect
           hoverable &&
             'transition-shadow duration-200 hover:shadow-md hover:border-neutral-300',
