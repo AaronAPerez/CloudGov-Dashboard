@@ -1,0 +1,23 @@
+{
+  "name": "cost-calculator",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to calculate and analyze AWS costs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "cost",
+    "optimization"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1550.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

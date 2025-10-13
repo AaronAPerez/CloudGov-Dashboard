@@ -11,6 +11,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import type { WorkSpace } from '@/lib/types';
+import { getWorkSpaces, saveWorkSpace } from '@/lib/aws/dynamodb';
+import { features } from '@/lib/aws/config';
 
 /**
  * Mock WorkSpaces instances
@@ -160,15 +162,31 @@ const mockWorkSpaces: WorkSpace[] = [
  */
 export async function GET(request: NextRequest) {
   try {
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
     const { searchParams } = new URL(request.url);
     const state = searchParams.get('state');
     const runningMode = searchParams.get('runningMode');
     const search = searchParams.get('search');
 
-    let filteredWorkSpaces = [...mockWorkSpaces];
+    let filteredWorkSpaces: WorkSpace[] = [];
+    let dataSource = 'mock';
+
+    // Try to fetch from DynamoDB first
+    if (features.useRealAWS) {
+      try {
+        const dbWorkSpaces = await getWorkSpaces();
+        if (dbWorkSpaces && dbWorkSpaces.length > 0) {
+          filteredWorkSpaces = dbWorkSpaces as WorkSpace[];
+          dataSource = 'dynamodb';
+        } else {
+          filteredWorkSpaces = [...mockWorkSpaces];
+        }
+      } catch (error) {
+        console.error('DynamoDB error, using mock data:', error);
+        filteredWorkSpaces = [...mockWorkSpaces];
+      }
+    } else {
+      filteredWorkSpaces = [...mockWorkSpaces];
+    }
 
     // Filter by state
     if (state && state !== 'all') {

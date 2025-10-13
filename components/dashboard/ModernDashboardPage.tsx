@@ -35,18 +35,15 @@ import {
   Sparkles,
   AlertTriangle,
   RefreshCw,
-  TrendingUp,
-  TrendingDown,
   Activity,
   Cloud,
   Zap,
   CheckCircle,
-  XCircle,
 } from 'lucide-react';
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { CostChart } from '@/components/dashboard/CostChart';
 import { ResourceTable } from '@/components/dashboard/ResourceTable';
-import { Card, CardHeader, CardBody, Badge, Button } from '@/components/ui';
+import { Badge, Button } from '@/components/ui';
 import { useResources, useCosts, useSecurity } from '@/hooks';
 import { formatCurrency, cn } from '@/lib/utils';
 import type { AWSResource } from '@/lib/types';
@@ -252,7 +249,7 @@ export default function DashboardPage() {
       </section>
 
       {/* Cost Trend Chart */}
-      <section className="mb-8 animate-slide-up" style={{ animationDelay: '0.4s' }} aria-labelledby="cost-trend-heading">
+      <section className="text-gray-300 mb-8 animate-slide-up" style={{ animationDelay: '0.4s' }} aria-labelledby="cost-trend-heading">
         <h2 id="cost-trend-heading" className="sr-only">
           Cost Trend
         </h2>

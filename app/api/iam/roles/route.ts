@@ -10,6 +10,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import type { IAMRole, IAMPolicy, IAMPolicyDocument } from '@/lib/types';
+import { getIAMRoles, saveIAMRole } from '@/lib/aws/dynamodb';
+import { features } from '@/lib/aws/config';
 
 /**
  * Mock IAM policies with varying risk levels
@@ -208,15 +210,33 @@ const mockRoles: IAMRole[] = [
  */
 export async function GET(request: NextRequest) {
   try {
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
     // Get query parameters
     const { searchParams } = new URL(request.url);
     const riskLevel = searchParams.get('riskLevel'); // 'high', 'medium', 'low'
     const search = searchParams.get('search');
 
-    let filteredRoles = [...mockRoles];
+    let filteredRoles: IAMRole[] = [];
+    let dataSource = 'mock';
+
+    // Try to fetch from DynamoDB first
+    if (features.useRealAWS) {
+      try {
+        const dbRoles = await getIAMRoles();
+        if (dbRoles && dbRoles.length > 0) {
+          filteredRoles = dbRoles as IAMRole[];
+          dataSource = 'dynamodb';
+        } else {
+          // If empty, populate with mock data
+          filteredRoles = [...mockRoles];
+          await Promise.all(mockRoles.map(role => saveIAMRole({ ...role, id: role.arn } as Record<string, unknown>)));
+        }
+      } catch (error) {
+        console.error('DynamoDB error, using mock data:', error);
+        filteredRoles = [...mockRoles];
+      }
+    } else {
+      filteredRoles = [...mockRoles];
+    }
 
     // Filter by risk level
     if (riskLevel === 'high') {
@@ -256,6 +276,12 @@ export async function GET(request: NextRequest) {
         roles: filteredRoles,
         summary,
         policies: mockPolicies,
+      },
+      metadata: {
+        source: dataSource,
+        note: dataSource === 'dynamodb'
+          ? 'Data from DynamoDB'
+          : 'Using local mock data. Set USE_REAL_AWS=true to enable DynamoDB.',
       },
       timestamp: new Date().toISOString(),
     });
@@ -328,6 +354,15 @@ export async function POST(request: NextRequest) {
       tags: {},
       riskScore,
     };
+
+    // Save to DynamoDB if enabled
+    if (features.useRealAWS) {
+      try {
+        await saveIAMRole({ ...newRole, id: newRole.arn });
+      } catch (error) {
+        console.error('Failed to save role to DynamoDB:', error);
+      }
+    }
 
     return NextResponse.json({
       success: true,

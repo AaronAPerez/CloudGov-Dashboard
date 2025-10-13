@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3002",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3002",
     "lint": "eslint",
     "test": "jest",
     "prepare": "husky"
@@ -13,7 +13,9 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch": "^3.908.0",
     "@aws-sdk/client-dynamodb": "^3.908.0",
-    "@aws-sdk/client-ec2": "^3.908.0",
+    "@aws-sdk/client-ec2": "^3.909.0",
+    "@aws-sdk/client-lambda": "^3.908.0",
+    "@aws-sdk/client-rds": "^3.908.0",
     "@aws-sdk/client-s3": "^3.908.0",
     "@aws-sdk/lib-dynamodb": "^3.908.0",
     "clsx": "^2.1.1",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.56.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",

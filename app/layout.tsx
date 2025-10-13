@@ -48,6 +48,9 @@ export const viewport: Viewport = {
  * SEO optimized for cloud governance and AWS monitoring
  */
 export const metadata: Metadata = {
+  // Metadata base URL for resolving relative URLs in OG images
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'),
+
   // Basic metadata
   title: {
     default: 'CloudGov Dashboard - AWS Resource Governance & Cost Optimization',

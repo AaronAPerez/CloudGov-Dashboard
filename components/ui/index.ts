@@ -36,3 +36,7 @@ export type { SpinnerProps, FullPageSpinnerProps } from './Spinner';
 // Modal component and types
 export { Modal } from './Modal';
 export type { ModalProps } from './Modal';
+
+// Switch component and types
+export { Switch } from './Switch';
+export type { SwitchProps } from './Switch';

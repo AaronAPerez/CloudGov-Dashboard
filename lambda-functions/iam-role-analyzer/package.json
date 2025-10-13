@@ -1,0 +1,23 @@
+{
+  "name": "iam-role-analyzer",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to analyze IAM roles for security risks",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "iam",
+    "security"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1550.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

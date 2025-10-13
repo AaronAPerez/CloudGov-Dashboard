@@ -10,6 +10,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import type { AIUsageLog, AIUsageSummary } from '@/lib/types';
+import { getAIUsage, saveAIUsage } from '@/lib/aws/dynamodb';
+import { features } from '@/lib/aws/config';
 
 /**
  * Mock AI usage logs
@@ -229,9 +231,6 @@ function calculateSummary(logs: AIUsageLog[]): AIUsageSummary {
  */
 export async function GET(request: NextRequest) {
   try {
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 200));
-
     const { searchParams } = new URL(request.url);
     const provider = searchParams.get('provider');
     const userId = searchParams.get('userId');
@@ -239,7 +238,26 @@ export async function GET(request: NextRequest) {
     const endDate = searchParams.get('endDate');
     const limit = parseInt(searchParams.get('limit') || '50');
 
-    let filteredLogs = [...mockLogs];
+    let filteredLogs: AIUsageLog[] = [];
+    let dataSource = 'mock';
+
+    // Try to fetch from DynamoDB first
+    if (features.useRealAWS) {
+      try {
+        const dbLogs = await getAIUsage(limit);
+        if (dbLogs && dbLogs.length > 0) {
+          filteredLogs = dbLogs as AIUsageLog[];
+          dataSource = 'dynamodb';
+        } else {
+          filteredLogs = [...mockLogs];
+        }
+      } catch (error) {
+        console.error('DynamoDB error, using mock data:', error);
+        filteredLogs = [...mockLogs];
+      }
+    } else {
+      filteredLogs = [...mockLogs];
+    }
 
     // Filter by provider
     if (provider && provider !== 'all') {

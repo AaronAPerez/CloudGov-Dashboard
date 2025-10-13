@@ -1,0 +1,23 @@
+{
+  "name": "security-scanner",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to scan resources for security vulnerabilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "security",
+    "scanning"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1550.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

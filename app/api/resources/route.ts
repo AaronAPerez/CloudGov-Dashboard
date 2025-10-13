@@ -24,8 +24,10 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import type { AWSResource, AWSResourceType, ResourceStatus } from '@/lib/types';
-import { getResources } from '@/lib/aws/dynamodb';
+import type { AWSResource, AWSResourceType } from '@/lib/types';
+import { getResources, saveResource } from '@/lib/aws/dynamodb';
+import { getAllAWSResources } from '@/lib/aws/services';
+import { features } from '@/lib/aws/config';
 
 /**
  * Query parameters schema for validation
@@ -40,56 +42,17 @@ const querySchema = z.object({
 });
 
 /**
- * Mock data generator for AWS resources
- * In production, this would call AWS SDK
+ * Fetch real AWS resources using AWS SDK
  */
-function generateMockResources(): AWSResource[] {
-  const types: AWSResourceType[] = ['EC2', 'S3', 'Lambda', 'RDS', 'DynamoDB', 'ECS', 'WorkSpaces'];
-  const statuses: ResourceStatus[] = ['running', 'stopped', 'pending', 'terminated', 'error'];
-  const regions = ['us-east-1', 'us-west-2', 'eu-west-1', 'ap-southeast-1'];
-  const owners = ['Alice Chen', 'Bob Smith', 'Carol Johnson', 'David Lee', 'Emma Wilson'];
-  const projects = ['Project-Alpha', 'Project-Beta', 'Project-Gamma', 'Project-Delta'];
-  const environments = ['Production', 'Staging', 'Development', 'Testing'];
-
-  const resources: AWSResource[] = [];
-  
-  // Generate 50 mock resources
-  for (let i = 0; i < 50; i++) {
-    const type = types[Math.floor(Math.random() * types.length)];
-    const status = statuses[Math.floor(Math.random() * statuses.length)];
-    const region = regions[Math.floor(Math.random() * regions.length)];
-    const owner = owners[Math.floor(Math.random() * owners.length)];
-    const project = projects[Math.floor(Math.random() * projects.length)];
-    const environment = environments[Math.floor(Math.random() * environments.length)];
-    
-    // Generate realistic costs based on resource type
-    let baseCost = 100;
-    if (type === 'EC2') baseCost = Math.random() * 500 + 200;
-    if (type === 'RDS') baseCost = Math.random() * 800 + 300;
-    if (type === 'S3') baseCost = Math.random() * 100 + 10;
-    if (type === 'Lambda') baseCost = Math.random() * 50 + 5;
-    if (type === 'DynamoDB') baseCost = Math.random() * 200 + 50;
-
-    resources.push({
-      id: `${type.toLowerCase()}-${Math.random().toString(36).substr(2, 12)}`,
-      name: `${type}-${environment.toLowerCase()}-${i + 1}`,
-      type,
-      status,
-      region,
-      monthlyCost: Math.floor(baseCost),
-      createdAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000),
-      lastAccessed: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-      owner,
-      tags: {
-        Project: project,
-        Environment: environment,
-        ManagedBy: 'CloudGov',
-        CostCenter: `CC-${Math.floor(Math.random() * 1000)}`,
-      },
-    });
+async function fetchAWSResources(): Promise<AWSResource[]> {
+  try {
+    // Fetch all AWS resources from actual AWS account
+    const resources = await getAllAWSResources();
+    return resources;
+  } catch (error) {
+    console.error('Error fetching AWS resources:', error);
+    throw error;
   }
-
-  return resources;
 }
 
 /**
@@ -113,25 +76,37 @@ export async function GET(request: NextRequest) {
     // Validate query parameters
     const validatedParams = querySchema.parse(queryParams);
 
-    // Try to get real data from DynamoDB first
+    // Fetch real data from AWS SDK
     let resources: AWSResource[] = [];
-    let useDynamoDB = true;
+    let dataSource = 'aws-sdk';
 
     try {
-      // Attempt to fetch from DynamoDB (AWS Free Tier)
-      resources = await getResources() as AWSResource[];
+      // First, try to fetch from AWS SDK (real AWS resources)
+      resources = await fetchAWSResources();
 
-      // If DynamoDB is empty, fall back to mock data
-      if (resources.length === 0) {
-        console.log('DynamoDB is empty, using mock data');
-        resources = generateMockResources();
-        useDynamoDB = false;
+      // Save to DynamoDB for caching
+      if (features.useRealAWS) {
+        try {
+          await Promise.all(resources.map(resource => saveResource(resource as unknown as Record<string, unknown>)));
+        } catch (dbError) {
+          console.error('Failed to save to DynamoDB:', dbError);
+        }
       }
-    } catch (error) {
-      // If DynamoDB is not configured or fails, use mock data
-      console.log('DynamoDB not available, using mock data:', error);
-      resources = generateMockResources();
-      useDynamoDB = false;
+    } catch (awsError) {
+      console.error('AWS SDK error, trying DynamoDB cache:', awsError);
+
+      // Fallback to DynamoDB cache
+      try {
+        resources = await getResources() as AWSResource[];
+        if (resources.length > 0) {
+          dataSource = 'dynamodb-cache';
+        } else {
+          throw new Error('DynamoDB cache is empty');
+        }
+      } catch (dbError) {
+        console.error('DynamoDB error:', dbError);
+        throw new Error('No data source available. Please configure AWS credentials.');
+      }
     }
 
     // Apply filters
@@ -171,10 +146,10 @@ export async function GET(request: NextRequest) {
           offset,
           limit,
           count: resources.length,
-          source: useDynamoDB ? 'dynamodb-free-tier' : 'mock',
-          note: useDynamoDB
-            ? 'Data from AWS DynamoDB (Free Tier)'
-            : 'Using mock data. Configure AWS credentials and DynamoDB tables to use real data.',
+          source: dataSource,
+          note: dataSource === 'aws-sdk'
+            ? 'Live data from AWS SDK'
+            : 'Cached data from DynamoDB',
         },
         timestamp: new Date().toISOString(),
       },

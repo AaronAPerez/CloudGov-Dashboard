@@ -1,0 +1,8 @@
+{
+  "type": "node",
+  "request": "launch",
+  "name": "Jest Debug",
+  "program": "${workspaceFolder}/node_modules/.bin/jest",
+  "args": ["--runInBand", "--no-cache"],
+  "console": "integratedTerminal"
+}
