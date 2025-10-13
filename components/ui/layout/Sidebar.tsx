@@ -231,19 +231,37 @@ export function Sidebar({
           </nav>
 
           {/* Footer info */}
-          <div className="border-t border-neutral-200 p-4">
-            <div className="rounded-lg bg-primary-50 p-3">
+          <div className="border-t border-neutral-200 dark:border-neutral-800 p-4 space-y-3">
+            {/* In Development Banner */}
+            <div className="rounded-lg bg-gradient-to-r from-red-500 to-orange-500 p-3 border-2 border-yellow-400 shadow-xl animate-pulse">
+              <div className="flex items-start gap-2">
+                <div className="flex h-6 w-6 items-center justify-center">
+                  <span className="text-lg">🚧</span>
+                </div>
+                <div>
+                  <p className="text-xs font-extrabold text-white uppercase tracking-wide">
+                    IN DEVELOPMENT
+                  </p>
+                  <p className="mt-1 text-xs text-white/90 font-semibold">
+                    Features actively being built
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Project Info */}
+            <div className="rounded-lg bg-primary-50 dark:bg-primary-950/30 p-3 border border-primary-200 dark:border-primary-800">
               <div className="flex items-start gap-2">
                 <AlertCircle
-                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary-700"
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary-700 dark:text-primary-400"
                   aria-hidden="true"
                 />
                 <div>
-                  <p className="text-xs font-medium text-primary-900">
-                    LLNL Demonstration
+                  <p className="text-xs font-medium text-primary-900 dark:text-primary-100">
+                    Portfolio Project
                   </p>
-                  <p className="mt-1 text-xs text-primary-700">
-                    Junior Software Developer Portfolio Project
+                  <p className="mt-1 text-xs text-primary-700 dark:text-primary-300">
+                    LLNL Demo - Junior Software Developer
                   </p>
                 </div>
               </div>

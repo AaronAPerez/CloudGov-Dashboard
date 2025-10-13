@@ -119,11 +119,18 @@ export default function DashboardPage() {
                 <h1 className="text-3xl font-bold text-white sm:text-4xl animate-slide-up">
                   Dashboard Overview
                 </h1>
-                <div className="flex items-center gap-2 mt-1">
-                  <Badge 
-                    variant="warning" 
-                    size="sm" 
-                    className="border-white/30 text-white backdrop-blur-sm"
+                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                  <Badge
+                    variant="error"
+                    size="sm"
+                    className="bg-gradient-to-r from-red-600 to-orange-600 text-white font-extrabold border-2 border-yellow-400 shadow-2xl animate-pulse px-3 py-1 text-xs uppercase tracking-wider"
+                  >
+                    🚧 IN DEVELOPMENT 🚧
+                  </Badge>
+                  <Badge
+                    variant="info"
+                    size="sm"
+                    className="bg-white/20 border-white/30 text-white backdrop-blur-sm"
                   >
                     Demo Mode
                   </Badge>

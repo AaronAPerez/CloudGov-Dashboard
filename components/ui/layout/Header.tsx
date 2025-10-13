@@ -94,13 +94,27 @@ const toggleDarkMode = () => {
         </Button>
 
         {/* Logo and branding */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-1 sm:flex-none">
           <Cloud className="h-8 w-8 text-primary-600" aria-hidden="true" />
-          <div className="hidden sm:block">
-            <h1 className="text-lg font-bold text-neutral-300">
-              CloudGov Dashboard
-            </h1>
-            <p className="text-xs text-neutral-400">
+          <div className="flex-1 sm:block">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-lg font-bold text-neutral-300">
+                CloudGov Dashboard
+              </h1>
+              {/* Desktop badge */}
+              <Badge
+                variant="warning"
+                size="sm"
+                className="hidden sm:inline-flex bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold border-2 border-orange-600 shadow-lg animate-pulse hover:scale-110 transition-transform"
+              >
+                🚧 IN DEVELOPMENT
+              </Badge>
+              {/* Mobile badge - smaller and icon only */}
+              <span className="sm:hidden inline-flex items-center justify-center h-5 w-5 rounded-full bg-gradient-to-r from-red-500 to-orange-500 border border-yellow-400 animate-pulse shadow-lg">
+                <span className="text-xs">🚧</span>
+              </span>
+            </div>
+            <p className="text-xs text-neutral-400 hidden sm:block">
               AWS Resource Governance
             </p>
           </div>
