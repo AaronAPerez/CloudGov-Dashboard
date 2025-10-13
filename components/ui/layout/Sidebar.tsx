@@ -22,15 +22,18 @@
  * <Sidebar isOpen={isSidebarOpen} onClose={handleClose} />
  */
 
-import { 
-  LayoutDashboard, 
-  Server, 
-  DollarSign, 
-  Shield, 
+import Link from 'next/link';
+import {
+  LayoutDashboard,
+  Server,
+  DollarSign,
+  Shield,
   Sparkles,
   Settings,
   FileText,
-  AlertCircle
+  AlertCircle,
+  Brain,
+  Key
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui';
@@ -84,6 +87,24 @@ const navigationItems: NavItem[] = [
       variant: 'info',
     },
     description: 'AWS resource inventory',
+  },
+  {
+    id: 'iam',
+    label: 'IAM Security',
+    icon: Key,
+    href: '/iam',
+    badge: {
+      count: 3,
+      variant: 'warning',
+    },
+    description: 'Roles, users, and permissions',
+  },
+  {
+    id: 'ai-usage',
+    label: 'AI Usage',
+    icon: Brain,
+    href: '/ai-usage',
+    description: 'AI API tracking and analytics',
   },
   {
     id: 'costs',
@@ -249,26 +270,9 @@ interface NavItemComponentProps {
 function NavItem({ item, isActive, onClick }: NavItemComponentProps) {
   const Icon = item.icon;
 
-
-  const navigationItems: NavItem[] = [
-  {
-    id: 'dashboard',
-    label: 'Dashboard',
-    icon: LayoutDashboard,
-    href: '/',
-  },
-  {
-    id: 'resources',
-    label: 'Resources',
-    icon: Server,
-    href: '/resources',
-    badge: { count: 847, variant: 'info' },
-  },
-  // ... other items
-];
-
   return (
-    <button
+    <Link
+      href={item.href}
       onClick={onClick}
       className={cn(
         'group flex w-full items-center gap-3 rounded-lg px-3 py-2',
@@ -276,8 +280,8 @@ function NavItem({ item, isActive, onClick }: NavItemComponentProps) {
         'focus:outline-none focus:ring-2 focus:ring-primary-500',
         // Active state
         isActive
-          ? 'bg-primary-100 text-primary-900'
-          : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900'
+          ? 'bg-primary-100 text-primary-900 dark:bg-primary-950 dark:text-primary-100'
+          : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-100'
       )}
       aria-current={isActive ? 'page' : undefined}
       title={item.description}
@@ -287,14 +291,14 @@ function NavItem({ item, isActive, onClick }: NavItemComponentProps) {
         className={cn(
           'h-5 w-5 flex-shrink-0 transition-colors',
           isActive
-            ? 'text-primary-700'
-            : 'text-neutral-500 group-hover:text-neutral-700'
+            ? 'text-primary-700 dark:text-primary-400'
+            : 'text-neutral-500 group-hover:text-neutral-700 dark:text-neutral-400 dark:group-hover:text-neutral-200'
         )}
         aria-hidden="true"
       />
 
       {/* Label */}
-      <span className="flex-1 text-left text-gray-300">{item.label}</span>
+      <span className="flex-1 text-left">{item.label}</span>
 
       {/* Badge (if present) */}
       {item.badge && (
@@ -302,6 +306,6 @@ function NavItem({ item, isActive, onClick }: NavItemComponentProps) {
           {item.badge.count}
         </Badge>
       )}
-    </button>
+    </Link>
   );
 }

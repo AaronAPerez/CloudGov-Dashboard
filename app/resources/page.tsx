@@ -992,7 +992,7 @@ function ResourcesEmpty({ onClear }: ResourcesEmptyProps) {
             No Resources Found
           </h3>
           <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400 max-w-md text-center">
-            We couldn't find any resources matching your filters. Try adjusting your search or filters.
+            We couldn&apos;t find any resources matching your filters. Try adjusting your search or filters.
           </p>
           <Button
             variant="ghost"
