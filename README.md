@@ -1,6 +1,6 @@
 # CloudGov Dashboard
 
-[![Build Status](https://dev.azure.com/cloudgov/dashboard/_apis/build/status/cloudgov-dashboard?branchName=main)](https://dev.azure.com/cloudgov/dashboard/_build/latest?definitionId=1&branchName=main)
+[![Build Status]](https://dev.azure.com/cloudgov/dashboard/_build/latest?definitionId=1&branchName=main)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 > **Portfolio Project**: Advanced cloud governance dashboard demonstrating full-stack development, cloud security, and DevOps proficiency.
