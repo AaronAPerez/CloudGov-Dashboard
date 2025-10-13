@@ -57,8 +57,12 @@ export interface MetricsCardProps {
   iconVariant?: 'primary' | 'success' | 'warning' | 'error' | 'neutral';
   /** Description or comparison text */
   description?: string;
+  /** Badge component to display */
+  badge?: React.ReactNode;
   /** Loading state */
   isLoading?: boolean;
+  /** Animation delay */
+  delay?: string;
   /** Click handler for interactive cards */
   onClick?: () => void;
 }
