@@ -162,16 +162,193 @@ export interface IAMRole {
   arn: string;
   /** Role name */
   name: string;
+  /** Role description */
+  description: string;
   /** Creation date */
   createdAt: Date;
   /** Last used date */
   lastUsed?: Date;
   /** Attached policies */
-  policies: string[];
+  policies: IAMPolicy[];
+  /** Inline policies */
+  inlinePolicies: IAMPolicy[];
   /** Is overly permissive */
   isOverlyPermissive: boolean;
   /** Trust relationships */
   trustedEntities: string[];
+  /** Permissions boundary */
+  permissionsBoundary?: string;
+  /** Tags */
+  tags: Record<string, string>;
+  /** Risk score (0-100) */
+  riskScore: number;
+}
+
+/**
+ * IAM Policy Information
+ */
+export interface IAMPolicy {
+  /** Policy ARN or name */
+  id: string;
+  /** Policy name */
+  name: string;
+  /** Policy type */
+  type: 'AWS Managed' | 'Customer Managed' | 'Inline';
+  /** Policy document */
+  document: IAMPolicyDocument;
+  /** Attached roles count */
+  attachedRolesCount: number;
+  /** Is high risk */
+  isHighRisk: boolean;
+}
+
+/**
+ * IAM Policy Document
+ */
+export interface IAMPolicyDocument {
+  Version: string;
+  Statement: IAMPolicyStatement[];
+}
+
+/**
+ * IAM Policy Statement
+ */
+export interface IAMPolicyStatement {
+  Effect: 'Allow' | 'Deny';
+  Action: string | string[];
+  Resource: string | string[];
+  Condition?: Record<string, unknown>;
+}
+
+/**
+ * IAM User with Role Assignments
+ */
+export interface IAMUser {
+  /** User ID */
+  id: string;
+  /** Username */
+  username: string;
+  /** User ARN */
+  arn: string;
+  /** Email */
+  email: string;
+  /** Assigned roles */
+  roles: string[];
+  /** Direct permissions */
+  permissions: string[];
+  /** MFA enabled */
+  mfaEnabled: boolean;
+  /** Last activity */
+  lastActivity: Date;
+  /** Access level */
+  accessLevel: 'read-only' | 'power-user' | 'admin';
+  /** Risk score */
+  riskScore: number;
+}
+
+/**
+ * AI API Usage Log Entry
+ */
+export interface AIUsageLog {
+  /** Log entry ID */
+  id: string;
+  /** Timestamp */
+  timestamp: Date;
+  /** User who made the request */
+  userId: string;
+  /** Username */
+  username: string;
+  /** AI provider */
+  provider: 'OpenAI' | 'AWS Bedrock' | 'Anthropic' | 'Google AI';
+  /** Model used */
+  model: string;
+  /** API endpoint */
+  endpoint: string;
+  /** Request type */
+  requestType: 'completion' | 'embedding' | 'image' | 'audio' | 'fine-tuning';
+  /** Tokens used */
+  tokensUsed: number;
+  /** Cost in USD */
+  cost: number;
+  /** Response time in ms */
+  responseTime: number;
+  /** Success status */
+  success: boolean;
+  /** Error message if failed */
+  error?: string;
+  /** Request metadata */
+  metadata?: Record<string, unknown>;
+}
+
+/**
+ * AI Usage Summary
+ */
+export interface AIUsageSummary {
+  /** Total requests */
+  totalRequests: number;
+  /** Total tokens used */
+  totalTokens: number;
+  /** Total cost */
+  totalCost: number;
+  /** Average response time */
+  avgResponseTime: number;
+  /** Success rate */
+  successRate: number;
+  /** Usage by provider */
+  byProvider: Record<string, {
+    requests: number;
+    tokens: number;
+    cost: number;
+  }>;
+  /** Usage by user */
+  byUser: Record<string, {
+    requests: number;
+    tokens: number;
+    cost: number;
+  }>;
+  /** Daily usage trend */
+  dailyTrend: {
+    date: string;
+    requests: number;
+    tokens: number;
+    cost: number;
+  }[];
+}
+
+/**
+ * WorkSpaces Instance
+ */
+export interface WorkSpace {
+  /** WorkSpace ID */
+  id: string;
+  /** WorkSpace name */
+  name: string;
+  /** Directory ID */
+  directoryId: string;
+  /** Username */
+  username: string;
+  /** Bundle ID */
+  bundleId: string;
+  /** Bundle name */
+  bundleName: string;
+  /** State */
+  state: 'PENDING' | 'AVAILABLE' | 'IMPAIRED' | 'UNHEALTHY' | 'REBOOTING' | 'STARTING' | 'REBUILDING' | 'RESTORING' | 'MAINTENANCE' | 'ADMIN_MAINTENANCE' | 'TERMINATING' | 'TERMINATED' | 'SUSPENDED' | 'UPDATING' | 'STOPPING' | 'STOPPED' | 'ERROR';
+  /** Running mode */
+  runningMode: 'AUTO_STOP' | 'ALWAYS_ON';
+  /** IP address */
+  ipAddress?: string;
+  /** Subnet ID */
+  subnetId: string;
+  /** Monthly cost */
+  monthlyCost: number;
+  /** Last connected */
+  lastConnection?: Date;
+  /** Compute type */
+  computeType: string;
+  /** Root volume size GB */
+  rootVolumeSize: number;
+  /** User volume size GB */
+  userVolumeSize: number;
 }
 
 /**
