@@ -60,6 +60,13 @@ export function Header({
   // State for dropdowns
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  // Add dark mode toggle in Header component
+const toggleDarkMode = () => {
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', 
+    document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  );
+};
 
   /**
    * Handle user logout
@@ -110,7 +117,7 @@ export function Header({
               type="search"
               placeholder="Search resources..."
               className={cn(
-                'w-full rounded-lg border border-neutral-300 bg-white',
+                'w-full rounded-lg border border-neutral-300 bg-white/20',
                 'py-2 pl-10 pr-4 text-sm',
                 'placeholder:text-neutral-400',
                 'focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500'
@@ -131,6 +138,8 @@ export function Header({
           >
             <Search className="h-5 w-5" />
           </Button>
+
+       
 
           {/* Notifications */}
           <div className="relative">
@@ -204,9 +213,9 @@ export function Header({
               aria-expanded={isUserMenuOpen}
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100">
-                <User className="h-5 w-5 text-primary-700" />
+                <User className="h-5 w-5 text-gray-300" />
               </div>
-              <span className="hidden text-sm font-medium md:block">
+              <span className="hidden text-sm font-medium md:block text-gray-300">
                 {userName}
               </span>
             </Button>

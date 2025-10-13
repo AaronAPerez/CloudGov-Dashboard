@@ -1,28 +1,26 @@
 /**
- * Modern Dashboard Page - CloudGov Dashboard
- *
- * Enhanced with:
- * - Dark mode support
- * - Glassmorphism effects
- * - Smooth animations
- * - Gradient accents
- * - Better visual hierarchy
- * - Premium feel
- * - Improved loading states
- * - Enhanced accessibility
- *
+ * Dashboard Page (Integrated with API)
+ * 
+ * Main dashboard view with real API integration.
+ * Demonstrates complete data flow from backend to frontend.
+ * 
  * Features:
- * - Real-time AWS resource monitoring
- * - Cost analytics with trends
- * - Security compliance dashboard
- * - AI-powered recommendations
- *
+ * - Real-time data from API endpoints
+ * - Automatic caching and revalidation (SWR)
+ * - Loading and error states
+ * - Responsive design
+ * - Accessibility compliant
+ * 
+ * API Integration:
+ * - GET /api/resources - Resource data
+ * - GET /api/costs - Cost analytics
+ * - GET /api/security - Security findings
+ * 
  * Performance:
- * - Optimized rendering
- * - Lazy loading
- * - Skeleton states
- * - Error boundaries
- *
+ * - Data is cached and shared across components
+ * - Automatic background revalidation
+ * - Optimistic UI updates
+ * 
  * @route /
  */
 
@@ -35,21 +33,21 @@ import {
   Sparkles,
   AlertTriangle,
   RefreshCw,
-  TrendingUp,
-  TrendingDown,
   Activity,
+  CheckCircle,
   Cloud,
   Zap,
-  CheckCircle,
-  XCircle,
 } from 'lucide-react';
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { CostChart } from '@/components/dashboard/CostChart';
 import { ResourceTable } from '@/components/dashboard/ResourceTable';
-import { Badge, Button } from '@/components/ui';
+import { Card, CardHeader, CardBody, Badge, Button } from '@/components/ui';
 import { useResources, useCosts, useSecurity } from '@/hooks';
-import { formatCurrency, cn } from '@/lib/utils';
+import { cn, formatCurrency } from '@/lib/utils';
 import type { AWSResource } from '@/lib/types';
+import HealthItem from '@/components/dashboard/HealthItem';
+import StatItem from '@/components/dashboard/StatItem';
+import MetricsCard from '@/components/dashboard/MetricsCard';
 
 /**
  * Dashboard Page Component
@@ -104,11 +102,11 @@ export default function DashboardPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="grid-bg absolute inset-0" />
         </div>
-
+        
         {/* Floating gradient orbs */}
         <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl animate-float" />
         <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-white/10 blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-
+        
         {/* Content */}
         <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1">
@@ -122,10 +120,10 @@ export default function DashboardPage() {
                   Dashboard Overview
                 </h1>
                 <div className="flex items-center gap-2 mt-1">
-                  <Badge
-                    variant="warning"
-                    size="sm"
-                    className="bg-white/20 border-white/30 text-white backdrop-blur-sm"
+                  <Badge 
+                    variant="warning" 
+                    size="sm" 
+                    className="border-white/30 text-white backdrop-blur-sm"
                   >
                     Demo Mode
                   </Badge>
@@ -186,7 +184,7 @@ export default function DashboardPage() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {/* Monthly Cost Metric */}
-          <ModernMetricCard
+          <MetricsCard
             title="Monthly Cost"
             value={formatCurrency(costSummary?.currentMonth || 0)}
             change={costSummary?.percentageChange}
@@ -205,7 +203,7 @@ export default function DashboardPage() {
           />
 
           {/* Total Resources Metric */}
-          <ModernMetricCard
+          <MetricsCard
             title="Total Resources"
             value={resources.length}
             icon={<Server className="h-6 w-6" />}
@@ -216,7 +214,7 @@ export default function DashboardPage() {
           />
 
           {/* Security Findings Metric */}
-          <ModernMetricCard
+          <MetricsCard
             title="Security Findings"
             value={compliance?.breakdown.critical || 0}
             icon={<Shield className="h-6 w-6" />}
@@ -227,7 +225,7 @@ export default function DashboardPage() {
           />
 
           {/* Compliance Score Metric */}
-          <ModernMetricCard
+          <MetricsCard
             title="Compliance Score"
             value={`${compliance?.score || 0}%`}
             icon={<Sparkles className="h-6 w-6" />}
@@ -253,7 +251,7 @@ export default function DashboardPage() {
         <h2 id="cost-trend-heading" className="sr-only">
           Cost Trend
         </h2>
-
+        
         <div className={cn(
           "rounded-2xl border overflow-hidden",
           "bg-white dark:bg-neutral-900",
@@ -276,19 +274,19 @@ export default function DashboardPage() {
       {/* Main Content Grid */}
       <div className="grid gap-6 xl:grid-cols-3">
         {/* Resources Table - 2/3 width */}
-        <section
-          className="xl:col-span-2 animate-slide-up"
+        <section 
+          className="xl:col-span-2 animate-slide-up" 
           style={{ animationDelay: '0.5s' }}
           aria-labelledby="resources-heading"
         >
           <h2 id="resources-heading" className="sr-only">
             Recent Resources
           </h2>
-
+          
           <div className={cn(
             "rounded-2xl border overflow-hidden",
-            "bg-gray-100 dark:bg-black",
-        "text-gray-900 dark:text-gray-100",
+            "bg-white dark:bg-neutral-900",
+            "border-neutral-200 dark:border-neutral-800",
             "shadow-soft hover:shadow-medium transition-shadow duration-300"
           )}>
             <ResourceTable
@@ -303,7 +301,7 @@ export default function DashboardPage() {
         {/* Sidebar - 1/3 width */}
         <aside className="space-y-6">
           {/* Security Findings Card */}
-          <div
+          <div 
             className={cn(
               "rounded-2xl border overflow-hidden animate-slide-up",
               "bg-white dark:bg-neutral-900",
@@ -346,8 +344,8 @@ export default function DashboardPage() {
               {securityLoading ? (
                 <div className="space-y-3">
                   {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
+                    <div 
+                      key={i} 
                       className="h-20 animate-pulse rounded-lg skeleton"
                     />
                   ))}
@@ -388,12 +386,12 @@ export default function DashboardPage() {
                       </div>
                     </div>
                   ))}
-                  <Button
-                    variant="ghost"
-                    fullWidth
+                  <Button 
+                    variant="ghost" 
+                    fullWidth 
                     className="mt-4 group"
                   >
-                    View All Findings
+                    View All Findings 
                     <span className="ml-1 group-hover:translate-x-1 transition-transform">
                       →
                     </span>
@@ -416,7 +414,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Quick Stats Card */}
-          <div
+          <div 
             className={cn(
               "rounded-2xl border p-6 overflow-hidden animate-slide-up",
               "bg-gradient-to-br from-primary-500/10 via-secondary-500/5 to-transparent",
@@ -429,7 +427,7 @@ export default function DashboardPage() {
           >
             {/* Background decoration */}
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary-500/10 dark:bg-primary-500/5 blur-3xl" />
-
+            
             <div className="relative">
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 text-white shadow-lg">
@@ -439,7 +437,7 @@ export default function DashboardPage() {
                   Quick Stats
                 </h3>
               </div>
-
+              
               <div className="space-y-3">
                 <StatItem
                   label="Active Deployments"
@@ -474,7 +472,7 @@ export default function DashboardPage() {
           </div>
 
           {/* System Health Card */}
-          <div
+          <div 
             className={cn(
               "rounded-2xl border p-6 animate-slide-up",
               "bg-white dark:bg-neutral-900",
@@ -491,7 +489,7 @@ export default function DashboardPage() {
                 System Health
               </h3>
             </div>
-
+            
             <div className="space-y-4">
               <HealthItem
                 label="API Services"
@@ -521,218 +519,56 @@ export default function DashboardPage() {
   );
 }
 
-/**
- * Modern Metric Card Component
- */
-interface ModernMetricCardProps {
-  title: string;
-  value: string | number;
-  change?: number;
-  trend?: 'up' | 'down' | 'neutral';
-  icon: React.ReactNode;
-  iconColor: string;
-  description?: string;
-  badge?: React.ReactNode;
-  isLoading?: boolean;
-  delay?: string;
-}
-
-function ModernMetricCard({
-  title,
-  value,
-  change,
-  trend,
-  icon,
-  iconColor,
-  description,
-  badge,
-  isLoading,
-  delay = '0s',
-}: ModernMetricCardProps) {
-  if (isLoading) {
-    return (
-      <div className={cn(
-        "rounded-2xl border p-6",
-        "bg-white dark:bg-neutral-900",
-        "border-neutral-200 dark:border-neutral-800",
-        "shadow-soft animate-pulse"
-      )}>
-        <div className="space-y-3">
-          <div className="h-4 w-24 skeleton rounded" />
-          <div className="h-8 w-32 skeleton rounded" />
-          <div className="h-4 w-20 skeleton rounded" />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={cn(
-        "group relative overflow-hidden rounded-2xl border p-6",
-        "bg-white dark:bg-neutral-900",
-        "border-neutral-200 dark:border-neutral-800",
-        "shadow-soft hover:shadow-medium",
-        "transition-all duration-300 hover:-translate-y-1",
-        "animate-scale-in"
-      )}
-      style={{ animationDelay: delay }}
-    >
-      {/* Gradient accent */}
-      <div className={cn(
-        "absolute inset-0 opacity-0 group-hover:opacity-5 dark:group-hover:opacity-10 transition-opacity",
-        `bg-gradient-to-br ${iconColor}`
-      )} />
-
-      {/* Content */}
-      <div className="relative z-10 flex items-start justify-between">
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-            {title}
-          </p>
-          <p className="mt-2 text-3xl font-bold text-neutral-900 dark:text-neutral-100 truncate">
-            {value}
-          </p>
-
-          {(change !== undefined || description || badge) && (
-            <div className="mt-3 flex items-center gap-2 flex-wrap">
-              {change !== undefined && (
-                <div className={cn(
-                  "flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
-                  trend === 'up'
-                    ? 'bg-success-100 dark:bg-success-950 text-success-700 dark:text-success-300'
-                    : trend === 'down'
-                    ? 'bg-error-100 dark:bg-error-950 text-error-700 dark:text-error-300'
-                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300'
-                )}>
-                  {trend === 'up' ? (
-                    <TrendingUp className="h-3 w-3" />
-                  ) : trend === 'down' ? (
-                    <TrendingDown className="h-3 w-3" />
-                  ) : null}
-                  {Math.abs(change).toFixed(1)}%
-                </div>
-              )}
-              {description && (
-                <span className="text-xs text-neutral-500 dark:text-neutral-400">
-                  {description}
-                </span>
-              )}
-              {badge && badge}
-            </div>
-          )}
-        </div>
-
-        {/* Icon */}
-        <div className={cn(
-          "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl",
-          `bg-gradient-to-br ${iconColor}`,
-          "text-white shadow-lg",
-          "group-hover:scale-110 transition-transform duration-300"
-        )}>
-          {icon}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /**
- * Stat Item Component
+ * SecurityFindingItem Component
+ * Individual security finding display
  */
-interface StatItemProps {
-  label: string;
-  value: string;
-  trend: 'up' | 'down';
-  change: string;
-  icon?: React.ReactNode;
-}
-
-function StatItem({ label, value, trend, change, icon }: StatItemProps) {
-  return (
-    <div className="flex items-center justify-between rounded-lg bg-white/50 dark:bg-neutral-800/50 p-3 backdrop-blur-sm border border-neutral-200/50 dark:border-neutral-700/50 hover:bg-white/80 dark:hover:bg-neutral-800/80 transition-colors">
-      <div className="flex items-center gap-2 flex-1">
-        {icon && (
-          <div className="text-neutral-600 dark:text-neutral-400">
-            {icon}
-          </div>
-        )}
-        <div>
-          <p className="text-xs text-neutral-600 dark:text-neutral-400">{label}</p>
-          <p className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-            {value}
-          </p>
-        </div>
-      </div>
-      <div className={cn(
-        "flex items-center gap-1 text-xs font-medium",
-        trend === 'up'
-          ? 'text-success-600 dark:text-success-400'
-          : 'text-error-600 dark:text-error-400'
-      )}>
-        {trend === 'up' ? (
-          <TrendingUp className="h-3 w-3" />
-        ) : (
-          <TrendingDown className="h-3 w-3" />
-        )}
-        {change}
-      </div>
-    </div>
-  );
-}
-
-/**
- * Health Item Component
- */
-interface HealthItemProps {
-  label: string;
-  status: 'operational' | 'degraded' | 'down';
-  value: string;
-}
-
-function HealthItem({ label, status, value }: HealthItemProps) {
-  const statusConfig = {
-    operational: {
-      icon: CheckCircle,
-      color: 'text-success-600 dark:text-success-400',
-      bg: 'bg-success-100 dark:bg-success-950',
-      label: 'Operational',
-    },
-    degraded: {
-      icon: AlertTriangle,
-      color: 'text-warning-600 dark:text-warning-400',
-      bg: 'bg-warning-100 dark:bg-warning-950',
-      label: 'Degraded',
-    },
-    down: {
-      icon: XCircle,
-      color: 'text-error-600 dark:text-error-400',
-      bg: 'bg-error-100 dark:bg-error-950',
-      label: 'Down',
-    },
+interface SecurityFindingItemProps {
+  finding: {
+    id: string;
+    title: string;
+    description: string;
+    severity: 'critical' | 'high' | 'medium' | 'low';
   };
+}
 
-  const config = statusConfig[status];
-  const Icon = config.icon;
+function SecurityFindingItem({ finding }: SecurityFindingItemProps) {
+  const severityVariant = finding.severity === 'critical' || finding.severity === 'high' ? 'error' : 'warning';
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <div className={cn("flex h-8 w-8 items-center justify-center rounded-lg", config.bg)}>
-          <Icon className={cn("h-4 w-4", config.color)} />
+    <div className="rounded-lg border border-neutral-200 p-3 transition-colors hover:bg-neutral-50">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1">
+          <h4 className="text-sm font-medium text-neutral-900">{finding.title}</h4>
+          <p className="mt-1 text-xs text-neutral-600">{finding.description}</p>
         </div>
-        <div>
-          <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-            {label}
-          </p>
-          <p className={cn("text-xs", config.color)}>
-            {config.label}
-          </p>
-        </div>
+        <Badge variant={severityVariant} size="sm">
+          {finding.severity}
+        </Badge>
       </div>
-      <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-        {value}
-      </span>
+    </div>
+  );
+}
+
+/**
+ * AlertItem Component
+ * Individual alert display
+ */
+interface AlertItemProps {
+  title: string;
+  description: string;
+  variant: 'error' | 'warning' | 'info';
+}
+
+function AlertItem({ title, description, variant }: AlertItemProps) {
+  return (
+    <div className="flex items-start gap-3">
+      <Badge variant={variant} size="sm" withDot />
+      <div className="flex-1">
+        <p className="text-sm font-medium text-neutral-900">{title}</p>
+        <p className="mt-0.5 text-xs text-neutral-600">{description}</p>
+      </div>
     </div>
   );
 }

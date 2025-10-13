@@ -33,10 +33,10 @@
  *   description="vs last month"
  * />
  */
+import React from 'react';
+import { cn } from '@/lib/utils';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
-import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
-import { Card, CardBody } from '@/components/ui';
-import { cn, formatNumber } from '@/lib/utils';
 
 /**
  * MetricsCard component props
@@ -52,6 +52,7 @@ export interface MetricsCardProps {
   trend?: 'up' | 'down' | 'neutral';
   /** Icon to display */
   icon?: React.ReactNode;
+  iconColor: string;
   /** Icon background color variant */
   iconVariant?: 'primary' | 'success' | 'warning' | 'error' | 'neutral';
   /** Description or comparison text */
@@ -63,183 +64,122 @@ export interface MetricsCardProps {
 }
 
 /**
- * Icon background color variants
- */
-const iconVariants = {
-  primary: 'bg-primary-100 text-primary-700',
-  success: 'bg-success-100 text-success-700',
-  warning: 'bg-warning-100 text-warning-700',
-  error: 'bg-error-100 text-error-700',
-  neutral: 'bg-neutral-100 text-neutral-700',
-};
-
-/**
- * Card border and accent color variants
- */
-const cardVariants = {
-  primary: 'border-l-4 border-l-primary-500 bg-gradient-to-br from-primary-50/50 to-white hover:shadow-lg hover:shadow-primary-100/50',
-  success: 'border-l-4 border-l-success-500 bg-gradient-to-br from-success-50/50 to-white hover:shadow-lg hover:shadow-success-100/50',
-  warning: 'border-l-4 border-l-warning-500 bg-gradient-to-br from-warning-50/50 to-white hover:shadow-lg hover:shadow-warning-100/50',
-  error: 'border-l-4 border-l-error-500 bg-gradient-to-br from-error-50/50 to-white hover:shadow-lg hover:shadow-error-100/50',
-  neutral: 'border-l-4 border-l-neutral-300 bg-gradient-to-br from-neutral-50/50 to-white hover:shadow-lg hover:shadow-neutral-100/50',
-};
-
-/**
  * MetricsCard Component
  * 
  * Displays a single metric with trend information
  */
-export function MetricsCard({
+function MetricsCard({
   title,
   value,
   change,
-  trend = 'neutral',
+  trend,
   icon,
-  iconVariant = 'primary',
-  description = 'vs last month',
-  isLoading = false,
-  onClick,
+  iconColor,
+  description,
+  badge,
+  isLoading,
+  delay = '0s',
 }: MetricsCardProps) {
-  // Determine if change is positive or negative for styling
-  const isPositive = change !== undefined && change > 0;
-  const isNegative = change !== undefined && change < 0;
+  if (isLoading) {
+    return (
+      <div
+        className={cn(
+          "rounded-2xl border p-6",
+          "bg-white dark:bg-neutral-900",
+          "border-neutral-200 dark:border-neutral-800",
+          "shadow-soft animate-pulse"
+        )}
+        aria-busy="true"
+        aria-label={`${title} loading`}
+      >
+        <div className="space-y-3">
+          <div className="h-4 w-24 skeleton rounded" />
+          <div className="h-8 w-32 skeleton rounded" />
+          <div className="h-4 w-20 skeleton rounded" />
+        </div>
+      </div>
+    );
+  }
 
-  // Determine trend icon
-  const TrendIcon =
-    trend === 'up' ? ArrowUp : trend === 'down' ? ArrowDown : Minus;
-
-  // Trend color based on direction
-  const trendColor =
-    trend === 'up'
-      ? 'text-success-700'
-      : trend === 'down'
-      ? 'text-error-700'
-      : 'text-neutral-500';
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      // Optional: trigger click logic here
+    }
+  };
 
   return (
-    <Card
-      hoverable={!!onClick}
-      interactive={!!onClick}
-      onClick={onClick}
-      isLoading={isLoading}
+    <div
+      role="button"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
       className={cn(
-        'transition-all duration-200',
-        cardVariants[iconVariant]
+        "group relative overflow-hidden rounded-2xl border p-6",
+        "bg-white dark:bg-neutral-900",
+        "border-neutral-200 dark:border-neutral-800",
+        "shadow-soft hover:shadow-medium",
+        "transition-all duration-300 hover:-translate-y-1",
+        "animate-scale-in"
       )}
+      style={{ animationDelay: delay }}
+      aria-label={`${title}: ${value}`}
     >
-      <CardBody>
-        <div className="flex items-start justify-between gap-3">
-          {/* Left side: Title and value */}
-          <div className="flex-1 min-w-0">
-            {/* Title */}
-            <p className="text-sm font-semibold text-neutral-700 truncate">{title}</p>
+      <div className={cn(
+        "absolute inset-0 opacity-0 group-hover:opacity-5 dark:group-hover:opacity-10 transition-opacity",
+        `bg-gradient-to-br ${iconColor}`
+      )} />
 
-            {/* Value */}
-            <p
-              className={cn(
-                'mt-2 text-xl sm:text-2xl font-bold break-words',
-                iconVariant === 'primary' && 'text-primary-900',
-                iconVariant === 'success' && 'text-success-900',
-                iconVariant === 'warning' && 'text-warning-900',
-                iconVariant === 'error' && 'text-error-900',
-                iconVariant === 'neutral' && 'text-neutral-900'
-              )}
-            >
-              {typeof value === 'number' ? formatNumber(value) : value}
-            </p>
+      <div className="relative z-10 flex items-start justify-between">
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+            {title}
+          </p>
+          <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 truncate">
+            {value}
+          </p>
 
-            {/* Change indicator */}
-            {change !== undefined && (
-              <div className="mt-2 flex flex-wrap items-center gap-2">
-                {/* Trend badge */}
+          {(change !== undefined || description || badge) && (
+            <div className="mt-3 flex items-center gap-2 flex-wrap">
+              {change !== undefined && (
                 <div
+                  aria-label={`Change: ${change.toFixed(1)}% ${trend}`}
                   className={cn(
-                    'flex items-center gap-1 rounded-full px-2 py-0.5',
-                    'text-xs font-medium',
-                    isPositive && 'bg-success-100 text-success-800',
-                    isNegative && 'bg-error-100 text-error-800',
-                    !isPositive && !isNegative && 'bg-neutral-100 text-neutral-800'
+                    "flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
+                    trend === 'up'
+                      ? 'bg-success-100 dark:bg-success-950 text-success-700 dark:text-success-300'
+                      : trend === 'down'
+                      ? 'bg-error-100 dark:bg-error-950 text-error-700 dark:text-error-300'
+                      : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300'
                   )}
                 >
-                  <TrendIcon
-                    className={cn('h-3 w-3', trendColor)}
-                    aria-hidden="true"
-                  />
-                  <span>
-                    {Math.abs(change).toFixed(1)}%
-                  </span>
+                  {trend === 'up' ? <TrendingUp className="h-3 w-3" /> : trend === 'down' ? <TrendingDown className="h-3 w-3" /> : null}
+                  {Math.abs(change).toFixed(1)}%
                 </div>
-
-                {/* Description */}
-                <span className="text-xs text-neutral-500 whitespace-nowrap">{description}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Right side: Icon */}
-          {icon && (
-            <div
-              className={cn(
-                'flex h-8 w-8 flex-shrink-0 items-center',
-                'transition-all',
-                iconVariants[iconVariant],
-                iconVariant === 'primary' && 'ring-primary-200/50',
-                iconVariant === 'success' && 'ring-success-200/50',
-                iconVariant === 'warning' && 'ring-warning-200/50',
-                iconVariant === 'error' && 'ring-error-200/50',
-                iconVariant === 'neutral' && 'ring-neutral-200/50'
               )}
-              aria-hidden="true"
-            >
-              {icon}
+              {description && (
+                <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                  {description}
+                </span>
+              )}
+              {badge}
             </div>
           )}
         </div>
-      </CardBody>
-    </Card>
-  );
-}
 
-/**
- * MetricsCardSkeleton Component
- * 
- * Loading skeleton for MetricsCard
- */
-export function MetricsCardSkeleton() {
-  return (
-    <Card>
-      <CardBody>
-        <div className="flex items-start justify-between">
-          <div className="flex-1 space-y-3">
-            {/* Title skeleton */}
-            <div className="h-4 w-24 animate-pulse rounded bg-neutral-200" />
-            {/* Value skeleton */}
-            <div className="h-8 w-32 animate-pulse rounded bg-neutral-200" />
-            {/* Change skeleton */}
-            <div className="h-6 w-28 animate-pulse rounded bg-neutral-200" />
-          </div>
-          {/* Icon skeleton */}
-          <div className="h-12 w-12 animate-pulse rounded-lg bg-neutral-200" />
+        <div
+          className={cn(
+            "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl",
+            `bg-gradient-to-br ${iconColor}`,
+            "text-white shadow-lg",
+            "group-hover:scale-110 transition-transform duration-300"
+          )}
+          aria-hidden="true"
+        >
+          {icon}
         </div>
-      </CardBody>
-    </Card>
-  );
-}
-
-/**
- * MetricsGrid Component
- * 
- * Grid layout for displaying multiple metrics cards
- * Responsive: 1 column on mobile, 2 on tablet, 4 on desktop
- */
-export interface MetricsGridProps {
-  children: React.ReactNode;
-}
-
-export function MetricsGrid({ children }: MetricsGridProps) {
-  return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {children}
+      </div>
     </div>
   );
 }
+
+export default MetricsCard;
