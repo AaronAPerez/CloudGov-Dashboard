@@ -16,7 +16,7 @@ const client = new DynamoDBClient({
 const docClient = DynamoDBDocumentClient.from(client);
 
 // Save resource to DynamoDB
-export async function saveResource(resource: any) {
+export async function saveResource(resource: Record<string, unknown>) {
   const command = new PutCommand({
     TableName: "CloudGovResources",
     Item: {
@@ -55,7 +55,7 @@ export async function getResourceById(id: string) {
 }
 
 // Save cost data to DynamoDB
-export async function saveCost(costData: any) {
+export async function saveCost(costData: Record<string, unknown>) {
   const command = new PutCommand({
     TableName: "CloudGovCosts",
     Item: {
@@ -79,7 +79,7 @@ export async function getCosts() {
 }
 
 // Save security finding to DynamoDB
-export async function saveSecurityFinding(finding: any) {
+export async function saveSecurityFinding(finding: Record<string, unknown>) {
   const command = new PutCommand({
     TableName: "CloudGovSecurityFindings",
     Item: {

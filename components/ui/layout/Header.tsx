@@ -71,7 +71,7 @@ export function Header({
 
   return (
     <header
-      className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white shadow-sm"
+      className="sticky top-0 z-40 w-full dark:text-gray-100 border-b border-neutral-200 shadow-sm"
       role="banner"
     >
       <div className="flex h-16 items-center gap-4 px-4 md:px-6">
@@ -90,10 +90,10 @@ export function Header({
         <div className="flex items-center gap-2">
           <Cloud className="h-8 w-8 text-primary-600" aria-hidden="true" />
           <div className="hidden sm:block">
-            <h1 className="text-lg font-bold text-neutral-900">
+            <h1 className="text-lg font-bold text-neutral-300">
               CloudGov Dashboard
             </h1>
-            <p className="text-xs text-neutral-600">
+            <p className="text-xs text-neutral-400">
               AWS Resource Governance
             </p>
           </div>
@@ -141,7 +141,7 @@ export function Header({
               aria-label={`Notifications, ${notificationCount} unread`}
               aria-expanded={isNotificationsOpen}
             >
-              <Bell className="h-5 w-5" />
+              <Bell className="h-5 w-5 text-gray-300" />
               {notificationCount > 0 && (
                 <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-error-600 text-[10px] font-bold text-white">
                   {notificationCount}
@@ -199,7 +199,7 @@ export function Header({
               variant="ghost"
               size="sm"
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-              className="gap-2"
+              className="gap-2 "
               aria-label="User menu"
               aria-expanded={isUserMenuOpen}
             >
@@ -237,7 +237,7 @@ export function Header({
                     )}
                     role="menuitem"
                   >
-                    <User className="h-4 w-4" aria-hidden="true" />
+                    <User className="h-4 w-4 text-gray-300" aria-hidden="true" />
                     Profile
                   </button>
                   <button

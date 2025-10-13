@@ -1,6 +1,6 @@
 /**
  * Modern Dashboard Page - CloudGov Dashboard
- *
+ * 
  * Enhanced with:
  * - Dark mode support
  * - Glassmorphism effects
@@ -10,19 +10,19 @@
  * - Premium feel
  * - Improved loading states
  * - Enhanced accessibility
- *
+ * 
  * Features:
  * - Real-time AWS resource monitoring
  * - Cost analytics with trends
  * - Security compliance dashboard
  * - AI-powered recommendations
- *
+ * 
  * Performance:
  * - Optimized rendering
  * - Lazy loading
  * - Skeleton states
  * - Error boundaries
- *
+ * 
  * @route /
  */
 
@@ -46,7 +46,7 @@ import {
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { CostChart } from '@/components/dashboard/CostChart';
 import { ResourceTable } from '@/components/dashboard/ResourceTable';
-import { Badge, Button } from '@/components/ui';
+import { Card, CardHeader, CardBody, Badge, Button } from '@/components/ui';
 import { useResources, useCosts, useSecurity } from '@/hooks';
 import { formatCurrency, cn } from '@/lib/utils';
 import type { AWSResource } from '@/lib/types';
@@ -104,11 +104,11 @@ export default function DashboardPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="grid-bg absolute inset-0" />
         </div>
-
+        
         {/* Floating gradient orbs */}
         <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl animate-float" />
         <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-white/10 blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-
+        
         {/* Content */}
         <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1">
@@ -122,10 +122,10 @@ export default function DashboardPage() {
                   Dashboard Overview
                 </h1>
                 <div className="flex items-center gap-2 mt-1">
-                  <Badge
-                    variant="warning"
-                    size="sm"
-                    className="bg-white/20 border-white/30 text-white backdrop-blur-sm"
+                  <Badge 
+                    variant="warning" 
+                    size="sm" 
+                    className="border-white/30 text-white backdrop-blur-sm"
                   >
                     Demo Mode
                   </Badge>
@@ -253,7 +253,7 @@ export default function DashboardPage() {
         <h2 id="cost-trend-heading" className="sr-only">
           Cost Trend
         </h2>
-
+        
         <div className={cn(
           "rounded-2xl border overflow-hidden",
           "bg-white dark:bg-neutral-900",
@@ -276,19 +276,19 @@ export default function DashboardPage() {
       {/* Main Content Grid */}
       <div className="grid gap-6 xl:grid-cols-3">
         {/* Resources Table - 2/3 width */}
-        <section
-          className="xl:col-span-2 animate-slide-up"
+        <section 
+          className="xl:col-span-2 animate-slide-up" 
           style={{ animationDelay: '0.5s' }}
           aria-labelledby="resources-heading"
         >
           <h2 id="resources-heading" className="sr-only">
             Recent Resources
           </h2>
-
+          
           <div className={cn(
             "rounded-2xl border overflow-hidden",
-            "bg-gray-100 dark:bg-black",
-        "text-gray-900 dark:text-gray-100",
+            "bg-white dark:bg-neutral-900",
+            "border-neutral-200 dark:border-neutral-800",
             "shadow-soft hover:shadow-medium transition-shadow duration-300"
           )}>
             <ResourceTable
@@ -303,7 +303,7 @@ export default function DashboardPage() {
         {/* Sidebar - 1/3 width */}
         <aside className="space-y-6">
           {/* Security Findings Card */}
-          <div
+          <div 
             className={cn(
               "rounded-2xl border overflow-hidden animate-slide-up",
               "bg-white dark:bg-neutral-900",
@@ -346,8 +346,8 @@ export default function DashboardPage() {
               {securityLoading ? (
                 <div className="space-y-3">
                   {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
+                    <div 
+                      key={i} 
                       className="h-20 animate-pulse rounded-lg skeleton"
                     />
                   ))}
@@ -388,12 +388,12 @@ export default function DashboardPage() {
                       </div>
                     </div>
                   ))}
-                  <Button
-                    variant="ghost"
-                    fullWidth
+                  <Button 
+                    variant="ghost" 
+                    fullWidth 
                     className="mt-4 group"
                   >
-                    View All Findings
+                    View All Findings 
                     <span className="ml-1 group-hover:translate-x-1 transition-transform">
                       →
                     </span>
@@ -416,7 +416,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Quick Stats Card */}
-          <div
+          <div 
             className={cn(
               "rounded-2xl border p-6 overflow-hidden animate-slide-up",
               "bg-gradient-to-br from-primary-500/10 via-secondary-500/5 to-transparent",
@@ -429,7 +429,7 @@ export default function DashboardPage() {
           >
             {/* Background decoration */}
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary-500/10 dark:bg-primary-500/5 blur-3xl" />
-
+            
             <div className="relative">
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 text-white shadow-lg">
@@ -439,7 +439,7 @@ export default function DashboardPage() {
                   Quick Stats
                 </h3>
               </div>
-
+              
               <div className="space-y-3">
                 <StatItem
                   label="Active Deployments"
@@ -474,7 +474,7 @@ export default function DashboardPage() {
           </div>
 
           {/* System Health Card */}
-          <div
+          <div 
             className={cn(
               "rounded-2xl border p-6 animate-slide-up",
               "bg-white dark:bg-neutral-900",
@@ -491,7 +491,7 @@ export default function DashboardPage() {
                 System Health
               </h3>
             </div>
-
+            
             <div className="space-y-4">
               <HealthItem
                 label="API Services"
@@ -567,7 +567,7 @@ function ModernMetricCard({
   }
 
   return (
-    <div
+    <div 
       className={cn(
         "group relative overflow-hidden rounded-2xl border p-6",
         "bg-white dark:bg-neutral-900",
@@ -583,23 +583,23 @@ function ModernMetricCard({
         "absolute inset-0 opacity-0 group-hover:opacity-5 dark:group-hover:opacity-10 transition-opacity",
         `bg-gradient-to-br ${iconColor}`
       )} />
-
+      
       {/* Content */}
       <div className="relative z-10 flex items-start justify-between">
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
             {title}
           </p>
-          <p className="mt-2 text-3xl font-bold text-neutral-900 dark:text-neutral-100 truncate">
+          <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 truncate">
             {value}
           </p>
-
+          
           {(change !== undefined || description || badge) && (
             <div className="mt-3 flex items-center gap-2 flex-wrap">
               {change !== undefined && (
                 <div className={cn(
                   "flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
-                  trend === 'up'
+                  trend === 'up' 
                     ? 'bg-success-100 dark:bg-success-950 text-success-700 dark:text-success-300'
                     : trend === 'down'
                     ? 'bg-error-100 dark:bg-error-950 text-error-700 dark:text-error-300'
@@ -666,7 +666,7 @@ function StatItem({ label, value, trend, change, icon }: StatItemProps) {
       </div>
       <div className={cn(
         "flex items-center gap-1 text-xs font-medium",
-        trend === 'up'
+        trend === 'up' 
           ? 'text-success-600 dark:text-success-400'
           : 'text-error-600 dark:text-error-400'
       )}>

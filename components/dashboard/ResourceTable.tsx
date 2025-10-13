@@ -41,7 +41,7 @@ import {
   ExternalLink,
   MoreVertical
 } from 'lucide-react';
-import { Card, CardHeader, CardBody, Badge, Button } from '@/components/ui';
+import { Card, CardHeader, CardBody, Button, Badge } from '@/components/ui';
 import { cn, formatCurrency, formatRelativeTime } from '@/lib/utils';
 import type { AWSResource, ResourceStatus } from '@/lib/types';
 
@@ -235,7 +235,7 @@ export function ResourceTable({
         <h3 className="text-lg font-semibold text-neutral-900">
           AWS Resources
         </h3>
-        <p className="text-sm text-neutral-600">
+        <p className="text-sm text-neutral-200">
           {resources.length} total resources
         </p>
       </CardHeader>
@@ -244,7 +244,7 @@ export function ResourceTable({
         <div className="overflow-x-auto">
           <table className="w-full">
             {/* Table header */}
-            <thead className="border-b border-neutral-200 bg-neutral-50">
+            <thead className="border-b border-neutral-200">
               <tr>
                 <TableHeader
                   label="Name"
@@ -283,7 +283,7 @@ export function ResourceTable({
                   sortIcon={renderSortIcon('lastAccessed')}
                 />
                 {showActions && (
-                  <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wide text-neutral-600">
+                  <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wide text-neutral-200">
                     Actions
                   </th>
                 )}
@@ -297,13 +297,14 @@ export function ResourceTable({
                   key={resource.id}
                   className={cn(
                     'transition-colors',
-                    onResourceClick && 'cursor-pointer hover:bg-neutral-50'
+                    onResourceClick && 'cursor-pointer hover:bg-neutral-800'
                   )}
                   onClick={() => onResourceClick?.(resource)}
                 >
                   {/* Name */}
                   <td className="px-4 py-3">
-                    <div className="font-medium text-neutral-900">
+                    <div className="font-medium 
+        text-gray-900 dark:text-gray-100">
                       {resource.name}
                     </div>
                     <div className="text-xs text-neutral-500">{resource.id}</div>
@@ -311,8 +312,8 @@ export function ResourceTable({
 
                   {/* Type */}
                   <td className="px-4 py-3">
-                    <Badge variant={typeVariants[resource.type] || 'neutral'} size="sm">
-                      {resource.type}
+                    <Badge variant={statusVariants[resource.status]} size="sm" withDot>
+                      {resource.status}
                     </Badge>
                   </td>
 
@@ -357,7 +358,7 @@ export function ResourceTable({
                     <div className="flex items-center gap-2">
                       <div
                         className={cn(
-                          'h-6 w-6 flex-shrink-0 rounded-full flex items-center justify-center text-[10px] font-semibold text-white',
+                          'h-6 w-6 flex-shrink-0 rounded-full flex items-center justify-center text-[10px] font-semibold  bg-gray-100 text-gray-900 dark:text-gray-100',
                           getOwnerColor(resource.owner)
                         )}
                       >
@@ -367,24 +368,25 @@ export function ResourceTable({
                           .join('')
                           .toUpperCase()}
                       </div>
-                      <span className="text-sm text-neutral-700">
+                      <span className="text-sm text-neutral-200">
                         {resource.owner}
                       </span>
                     </div>
                   </td>
 
                   {/* Last Accessed */}
-                  <td className="px-4 py-3 text-sm text-neutral-600">
+                  <td className="px-4 py-3 text-sm text-neutral-200">
                     {formatRelativeTime(resource.lastAccessed)}
                   </td>
 
                   {/* Actions */}
                   {showActions && (
-                    <td className="px-4 py-3 text-right">
-                      <div className="flex items-center justify-end gap-2">
+                    <td className="px-4 py-3 text-right text-gray-200">
+                      <div className="flex items-center justify-end gap-2 text-gray-100">
                         <Button
                           variant="ghost"
                           size="sm"
+                             className=' bg-gray-100 text-gray-900 dark:text-gray-100'
                           onClick={e => {
                             e.stopPropagation();
                             console.log('View details:', resource.id);
@@ -396,6 +398,7 @@ export function ResourceTable({
                         <Button
                           variant="ghost"
                           size="sm"
+                          className=' bg-gray-100 text-gray-900 dark:text-gray-100'
                           onClick={e => {
                             e.stopPropagation();
                             console.log('More options:', resource.id);

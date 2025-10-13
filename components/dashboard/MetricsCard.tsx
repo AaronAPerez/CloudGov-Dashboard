@@ -137,7 +137,7 @@ export function MetricsCard({
             {/* Value */}
             <p
               className={cn(
-                'mt-2 text-2xl sm:text-3xl font-bold break-words',
+                'mt-2 text-xl sm:text-2xl font-bold break-words',
                 iconVariant === 'primary' && 'text-primary-900',
                 iconVariant === 'success' && 'text-success-900',
                 iconVariant === 'warning' && 'text-warning-900',

@@ -1,26 +1,273 @@
+/**
+ * Global Styles - CloudGov Dashboard
+ * 
+ * Modern, accessible, and performant global styles featuring:
+ * - Dark mode support with CSS custom properties
+ * - Smooth scrolling and transitions
+ * - Custom scrollbars for WebKit and Firefox
+ * - Typography system
+ * - Glassmorphism effects
+ * - Animation utilities
+ * - Accessibility features (reduced motion, focus states)
+ * - Print styles
+ * 
+ * @see https://tailwindcss.com/docs/adding-custom-styles
+ */
+
 @import "tailwindcss";
 
+/* ============================================
+   CSS CUSTOM PROPERTIES (CSS Variables)
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light mode colors */
+  --background: 250 250 250;
+  --foreground: 23 23 23;
+  --card: 255 255 255;
+  --card-foreground: 23 23 23;
+  --border: 229 229 229;
+  --input: 229 229 229;
+  --ring: 14 165 233;
+  --muted: 245 245 245;
+  --muted-foreground: 115 115 115;
+  --accent: 245 245 245;
+  --accent-foreground: 23 23 23;
+  
+  /* Shadows */
+  --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 4px 25px -3px rgba(0, 0, 0, 0.1), 0 10px 30px -2px rgba(0, 0, 0, 0.05);
+  --shadow-large: 0 10px 40px -5px rgba(0, 0, 0, 0.15), 0 15px 50px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Lexend', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark mode colors */
+.dark {
+  --background: 10 10 10;
+  --foreground: 250 250 250;
+  --card: 23 23 23;
+  --card-foreground: 250 250 250;
+  --border: 38 38 38;
+  --input: 38 38 38;
+  --ring: 56 189 248;
+  --muted: 38 38 38;
+  --muted-foreground: 163 163 163;
+  --accent: 38 38 38;
+  --accent-foreground: 250 250 250;
+  
+  /* Shadows for dark mode */
+  --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.3), 0 10px 20px -2px rgba(0, 0, 0, 0.2);
+  --shadow-medium: 0 4px 25px -3px rgba(0, 0, 0, 0.4), 0 10px 30px -2px rgba(0, 0, 0, 0.3);
+  --shadow-large: 0 10px 40px -5px rgba(0, 0, 0, 0.5), 0 15px 50px -3px rgba(0, 0, 0, 0.4);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  @apply border-neutral-200 dark:border-neutral-800;
+}
+
+html {
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+  
+  /* Better text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Font feature settings */
+  font-feature-settings: 'liga', 'kern';
+}
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-neutral-50 text-neutral-900;
+  @apply dark:bg-neutral-950 dark:text-neutral-50;
+  @apply font-sans antialiased;
+  
+  /* Better line height for readability */
+  line-height: 1.6;
+  
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  
+  /* Smooth color transitions */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+
+/* WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-100 dark:bg-neutral-900;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-300 dark:bg-neutral-700;
+  @apply hover:bg-neutral-400 dark:hover:bg-neutral-600;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:active {
+  @apply bg-neutral-500 dark:bg-neutral-500;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(212, 212, 212) rgb(245, 245, 245);
+}
+
+.dark * {
+  scrollbar-color: rgb(64, 64, 64) rgb(23, 23, 23);
+}
+
+
+
+
+
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+
+
+em, i {
+  font-style: italic;
+}
+
+
+
+
+
+
+
+/* ============================================
+   REDUCED MOTION (Accessibility)
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   GLASSMORPHISM EFFECTS
+   ============================================ */
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+
+/* ============================================
+   GRADIENT TEXT
+   ============================================ */
+
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-rainbow {
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #667eea);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+
+
+
+
+/* Loading skeleton utility */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(229, 229, 229, 1) 0%,
+    rgba(245, 245, 245, 1) 50%,
+    rgba(229, 229, 229, 1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton 1.5s ease-in-out infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(38, 38, 38, 1) 0%,
+    rgba(64, 64, 64, 1) 50%,
+    rgba(38, 38, 38, 1) 100%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+

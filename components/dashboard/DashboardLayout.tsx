@@ -63,7 +63,7 @@ export function DashboardLayout({
   };
 
   return (
-    <div className="min-h-screen bg-cyan-50">
+    <div className="min-h-screen">
       {/* Header */}
       <Header
         onMenuToggle={handleToggleSidebar}

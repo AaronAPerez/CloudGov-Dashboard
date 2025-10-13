@@ -141,7 +141,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="min-h-screen bg-sky-200 font-sans antialiased">
+      <body className="min-h-screen font-sans antialiased bg-gray-100 dark:bg-black
+        text-gray-900 dark:text-gray-100">
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"

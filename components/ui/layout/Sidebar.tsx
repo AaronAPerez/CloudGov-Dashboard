@@ -170,7 +170,7 @@ export function Sidebar({
       <aside
         className={cn(
           'fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-64',
-          'border-r border-neutral-200 bg-white',
+          'border-r border-neutral-200 dark:text-gray-200',
           'transition-transform duration-300 ease-in-out',
           'md:translate-x-0',
           // Mobile: slide in/out
@@ -244,8 +244,28 @@ interface NavItemComponentProps {
   onClick: () => void;
 }
 
+
+
 function NavItem({ item, isActive, onClick }: NavItemComponentProps) {
   const Icon = item.icon;
+
+
+  const navigationItems: NavItem[] = [
+  {
+    id: 'dashboard',
+    label: 'Dashboard',
+    icon: LayoutDashboard,
+    href: '/',
+  },
+  {
+    id: 'resources',
+    label: 'Resources',
+    icon: Server,
+    href: '/resources',
+    badge: { count: 847, variant: 'info' },
+  },
+  // ... other items
+];
 
   return (
     <button
@@ -274,7 +294,7 @@ function NavItem({ item, isActive, onClick }: NavItemComponentProps) {
       />
 
       {/* Label */}
-      <span className="flex-1 text-left">{item.label}</span>
+      <span className="flex-1 text-left text-gray-300">{item.label}</span>
 
       {/* Badge (if present) */}
       {item.badge && (
