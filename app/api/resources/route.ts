@@ -25,6 +25,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import type { AWSResource, AWSResourceType, ResourceStatus } from '@/lib/types';
+import { getResources } from '@/lib/aws/dynamodb';
 
 /**
  * Query parameters schema for validation
@@ -112,11 +113,26 @@ export async function GET(request: NextRequest) {
     // Validate query parameters
     const validatedParams = querySchema.parse(queryParams);
 
-    // Simulate API delay (remove in production)
-    await new Promise(resolve => setTimeout(resolve, 300));
+    // Try to get real data from DynamoDB first
+    let resources: AWSResource[] = [];
+    let useDynamoDB = true;
 
-    // Generate mock data (replace with AWS SDK calls)
-    let resources = generateMockResources();
+    try {
+      // Attempt to fetch from DynamoDB (AWS Free Tier)
+      resources = await getResources() as AWSResource[];
+
+      // If DynamoDB is empty, fall back to mock data
+      if (resources.length === 0) {
+        console.log('DynamoDB is empty, using mock data');
+        resources = generateMockResources();
+        useDynamoDB = false;
+      }
+    } catch (error) {
+      // If DynamoDB is not configured or fails, use mock data
+      console.log('DynamoDB not available, using mock data:', error);
+      resources = generateMockResources();
+      useDynamoDB = false;
+    }
 
     // Apply filters
     if (validatedParams.type) {
@@ -132,7 +148,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (validatedParams.owner) {
-      resources = resources.filter(r => 
+      resources = resources.filter(r =>
         r.owner.toLowerCase().includes(validatedParams.owner!.toLowerCase())
       );
     }
@@ -155,8 +171,10 @@ export async function GET(request: NextRequest) {
           offset,
           limit,
           count: resources.length,
-          mock: true,
-          note: 'This is mock data. In production, this would connect to AWS SDK (EC2, S3, Lambda, etc.).',
+          source: useDynamoDB ? 'dynamodb-free-tier' : 'mock',
+          note: useDynamoDB
+            ? 'Data from AWS DynamoDB (Free Tier)'
+            : 'Using mock data. Configure AWS credentials and DynamoDB tables to use real data.',
         },
         timestamp: new Date().toISOString(),
       },
