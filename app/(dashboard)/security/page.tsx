@@ -65,7 +65,6 @@ export default function SecurityPage() {
   const {
     findings,
     compliance,
-    priorityFindings,
     isLoading,
     error,
     refetch,

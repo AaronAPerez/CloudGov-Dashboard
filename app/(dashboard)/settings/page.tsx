@@ -83,7 +83,7 @@ type SettingsTab = 'profile' | 'notifications' | 'security' | 'api' | 'appearanc
  */
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>('profile');
-  const { settings, updateSettings, isLoading, isSaving } = useSettings();
+  const { settings, updateSettings, isSaving } = useSettings();
   const { showToast } = useToast();
 
   const tabs = [
@@ -100,7 +100,7 @@ export default function SettingsPage() {
     try {
       await updateSettings(settings);
       showToast({ type: 'success', message: 'Settings saved successfully' });
-    } catch (error) {
+    } catch {
       showToast({ type: 'error', message: 'Failed to save settings' });
     }
   };
