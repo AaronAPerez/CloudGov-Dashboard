@@ -59,6 +59,7 @@ import {
   UserMinus,
   Eye,
   BarChart3,
+  Calendar,
 } from 'lucide-react';
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { Card, CardHeader, CardBody, Badge, Button, Input } from '@/components/ui';
@@ -164,7 +165,7 @@ export default function WorkSpacesPage() {
     const running = workspaces.filter((ws) => ws.state === 'AVAILABLE').length;
     const stopped = workspaces.filter((ws) => ws.state === 'STOPPED').length;
     const unhealthy = workspaces.filter(
-      (ws) => ws.state === 'UNHEALTHY' || ws.state === 'IMPAIRED' || ws.state === 'ERROR'
+      (ws) => ws.state === 'UNHEALTHY' || ws.state === 'ERROR'
     ).length;
     const connected = workspaces.filter((ws) => ws.connectionState === 'CONNECTED').length;
     const totalCost = workspaces.reduce((sum, ws) => sum + ws.monthlyCost, 0);
@@ -235,7 +236,6 @@ export default function WorkSpacesPage() {
               variant="ghost"
               size="md"
               onClick={refetch}
-              leftIcon={<RefreshCw className="h-4 w-4" />}
             >
               Refresh
             </Button>
@@ -243,7 +243,6 @@ export default function WorkSpacesPage() {
               variant="primary"
               size="md"
               onClick={() => setShowCreateModal(true)}
-              leftIcon={<Plus className="h-4 w-4" />}
             >
               Create WorkSpace
             </Button>
@@ -378,12 +377,13 @@ export default function WorkSpacesPage() {
 
       {/* Search and Filters */}
       <div className="mb-6 flex flex-wrap items-center gap-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-        <div className="flex-1 min-w-[300px]">
+        <div className="flex-1 min-w-[300px] relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
           <Input
             placeholder="Search by username, ID, or IP address..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            leftIcon={<Search className="h-4 w-4" />}
+            className="pl-10"
           />
         </div>
 
@@ -414,7 +414,7 @@ export default function WorkSpacesPage() {
             <CardBody className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Badge variant="primary" size="lg">
+                  <Badge variant="info" size="md">
                     {selectedWorkSpaces.size} selected
                   </Badge>
                   <button
@@ -428,7 +428,6 @@ export default function WorkSpacesPage() {
                   <Button
                     variant="primary"
                     size="sm"
-                    leftIcon={<Power className="h-4 w-4" />}
                     onClick={() => handleBulkAction('start')}
                   >
                     Start
@@ -436,7 +435,6 @@ export default function WorkSpacesPage() {
                   <Button
                     variant="secondary"
                     size="sm"
-                    leftIcon={<Power className="h-4 w-4" />}
                     onClick={() => handleBulkAction('stop')}
                   >
                     Stop
@@ -444,15 +442,13 @@ export default function WorkSpacesPage() {
                   <Button
                     variant="secondary"
                     size="sm"
-                    leftIcon={<RefreshCw className="h-4 w-4" />}
-                    onClick={() => handleBulkAction('reboot')}
+                          onClick={() => handleBulkAction('reboot')}
                   >
                     Reboot
                   </Button>
                   <Button
-                    variant="error"
+                    variant="danger"
                     size="sm"
-                    leftIcon={<Trash2 className="h-4 w-4" />}
                     onClick={() => handleBulkAction('delete')}
                   >
                     Delete
@@ -481,7 +477,7 @@ export default function WorkSpacesPage() {
         ) : (
           filteredWorkSpaces.map((workspace, index) => (
             <WorkSpaceCard
-              key={workspace.workspaceId}
+              key={workspace.workspaceId || `workspace-${index}`}
               workspace={workspace}
               selected={selectedWorkSpaces.has(workspace.workspaceId)}
               onToggleSelect={() => {
@@ -506,7 +502,7 @@ export default function WorkSpacesPage() {
                       await rebootWorkSpace(workspace.workspaceId);
                       break;
                     case 'rebuild':
-                      await rebuildWorkSpace(workspace.workspaceId);
+                      await rebuildWorkSpace();
                       break;
                     case 'delete':
                       await deleteWorkSpace(workspace.workspaceId);

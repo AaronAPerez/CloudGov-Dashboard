@@ -2,11 +2,23 @@
  * WorkSpaces Type Definitions
  */
 
-export type WorkSpaceStatus = 
+export type WorkSpaceStatus =
   | 'PENDING'
-  | 'AVAILABLE' 
-  | 'STOPPED'
+  | 'AVAILABLE'
+  | 'IMPAIRED'
   | 'UNHEALTHY'
+  | 'REBOOTING'
+  | 'STARTING'
+  | 'REBUILDING'
+  | 'RESTORING'
+  | 'MAINTENANCE'
+  | 'ADMIN_MAINTENANCE'
+  | 'TERMINATING'
+  | 'TERMINATED'
+  | 'SUSPENDED'
+  | 'UPDATING'
+  | 'STOPPING'
+  | 'STOPPED'
   | 'ERROR';
 
 export interface WorkSpace {
@@ -34,10 +46,13 @@ export interface WorkSpaceBundle {
   name: string;
   description: string;
   computeType: string;
+  userStorage: number;
+  rootStorage: number;
 }
 
 export interface WorkSpaceDirectory {
   directoryId: string;
   directoryName: string;
   directoryType: string;
+  registrationCode: string;
 }

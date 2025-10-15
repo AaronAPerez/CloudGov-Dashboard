@@ -42,6 +42,74 @@ const querySchema = z.object({
 });
 
 /**
+ * Generate mock resources for demo/fallback
+ */
+function generateMockResources(): AWSResource[] {
+  return [
+    {
+      id: 'i-0123456789abcdef0',
+      name: 'Production Web Server',
+      type: 'EC2',
+      status: 'running',
+      region: 'us-east-1',
+      monthlyCost: 145.50,
+      createdAt: new Date('2024-01-15'),
+      lastAccessed: new Date(),
+      owner: 'DevOps Team',
+      tags: { Environment: 'Production', Application: 'Web' },
+    },
+    {
+      id: 'db-prod-001',
+      name: 'Production Database',
+      type: 'RDS',
+      status: 'running',
+      region: 'us-east-1',
+      monthlyCost: 320.00,
+      createdAt: new Date('2024-01-10'),
+      lastAccessed: new Date(),
+      owner: 'Database Admin',
+      tags: { Environment: 'Production', Type: 'PostgreSQL' },
+    },
+    {
+      id: 'cloudgov-assets-bucket',
+      name: 'CloudGov Assets',
+      type: 'S3',
+      status: 'running',
+      region: 'us-east-1',
+      monthlyCost: 12.50,
+      createdAt: new Date('2024-01-05'),
+      lastAccessed: new Date(),
+      owner: 'DevOps Team',
+      tags: { Environment: 'Production', Purpose: 'Static Assets' },
+    },
+    {
+      id: 'api-handler-function',
+      name: 'API Handler',
+      type: 'Lambda',
+      status: 'running',
+      region: 'us-east-1',
+      monthlyCost: 8.75,
+      createdAt: new Date('2024-02-01'),
+      lastAccessed: new Date(),
+      owner: 'Backend Team',
+      tags: { Environment: 'Production', Runtime: 'Node.js' },
+    },
+    {
+      id: 'user-sessions-table',
+      name: 'User Sessions',
+      type: 'DynamoDB',
+      status: 'running',
+      region: 'us-east-1',
+      monthlyCost: 5.25,
+      createdAt: new Date('2024-01-20'),
+      lastAccessed: new Date(),
+      owner: 'Backend Team',
+      tags: { Environment: 'Production', Purpose: 'Session Storage' },
+    },
+  ];
+}
+
+/**
  * Fetch real AWS resources using AWS SDK
  */
 async function fetchAWSResources(): Promise<AWSResource[]> {
@@ -84,6 +152,12 @@ export async function GET(request: NextRequest) {
       // First, try to fetch from AWS SDK (real AWS resources)
       resources = await fetchAWSResources();
 
+      // If AWS returns no resources, try cache or fallback to mock
+      if (resources.length === 0) {
+        console.log('No AWS resources found, trying cache...');
+        throw new Error('No resources found in AWS account');
+      }
+
       // Save to DynamoDB for caching
       if (features.useRealAWS) {
         try {
@@ -104,8 +178,10 @@ export async function GET(request: NextRequest) {
           throw new Error('DynamoDB cache is empty');
         }
       } catch (dbError) {
-        console.error('DynamoDB error:', dbError);
-        throw new Error('No data source available. Please configure AWS credentials.');
+        console.error('DynamoDB error, using mock data:', dbError);
+        // Final fallback: Use mock data for demo purposes
+        resources = generateMockResources();
+        dataSource = 'mock-demo';
       }
     }
 
@@ -149,7 +225,9 @@ export async function GET(request: NextRequest) {
           source: dataSource,
           note: dataSource === 'aws-sdk'
             ? 'Live data from AWS SDK'
-            : 'Cached data from DynamoDB',
+            : dataSource === 'dynamodb-cache'
+            ? 'Cached data from DynamoDB'
+            : 'Demo data for portfolio showcase',
         },
         timestamp: new Date().toISOString(),
       },

@@ -15,7 +15,7 @@ export class WorkSpacesClient {
     return data.data.workspaces;
   }
 
-  async createWorkSpace(params: any): Promise<WorkSpace> {
+  async createWorkSpace(params: Record<string, unknown>): Promise<WorkSpace> {
     const response = await fetch(`${API_BASE_URL}/workspaces`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -56,6 +56,12 @@ export class WorkSpacesClient {
       method: 'DELETE',
     });
     if (!response.ok) throw new Error('Failed to delete WorkSpace');
+  }
+
+  async getBatchStatus(batchId: string): Promise<any> {
+    const response = await fetch(`${API_BASE_URL}/workspaces/bulk/${batchId}`);
+    if (!response.ok) throw new Error('Failed to get batch status');
+    return response.json();
   }
 }
 
