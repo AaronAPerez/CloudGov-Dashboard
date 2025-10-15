@@ -58,7 +58,7 @@ export class WorkSpacesClient {
     if (!response.ok) throw new Error('Failed to delete WorkSpace');
   }
 
-  async getBatchStatus(batchId: string): Promise<any> {
+  async getBatchStatus(batchId: string): Promise<unknown> {
     const response = await fetch(`${API_BASE_URL}/workspaces/bulk/${batchId}`);
     if (!response.ok) throw new Error('Failed to get batch status');
     return response.json();

@@ -148,9 +148,14 @@ export async function GET(request: NextRequest) {
     let resources: AWSResource[] = [];
     let dataSource = 'aws-sdk';
 
-    try {
-      // First, try to fetch from AWS SDK (real AWS resources)
-      resources = await fetchAWSResources();
+    // Check if AWS SDK should be attempted
+    const shouldTryAWS = features.useRealAWS && getAllAWSResources && typeof getAllAWSResources === 'function';
+
+    if (shouldTryAWS) {
+      try {
+        // First, try to fetch from AWS SDK (real AWS resources)
+        console.log('Attempting to fetch from AWS SDK...');
+        resources = await fetchAWSResources();
 
       // If AWS returns no resources, try cache or fallback to mock
       if (resources.length === 0) {
@@ -158,31 +163,40 @@ export async function GET(request: NextRequest) {
         throw new Error('No resources found in AWS account');
       }
 
-      // Save to DynamoDB for caching
+          // Save to DynamoDB for caching
       if (features.useRealAWS) {
-        try {
-          await Promise.all(resources.map(resource => saveResource(resource as unknown as Record<string, unknown>)));
-        } catch (dbError) {
-          console.error('Failed to save to DynamoDB:', dbError);
+          try {
+            await Promise.all(resources.map(resource => saveResource(resource as unknown as Record<string, unknown>)));
+          } catch (dbError) {
+            console.error('Failed to save to DynamoDB:', dbError);
+          }
+        } else {
+          throw new Error('No resources found in AWS account');
         }
-      }
-    } catch (awsError) {
+      } catch (awsError) {
       console.error('AWS SDK error, trying DynamoDB cache:', awsError);
 
-      // Fallback to DynamoDB cache
-      try {
-        resources = await getResources() as AWSResource[];
-        if (resources.length > 0) {
-          dataSource = 'dynamodb-cache';
-        } else {
-          throw new Error('DynamoDB cache is empty');
-        }
-      } catch (dbError) {
+        // Fallback to DynamoDB cache
+        try {
+          resources = await getResources() as AWSResource[];
+          if (resources.length > 0) {
+            dataSource = 'dynamodb-cache';
+            console.log(`Using ${resources.length} resources from DynamoDB cache`);
+          } else {
+            throw new Error('DynamoDB cache is empty');
+          }
+        } catch (dbError) {
         console.error('DynamoDB error, using mock data:', dbError);
         // Final fallback: Use mock data for demo purposes
-        resources = generateMockResources();
-        dataSource = 'mock-demo';
+          resources = generateMockResources();
+          dataSource = 'mock-demo';
+        }
       }
+    } else {
+      // Skip AWS and go straight to mock data since AWS free tier is exceeded
+      console.log('AWS SDK disabled or unavailable - using mock data');
+      resources = generateMockResources();
+      dataSource = 'mock-demo';
     }
 
     // Apply filters

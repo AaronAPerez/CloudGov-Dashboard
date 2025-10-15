@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CloudGovDashboard")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7a6d80941eb68be2b924a528adaf1198d389c6c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a635fb0e5f24480a835c2dd0706f160cdad5cd05")]
 [assembly: System.Reflection.AssemblyProductAttribute("CloudGovDashboard")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CloudGovDashboard")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

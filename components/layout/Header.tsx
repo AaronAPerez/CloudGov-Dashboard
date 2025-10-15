@@ -61,12 +61,12 @@ export function Header({
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   // Add dark mode toggle in Header component
-const toggleDarkMode = () => {
-  document.documentElement.classList.toggle('dark');
-  localStorage.setItem('theme', 
-    document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-  );
-};
+// const toggleDarkMode = () => {
+//   document.documentElement.classList.toggle('dark');
+//   localStorage.setItem('theme', 
+//     document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+//   );
+// };
 
   /**
    * Handle user logout
@@ -153,7 +153,6 @@ const toggleDarkMode = () => {
             <Search className="h-5 w-5" />
           </Button>
 
-       
 
           {/* Notifications */}
           <div className="relative">

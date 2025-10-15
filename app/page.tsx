@@ -47,15 +47,16 @@ import {
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { CostChart } from '@/components/dashboard/CostChart';
 import { ResourceTable } from '@/components/dashboard/ResourceTable';
-import { Card, CardHeader, CardBody, Badge, Button } from '@/components/ui';
+import { Badge, Button } from '@/components/ui';
 import { useResources, useCosts, useSecurity } from '@/hooks';
 import { cn, formatCurrency } from '@/lib/utils';
 import type { AWSResource } from '@/lib/types';
 import HealthItem from '@/components/dashboard/HealthItem';
 import StatItem from '@/components/dashboard/StatItem';
 import { MetricsCard } from '@/components/dashboard/MetricsCard';
-// import AWSConnectionStatus from '@/components/AWSConnectionStatus';
-// import DemoModeBanner, { DataSourceBadge } from '@/components/DemoModeBanner';
+import AWSConnectionStatus from '@/components/AWSConnectionStatus';
+import DemoModeBanner, { DataSourceBadge } from '@/components/DemoModeBanner';
+
 
 /**
  * Dashboard Page Component
@@ -70,28 +71,28 @@ export default function DashboardPage() {
   /**
    * Check AWS connection status on mount
    */
-  // useEffect(() => {
-  //   checkConnection();
-  // }, []);
+  useEffect(() => {
+    checkConnection();
+  }, []);
 
-  // const checkConnection = async () => {
-  //   setIsCheckingConnection(true);
-  //   try {
-  //     const response = await fetch('/api/aws/connection-status');
-  //     const data = await response.json();
-  //     setConnectionStatus(data);
-  //   } catch (error) {
-  //     console.error('Failed to check connection:', error);
-  //     // Set a fallback status if API fails
-  //     setConnectionStatus({
-  //       success: false,
-  //       mode: 'demo',
-  //       summary: { connectedServices: 0 }
-  //     });
-  //   } finally {
-  //     setIsCheckingConnection(false);
-  //   }
-  // };
+  const checkConnection = async () => {
+    setIsCheckingConnection(true);
+    try {
+      const response = await fetch('/api/aws/connection-status');
+      const data = await response.json();
+      setConnectionStatus(data);
+    } catch (error) {
+      console.error('Failed to check connection:', error);
+      // Set a fallback status if API fails
+      setConnectionStatus({
+        success: false,
+        mode: 'demo',
+        summary: { connectedServices: 0 }
+      });
+    } finally {
+      setIsCheckingConnection(false);
+    }
+  };
 
   // Fetch data using custom hooks
   const {
@@ -121,7 +122,7 @@ export default function DashboardPage() {
    * Refresh all data including connection status
    */
   const handleRefreshAll = () => {
-    // checkConnection();
+    checkConnection();
     refetchResources();
     refetchCosts();
     refetchSecurity();
@@ -143,16 +144,16 @@ export default function DashboardPage() {
   return (
     <DashboardLayout activeRoute="/">
       {/* Demo Mode Banner - Only show if connected but no data */}
-      {/* {!isCheckingConnection && isDemoMode && hasConnection && (
+      {!isCheckingConnection && isDemoMode && hasConnection && (
         <div className="mb-6 animate-fade-in">
           <DemoModeBanner variant="banner" showStats={true} />
         </div>
       )}
 
       {/* AWS Connection Status Card */}
-      {/* <div className="mb-6 animate-slide-down">
+      <div className="mb-6 animate-slide-down">
         <AWSConnectionStatus showDetails={true} />
-      </div>  */}
+      </div>  
 
       {/* Hero Section with Gradient Background */}
       <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-br from-primary-600 via-secondary-600 to-primary-700 p-8 shadow-xl dark:from-primary-700 dark:via-secondary-700 dark:to-primary-800 animate-fade-in">
@@ -187,12 +188,12 @@ export default function DashboardPage() {
                   </Badge>
                   
                   {/* Data Source Badge - Dynamic based on connection status */}
-                  {/* {!isCheckingConnection && (
+                  {!isCheckingConnection && (
                     <DataSourceBadge 
                       isLive={isLiveData} 
                       className="bg-white/20 border-white/30 text-white backdrop-blur-sm" 
                     />
-                  )} */}
+                  )}
                   
                   <span className="text-sm text-white/80">
                     Real-time monitoring active
@@ -604,59 +605,5 @@ export default function DashboardPage() {
         </div>
       )}
     </DashboardLayout>
-  );
-}
-
-
-/**
- * SecurityFindingItem Component
- * Individual security finding display
- */
-interface SecurityFindingItemProps {
-  finding: {
-    id: string;
-    title: string;
-    description: string;
-    severity: 'critical' | 'high' | 'medium' | 'low';
-  };
-}
-
-function SecurityFindingItem({ finding }: SecurityFindingItemProps) {
-  const severityVariant = finding.severity === 'critical' || finding.severity === 'high' ? 'error' : 'warning';
-
-  return (
-    <div className="rounded-lg border border-neutral-200 p-3 transition-colors hover:bg-neutral-50">
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex-1">
-          <h4 className="text-sm font-medium text-neutral-900">{finding.title}</h4>
-          <p className="mt-1 text-xs text-neutral-600">{finding.description}</p>
-        </div>
-        <Badge variant={severityVariant} size="sm">
-          {finding.severity}
-        </Badge>
-      </div>
-    </div>
-  );
-}
-
-/**
- * AlertItem Component
- * Individual alert display
- */
-interface AlertItemProps {
-  title: string;
-  description: string;
-  variant: 'error' | 'warning' | 'info';
-}
-
-function AlertItem({ title, description, variant }: AlertItemProps) {
-  return (
-    <div className="flex items-start gap-3">
-      <Badge variant={variant} size="sm" withDot />
-      <div className="flex-1">
-        <p className="text-sm font-medium text-neutral-900">{title}</p>
-        <p className="mt-0.5 text-xs text-neutral-600">{description}</p>
-      </div>
-    </div>
   );
 }

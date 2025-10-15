@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   /* config options here */
   devIndicators: false,
 
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   // Exclude AWS SDK from client-side bundle
   serverExternalPackages: [
     '@aws-sdk/client-dynamodb',

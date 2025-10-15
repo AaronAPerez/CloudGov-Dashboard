@@ -28,11 +28,8 @@ import {
   Server,
   DollarSign,
   Shield,
-  Sparkles,
   Settings,
-  FileText,
   AlertCircle,
-  Brain,
   Key,
   Monitor
 } from 'lucide-react';

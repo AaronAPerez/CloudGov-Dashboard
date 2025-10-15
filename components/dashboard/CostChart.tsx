@@ -101,8 +101,8 @@ export function CostChart({
     return (
       <Card>
         <CardHeader>
-          <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
-          <p className="text-sm text-neutral-600">{description}</p>
+          <h3 className="text-lg font-semibold text-neutral-300">{title}</h3>
+          <p className="text-sm text-neutral-200">{description}</p>
         </CardHeader>
         <CardBody>
           <div className="flex flex-col items-center justify-center py-12">
