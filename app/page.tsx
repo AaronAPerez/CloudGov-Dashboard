@@ -64,8 +64,8 @@ export default function DashboardPage() {
   const router = useRouter();
   
   // Connection status state
-  const [connectionStatus, setConnectionStatus] = useState<any>(null);
-  const [isCheckingConnection, setIsCheckingConnection] = useState(true);
+  // const [connectionStatus, setConnectionStatus] = useState<any>(null);
+  // const [isCheckingConnection, setIsCheckingConnection] = useState(true);
 
   /**
    * Check AWS connection status on mount
