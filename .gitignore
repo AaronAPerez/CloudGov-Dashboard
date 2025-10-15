@@ -93,3 +93,7 @@ amplifytools.xcconfig
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+.vercel
+cdk.out
+lambda/dist

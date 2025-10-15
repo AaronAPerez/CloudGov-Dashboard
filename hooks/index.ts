@@ -15,3 +15,12 @@ export { useCosts, useCostAlerts } from './useCosts';
 
 // Security and compliance hooks
 export { useSecurity, useSecurityAlerts } from './useSecurity';
+
+// WorkSpaces management hooks
+export { useWorkSpaces } from './useWorkSpaces';
+
+// Settings hooks
+export { useSettings } from './useSettings';
+
+// Toast notifications
+export { useToast } from './useToast';

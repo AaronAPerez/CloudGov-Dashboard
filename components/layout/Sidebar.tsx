@@ -33,7 +33,8 @@ import {
   FileText,
   AlertCircle,
   Brain,
-  Key
+  Key,
+  Monitor
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui';
@@ -75,6 +76,13 @@ const navigationItems: NavItem[] = [
     label: 'Dashboard',
     icon: LayoutDashboard,
     href: '/',
+    description: 'Overview and key metrics',
+  },
+  {
+    id: 'workspaces',
+    label: 'WorkSpaces',
+    icon: Monitor,
+    href: '/workspaces',
     description: 'Overview and key metrics',
   },
   {

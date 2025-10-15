@@ -67,7 +67,7 @@ type SortDirection = 'asc' | 'desc' | null;
 /**
  * Resource type color variants
  */
-const typeVariants: Record<string, 'primary' | 'success' | 'warning' | 'error' | 'info' | 'neutral'> = {
+export const typeVariants: Record<string, 'primary' | 'success' | 'warning' | 'error' | 'info' | 'neutral'> = {
   'EC2': 'primary',
   'S3': 'success',
   'Lambda': 'warning',

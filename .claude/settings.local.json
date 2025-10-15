@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Read(//c/Users/aaper/Downloads/**)",
+      "Bash(npm install:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run type-check:*)",
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(cp:*)",
+      "Bash(npx playwright test:*)",
+      "Bash(cat:*)",
+      "Bash(bash:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

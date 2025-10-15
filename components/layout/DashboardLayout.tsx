@@ -23,8 +23,8 @@
  */
 
 import { useState, ReactNode } from 'react';
-import { Header } from '../layout/Header';
-import { Sidebar } from '../layout/Sidebar';
+import { Header } from './Header';
+import { Sidebar } from './Sidebar';
 
 /**
  * DashboardLayout component props
@@ -63,7 +63,7 @@ export function DashboardLayout({
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-neutral-50">
       {/* Header */}
       <Header
         onMenuToggle={handleToggleSidebar}

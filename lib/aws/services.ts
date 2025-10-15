@@ -1,7 +1,7 @@
 "use server";
 
-import { EC2Client, DescribeInstancesCommand, DescribeVolumesCommand } from "@aws-sdk/client-ec2";
-import { S3Client, ListBucketsCommand, GetBucketLocationCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
+import { EC2Client, DescribeInstancesCommand } from "@aws-sdk/client-ec2";
+import { S3Client, ListBucketsCommand } from "@aws-sdk/client-s3";
 import { LambdaClient, ListFunctionsCommand } from "@aws-sdk/client-lambda";
 import { RDSClient, DescribeDBInstancesCommand } from "@aws-sdk/client-rds";
 import { DynamoDBClient, ListTablesCommand, DescribeTableCommand } from "@aws-sdk/client-dynamodb";

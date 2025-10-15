@@ -26,6 +26,7 @@
 
 'use client';
 
+import { useRouter } from 'next/navigation';
 import {
   Server,
   DollarSign,
@@ -47,12 +48,14 @@ import { cn, formatCurrency } from '@/lib/utils';
 import type { AWSResource } from '@/lib/types';
 import HealthItem from '@/components/dashboard/HealthItem';
 import StatItem from '@/components/dashboard/StatItem';
-import MetricsCard from '@/components/dashboard/MetricsCard';
+import { MetricsCard } from '@/components/dashboard/MetricsCard';
 
 /**
  * Dashboard Page Component
  */
 export default function DashboardPage() {
+  const router = useRouter();
+
   // Fetch data using custom hooks
   const {
     resources,
@@ -87,11 +90,11 @@ export default function DashboardPage() {
   };
 
   /**
-   * Handle resource click
+   * Handle resource click - Navigate to resources page with filter
    */
   const handleResourceClick = (resource: AWSResource) => {
-    console.log('View resource details:', resource);
-    // TODO: Navigate to resource details page
+    // Navigate to resources page with the resource ID as a query parameter
+    router.push(`/resources?id=${resource.id}&type=${resource.type}`);
   };
 
   return (

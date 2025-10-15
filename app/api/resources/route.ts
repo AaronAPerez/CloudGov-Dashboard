@@ -184,17 +184,80 @@ export async function GET(request: NextRequest) {
 }
 
 /**
- * POST /api/resources
- * 
- * Create or update resource (for future implementation)
+ * Resource creation/update schema
  */
-export async function POST(_request: NextRequest) {
-  return NextResponse.json(
-    {
-      success: false,
-      error: 'Method not implemented',
-      timestamp: new Date().toISOString(),
-    },
-    { status: 501 }
-  );
+const resourceSchema = z.object({
+  id: z.string().min(1, 'Resource ID is required'),
+  name: z.string().min(1, 'Resource name is required'),
+  type: z.enum(['EC2', 'S3', 'Lambda', 'DynamoDB', 'RDS', 'ECS', 'EKS', 'CloudFront', 'API Gateway', 'WorkSpaces']),
+  status: z.enum(['running', 'stopped', 'terminated', 'pending', 'error']),
+  region: z.string().min(1, 'Region is required'),
+  monthlyCost: z.number().min(0),
+  owner: z.string().min(1, 'Owner is required'),
+  tags: z.array(z.string()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
+});
+
+/**
+ * POST /api/resources
+ *
+ * Create or update an AWS resource in DynamoDB
+ *
+ * @body {AWSResource} - Resource data to save
+ * @returns {201} - Resource created successfully
+ * @returns {400} - Invalid request body
+ * @returns {500} - Server error
+ */
+export async function POST(request: NextRequest) {
+  try {
+    // Parse and validate request body
+    const body = await request.json();
+    const validatedData = resourceSchema.parse(body);
+
+    // Prepare resource object
+    const resource = {
+      ...validatedData,
+      createdAt: new Date(),
+      lastAccessed: new Date(),
+      updatedAt: new Date(),
+    };
+
+    // Save to DynamoDB
+    await saveResource(resource);
+
+    return NextResponse.json(
+      {
+        success: true,
+        data: resource,
+        message: 'Resource saved successfully',
+        timestamp: new Date().toISOString(),
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    // Handle Zod validation errors
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Invalid request body',
+          details: error.issues,
+          timestamp: new Date().toISOString(),
+        },
+        { status: 400 }
+      );
+    }
+
+    // Handle other errors
+    console.error('Error creating resource:', error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to create resource',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString(),
+      },
+      { status: 500 }
+    );
+  }
 }
