@@ -34,6 +34,7 @@
  * />
  */
 
+import React from 'react';
 import { useState } from 'react';
 import { 
   ChevronUp, 
@@ -215,8 +216,13 @@ export function ResourceTable({
   if (resources.length === 0) {
     return (
       <Card>
+        <CardHeader>
+          <h3 className="text-lg font-semibold text-neutral-900">
+            AWS Resources
+          </h3>
+        </CardHeader>
         <CardBody>
-          <div className="flex flex-col items-center justify-center py-12">
+          <div className="flex flex-col items-center justify-center py-12" role="status">
             <p className="text-lg font-medium text-neutral-900">
               No resources found
             </p>

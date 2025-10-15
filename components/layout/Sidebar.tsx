@@ -107,13 +107,13 @@ const navigationItems: NavItem[] = [
     },
     description: 'Roles, users, and permissions',
   },
-  {
-    id: 'ai-usage',
-    label: 'AI Usage',
-    icon: Brain,
-    href: '/ai-usage',
-    description: 'AI API tracking and analytics',
-  },
+  // {
+  //   id: 'ai-usage',
+  //   label: 'AI Usage',
+  //   icon: Brain,
+  //   href: '/ai-usage',
+  //   description: 'AI API tracking and analytics',
+  // },
   {
     id: 'costs',
     label: 'Cost Analytics',
@@ -132,26 +132,26 @@ const navigationItems: NavItem[] = [
     },
     description: 'Compliance and findings',
   },
-  {
-    id: 'ai-assistant',
-    label: 'AI Assistant',
-    icon: Sparkles,
-    href: '/ai-assistant',
-    description: 'Intelligent recommendations',
-  },
+  // {
+  //   id: 'ai-assistant',
+  //   label: 'AI Assistant',
+  //   icon: Sparkles,
+  //   href: '/ai-assistant',
+  //   description: 'Intelligent recommendations',
+  // },
 ];
 
 /**
  * Bottom navigation items (settings, etc.)
  */
 const bottomNavItems: NavItem[] = [
-  {
-    id: 'docs',
-    label: 'Documentation',
-    icon: FileText,
-    href: '/docs',
-    description: 'Guides and API reference',
-  },
+  // {
+  //   id: 'docs',
+  //   label: 'Documentation',
+  //   icon: FileText,
+  //   href: '/docs',
+  //   description: 'Guides and API reference',
+  // },
   {
     id: 'settings',
     label: 'Settings',
@@ -174,10 +174,7 @@ export function Sidebar({
   /**
    * Handle navigation item click
    */
-  const handleNavClick = (href: string) => {
-    // TODO: Implement actual navigation
-    console.log('Navigate to:', href);
-    
+  const handleNavClick = () => {
     // Close mobile sidebar after navigation
     if (onClose) {
       onClose();
@@ -217,7 +214,7 @@ export function Sidebar({
                   key={item.id}
                   item={item}
                   isActive={activeRoute === item.href}
-                  onClick={() => handleNavClick(item.href)}
+                  onClick={handleNavClick}
                 />
               ))}
             </div>
@@ -232,7 +229,7 @@ export function Sidebar({
                   key={item.id}
                   item={item}
                   isActive={activeRoute === item.href}
-                  onClick={() => handleNavClick(item.href)}
+                  onClick={handleNavClick}
                 />
               ))}
             </div>

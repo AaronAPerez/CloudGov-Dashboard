@@ -112,16 +112,17 @@ export function MetricsCard({
       onClick={onClick}
       isLoading={isLoading}
       className="transition-all duration-200"
+      aria-label={`${title}: ${value}${change !== undefined ? `, ${change > 0 ? 'up' : change < 0 ? 'down' : 'unchanged'} ${Math.abs(change).toFixed(1)}%` : ''}`}
     >
       <CardBody>
         <div className="flex items-start justify-between">
           {/* Left side: Title and value */}
           <div className="flex-1">
             {/* Title */}
-            <p className="text-sm font-medium text-neutral-600">{title}</p>
+            <p className="text-sm font-medium text-neutral-400">{title}</p>
 
             {/* Value */}
-            <p className="mt-2 text-3xl font-bold text-neutral-900">
+            <p className="mt-2 text-3xl font-bold text-neutral-300">
               {typeof value === 'number' ? formatNumber(value) : value}
             </p>
 

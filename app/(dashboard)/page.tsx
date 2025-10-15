@@ -28,6 +28,8 @@
 
 'use client';
 
+import React from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Server,
   DollarSign,
@@ -47,14 +49,17 @@ import { Badge, Button } from '@/components/ui';
 import { useResources, useCosts, useSecurity } from '@/hooks';
 import { formatCurrency, cn } from '@/lib/utils';
 import type { AWSResource } from '@/lib/types';
-import HealthItem from './HealthItem';
-import StatItem from './StatItem';
-import { MetricsCard } from './MetricsCard';
+import HealthItem from '../../components/dashboard/HealthItem';
+import StatItem from '../../components/dashboard/StatItem';
+import { MetricsCard } from '../../components/dashboard/MetricsCard';
+
 
 /**
  * Dashboard Page Component
  */
 export default function DashboardPage() {
+  const router = useRouter();
+
   // Fetch data using custom hooks
   const {
     resources,
@@ -89,11 +94,11 @@ export default function DashboardPage() {
   };
 
   /**
-   * Handle resource click
+   * Handle resource click - Navigate to resources page with filter
    */
   const handleResourceClick = (resource: AWSResource) => {
-    console.log('View resource details:', resource);
-    // TODO: Navigate to resource details page
+    // Navigate to resources page with the resource ID as a query parameter
+    router.push(`/resources?id=${resource.id}&type=${resource.type}`);
   };
 
   return (
@@ -201,7 +206,6 @@ export default function DashboardPage() {
             iconVariant="primary"
             description="vs last month"
             isLoading={costsLoading}
-            
           />
 
           {/* Total Resources Metric */}
@@ -209,10 +213,9 @@ export default function DashboardPage() {
             title="Total Resources"
             value={resources.length}
             icon={<Server className="h-6 w-6" />}
-            iconVariant="primary"
+            iconVariant="success"
             description="active resources"
             isLoading={resourcesLoading}
-            
           />
 
           {/* Security Findings Metric */}
@@ -220,10 +223,9 @@ export default function DashboardPage() {
             title="Security Findings"
             value={compliance?.breakdown.critical || 0}
             icon={<Shield className="h-6 w-6" />}
-            iconVariant="primary"
+            iconVariant="error"
             description="critical issues"
             isLoading={securityLoading}
-            
           />
 
           {/* Compliance Score Metric */}
@@ -234,13 +236,12 @@ export default function DashboardPage() {
             iconVariant="primary"
             description={`Grade: ${compliance?.grade || 'N/A'}`}
             isLoading={securityLoading}
-            
           />
         </div>
       </section>
 
       {/* Cost Trend Chart */}
-      <section className="mb-8 animate-slide-up" style={{ animationDelay: '0.4s' }} aria-labelledby="cost-trend-heading">
+      <section className="text-gray-300 mb-8 animate-slide-up" style={{ animationDelay: '0.4s' }} aria-labelledby="cost-trend-heading">
         <h2 id="cost-trend-heading" className="sr-only">
           Cost Trend
         </h2>
@@ -320,7 +321,7 @@ export default function DashboardPage() {
                   )}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold dark:text-neutral-100">
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
                     Security Findings
                   </h3>
                   {compliance && (
@@ -361,7 +362,7 @@ export default function DashboardPage() {
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
-                            <h4 className="text-sm font-medium dark:text-neutral-100 truncate">
+                            <h4 className="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">
                               {finding.title}
                             </h4>
                           </div>
@@ -426,7 +427,7 @@ export default function DashboardPage() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 text-white shadow-lg">
                   <Activity className="h-5 w-5" />
                 </div>
-                <h3 className="text-lg font-semibold dark:text-neutral-100">
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
                   Quick Stats
                 </h3>
               </div>
@@ -478,7 +479,7 @@ export default function DashboardPage() {
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-success-100 dark:bg-success-950">
                 <Activity className="h-5 w-5 text-success-600 dark:text-success-400" />
               </div>
-              <h3 className="text-lg font-semibold dark:text-neutral-100">
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
                 System Health
               </h3>
             </div>
@@ -511,7 +512,4 @@ export default function DashboardPage() {
     </DashboardLayout>
   );
 }
-
-
-
 
