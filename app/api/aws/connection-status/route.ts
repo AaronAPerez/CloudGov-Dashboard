@@ -11,27 +11,27 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  EC2Client, 
-  DescribeInstancesCommand 
+import {
+  EC2Client,
+  DescribeInstancesCommand
 } from '@aws-sdk/client-ec2';
-import { 
-  S3Client, 
-  ListBucketsCommand 
+import {
+  S3Client,
+  ListBucketsCommand
 } from '@aws-sdk/client-s3';
-import { 
-  LambdaClient, 
-  ListFunctionsCommand 
+import {
+  LambdaClient,
+  ListFunctionsCommand
 } from '@aws-sdk/client-lambda';
-import { 
-  DynamoDBClient, 
-  ListTablesCommand 
+import {
+  DynamoDBClient,
+  ListTablesCommand
 } from '@aws-sdk/client-dynamodb';
-import { 
-  RDSClient, 
-  DescribeDBInstancesCommand 
+import {
+  RDSClient,
+  DescribeDBInstancesCommand
 } from '@aws-sdk/client-rds';
-import { awsConfig } from '@/lib/aws/config';
+import { awsConfig, features } from '@/lib/aws/config';
 
 interface ServiceCheckResult {
   name: string;
@@ -223,12 +223,18 @@ async function checkRDS(): Promise<ServiceCheckResult> {
       resourceCount: instanceCount,
     };
   } catch (error: any) {
+    // Check if it's a "no instances" scenario vs actual connection failure
+    const isNoInstances = error.name !== 'CredentialsProviderError' &&
+                          error.name !== 'UnauthorizedException';
+
     return {
       name: 'Amazon RDS',
       connected: false,
       hasData: false,
-      error: error.name === 'CredentialsProviderError' 
-        ? 'Invalid credentials' 
+      error: error.name === 'CredentialsProviderError'
+        ? 'Invalid credentials'
+        : isNoInstances
+        ? 'No RDS instances (cost optimization)'
         : 'Connection failed',
       latency: Date.now() - startTime,
     };

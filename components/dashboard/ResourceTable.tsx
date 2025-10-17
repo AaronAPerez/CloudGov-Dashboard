@@ -238,10 +238,10 @@ export function ResourceTable({
   return (
     <Card>
       <CardHeader>
-        <h3 className="text-lg font-semibold text-neutral-900">
+        <h3 className="text-lg font-semibold">
           AWS Resources
         </h3>
-        <p className="text-sm text-neutral-200">
+        <p className="text-sm">
           {resources.length} total resources
         </p>
       </CardHeader>
@@ -289,7 +289,7 @@ export function ResourceTable({
                   sortIcon={renderSortIcon('lastAccessed')}
                 />
                 {showActions && (
-                  <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wide text-neutral-200">
+                  <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wide">
                     Actions
                   </th>
                 )}
@@ -297,7 +297,7 @@ export function ResourceTable({
             </thead>
 
             {/* Table body */}
-            <tbody className="divide-y divide-neutral-100">
+            <tbody className="divide-y">
               {sortedResources.map(resource => (
                 <tr
                   key={resource.id}
@@ -313,7 +313,7 @@ export function ResourceTable({
         text-gray-900 dark:text-gray-100">
                       {resource.name}
                     </div>
-                    <div className="text-xs text-neutral-500">{resource.id}</div>
+                    <div className="text-xs">{resource.id}</div>
                   </td>
 
                   {/* Type */}
@@ -374,21 +374,21 @@ export function ResourceTable({
                           .join('')
                           .toUpperCase()}
                       </div>
-                      <span className="text-sm text-neutral-200">
+                      <span className="text-sm">
                         {resource.owner}
                       </span>
                     </div>
                   </td>
 
                   {/* Last Accessed */}
-                  <td className="px-4 py-3 text-sm text-neutral-200">
+                  <td className="px-4 py-3 text-sm">
                     {formatRelativeTime(resource.lastAccessed)}
                   </td>
 
                   {/* Actions */}
                   {showActions && (
-                    <td className="px-4 py-3 text-right text-gray-200">
-                      <div className="flex items-center justify-end gap-2 text-gray-100">
+                    <td className="px-4 py-3 text-right">
+                      <div className="flex items-center justify-end gap-2">
                         <Button
                           variant="ghost"
                           size="sm"

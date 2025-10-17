@@ -216,7 +216,7 @@ export default function AWSConnectionStatus({ showDetails = true }: ConnectionSt
             )}
 
             {connectedCount > 0 && hasAnyData && (
-              <div className="flex items-center gap-2 p-3 md:p-4 bg-gradient-to-br from-success-50 to-green-50/50 dark:from-success-950/20 dark:to-green-950/10 border border-success-200 dark:border-success-800 rounded-lg mt-3">
+              <div className="flex items-center gap-2 p-3 md:p-4 bg-gradient-to-br from-green-300 to-green-50/50 dark:from-green-800 dark:to-green-950/10 border border-success-200 dark:border-success-800 rounded-lg mt-3">
                 <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 flex-shrink-0" />
                 <p className="text-sm text-success-700 dark:text-success-300 font-medium">
                   All AWS services connected successfully. Displaying live data.
@@ -237,7 +237,7 @@ export default function AWSConnectionStatus({ showDetails = true }: ConnectionSt
           {showDetails && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="flex-shrink-0 px-4 py-2 text-xs font-semibold text-primary-700 dark:text-primary-400 bg-primary-100 dark:bg-primary-950 hover:bg-primary-200 dark:hover:bg-primary-900 rounded-lg transition-all duration-200 border border-primary-200 dark:border-primary-800 shadow-sm hover:shadow"
+              className="flex-shrink-0 px-4 py-2 text-xs font-semibold text-primary-700 dark:text-primary-400 bg-gray-300 dark:bg-gray-600 hover:bg-primary-200 dark:hover:bg-primary-900 rounded-lg transition-all duration-200 border border-primary-200 dark:border-primary-800 shadow-sm hover:shadow"
             >
               {isExpanded ? 'Hide' : 'Show'} Details
             </button>
@@ -297,7 +297,7 @@ export default function AWSConnectionStatus({ showDetails = true }: ConnectionSt
                   )}
 
                   {!service.connected && service.error && (
-                    <span className="relative z-10 text-xs text-error-600 dark:text-error-400 font-medium truncate max-w-[150px]">
+                    <span className="relative z-10 text-xs text-error-600 dark:text-error-400 font-medium text-right break-words">
                       {service.error}
                     </span>
                   )}

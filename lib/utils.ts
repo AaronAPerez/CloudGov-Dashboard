@@ -25,11 +25,11 @@ export function cn(...inputs: ClassValue[]): string {
 
 /**
  * Format currency values
- * 
+ *
  * @param amount - Numeric amount to format
  * @param currency - Currency code (default: USD)
  * @returns Formatted currency string
- * 
+ *
  * @example
  * formatCurrency(1234.56) // Returns: '$1,234.56'
  * formatCurrency(1234.56, 'EUR') // Returns: '€1,234.56'
@@ -43,6 +43,42 @@ export function formatCurrency(
     currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
+  }).format(amount);
+}
+
+/**
+ * Format currency with compact notation for large amounts
+ *
+ * @param amount - Numeric amount to format
+ * @param currency - Currency code (default: USD)
+ * @returns Compact formatted currency string
+ *
+ * @example
+ * formatCompactCurrency(1234.56) // Returns: '$1.2K'
+ * formatCompactCurrency(35719) // Returns: '$35.7K'
+ * formatCompactCurrency(1234567) // Returns: '$1.2M'
+ */
+export function formatCompactCurrency(
+  amount: number,
+  currency: string = 'USD'
+): string {
+  // For amounts under 10K, show full amount
+  if (amount < 10000) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  }
+
+  // For larger amounts, use compact notation
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+    notation: 'compact',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 1,
   }).format(amount);
 }
 

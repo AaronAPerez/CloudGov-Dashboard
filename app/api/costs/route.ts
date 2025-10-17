@@ -62,7 +62,7 @@ function generateMockCosts(range: string, _groupBy: string): { costs: CostDataPo
 
   // Determine number of data points based on range
   let dataPoints = 30;
-  const baselineCost = 12000;
+  const baselineCost = 1200;
 
   switch (range) {
     case '7d':

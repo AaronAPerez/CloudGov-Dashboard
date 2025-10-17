@@ -216,8 +216,8 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
 
           {/* Logo and title (always visible) */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 text-white">
-              <Cloud className="h-10 w-10" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500">
+              <Cloud className="h-8 w-8" />
             </div>
             <span className="font-semibold text-neutral-900 dark:text-neutral-100 text-lg whitespace-nowrap">
               CloudGov
@@ -239,10 +239,15 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
         {/* Center section - Search bar */}
         <div className="hidden md:flex flex-1 justify-start max-w-md lg:max-w-lg">
           <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
+            <label htmlFor="resource-search" className="sr-only">
+              Search resources
+            </label>
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" />
             <input
+              id="resource-search"
               type="search"
               placeholder="Search resources..."
+              aria-label="Search resources"
               className="w-full pl-10 pr-4 py-2 text-sm bg-neutral-100 dark:bg-neutral-800 border border-transparent focus:border-primary-500 dark:focus:border-primary-400 rounded-lg outline-none transition-colors"
             />
           </div>
@@ -260,7 +265,7 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
             {theme === 'dark' ? (
               <Sun className="h-5 w-5 text-yellow-500" />
             ) : (
-              <Moon className="h-5 w-5 text-neutral-700" />
+              <Moon className="h-5 w-5 text-sky-400" />
             )}
           </button>
 
@@ -271,7 +276,7 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
           >
             <Bell className="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
             {notificationCount > 0 && (
-              <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-error-500 text-[10px] font-bold text-white">
+              <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                 {notificationCount}
               </span>
             )}
@@ -285,7 +290,7 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
               aria-label="User menu"
               aria-expanded={isUserMenuOpen}
             >
-              <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white flex-shrink-0 shadow-md">
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex-shrink-0 shadow-md">
                 <User className="h-4 w-4" />
               </div>
               <div className="hidden md:block text-left">

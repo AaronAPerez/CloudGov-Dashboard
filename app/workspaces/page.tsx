@@ -2,7 +2,7 @@
 
 import { useWorkSpaces } from '@/hooks/useWorkSpaces';
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
-import { Card, CardHeader, CardBody, Badge, Button } from '@/components/ui';
+import { Card, CardBody, Badge, Button } from '@/components/ui';
 import { Monitor, Play, Square, RotateCw, Trash2, Loader2 } from 'lucide-react';
 
 export default function WorkSpacesPage() {

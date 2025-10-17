@@ -66,11 +66,11 @@ export interface MetricsCardProps {
  * Icon background color variants
  */
 const iconVariants = {
-  primary: 'bg-primary-100 text-primary-700',
-  success: 'bg-success-100 text-success-700',
-  warning: 'bg-warning-100 text-warning-700',
-  error: 'bg-error-100 text-error-700',
-  neutral: 'bg-neutral-100 text-neutral-700',
+  primary: 'bg-primary-100 text-primary-700 dark:bg-primary-950 dark:text-primary-300',
+  success: 'bg-success-100 text-success-700 dark:bg-success-950 dark:text-success-300',
+  warning: 'bg-warning-100 text-warning-700 dark:bg-warning-950 dark:text-warning-300',
+  error: 'bg-error-100 text-error-700 dark:bg-error-950 dark:text-error-300',
+  neutral: 'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300',
 };
 
 /**
@@ -100,10 +100,10 @@ export function MetricsCard({
   // Trend color based on direction
   const trendColor =
     trend === 'up'
-      ? 'text-success-700'
+      ? 'text-success-700 dark:text-success-300'
       : trend === 'down'
-      ? 'text-error-700'
-      : 'text-neutral-500';
+      ? 'text-error-700 dark:text-error-300'
+      : 'text-neutral-500 dark:text-neutral-400';
 
   return (
     <Card
@@ -115,28 +115,28 @@ export function MetricsCard({
       aria-label={`${title}: ${value}${change !== undefined ? `, ${change > 0 ? 'up' : change < 0 ? 'down' : 'unchanged'} ${Math.abs(change).toFixed(1)}%` : ''}`}
     >
       <CardBody>
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between gap-3">
           {/* Left side: Title and value */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             {/* Title */}
-            <p className="text-sm font-medium text-neutral-400">{title}</p>
+            <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{title}</p>
 
             {/* Value */}
-            <p className="mt-2 text-3xl font-bold text-neutral-300">
+            <p className="mt-2 text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               {typeof value === 'number' ? formatNumber(value) : value}
             </p>
 
             {/* Change indicator */}
             {change !== undefined && (
-              <div className="mt-2 flex items-center gap-2">
+              <div className="mt-2 flex items-center gap-2 flex-wrap">
                 {/* Trend badge */}
                 <div
                   className={cn(
                     'flex items-center gap-1 rounded-full px-2 py-0.5',
                     'text-xs font-medium',
-                    isPositive && 'bg-success-100 text-success-800',
-                    isNegative && 'bg-error-100 text-error-800',
-                    !isPositive && !isNegative && 'bg-neutral-100 text-neutral-800'
+                    isPositive && 'bg-success-100 text-success-800 dark:bg-success-950 dark:text-success-200',
+                    isNegative && 'bg-error-100 text-error-800 dark:bg-error-950 dark:text-error-200',
+                    !isPositive && !isNegative && 'bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200'
                   )}
                 >
                   <TrendIcon
@@ -149,7 +149,7 @@ export function MetricsCard({
                 </div>
 
                 {/* Description */}
-                <span className="text-xs text-neutral-500">{description}</span>
+                <span className="text-xs text-neutral-500 dark:text-neutral-400">{description}</span>
               </div>
             )}
           </div>

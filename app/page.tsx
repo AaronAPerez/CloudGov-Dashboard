@@ -39,7 +39,7 @@ import { CostChart } from '@/components/dashboard/CostChart';
 import { ResourceTable } from '@/components/dashboard/ResourceTable';
 import { Badge, Button } from '@/components/ui';
 import { useResources, useCosts, useSecurity } from '@/hooks';
-import { cn, formatCurrency } from '@/lib/utils';
+import { cn, formatCurrency, formatCompactCurrency } from '@/lib/utils';
 import type { AWSResource } from '@/lib/types';
 import HealthItem from '@/components/dashboard/HealthItem';
 import StatItem from '@/components/dashboard/StatItem';
@@ -203,11 +203,11 @@ export default function DashboardPage() {
             <div className="flex-1 min-w-0">
               <div className="flex items-start gap-3 mb-3">
                 <div className="relative flex-shrink-0">
-                  <Cloud className="h-8 w-8 md:h-10 md:w-10 text-white" />
+                  <Cloud className="h-8 w-8 md:h-10 md:w-10" />
                   <div className="absolute -inset-2 bg-white/20 rounded-full blur-md animate-pulse-soft" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white animate-slide-up truncate">
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold animate-slide-up truncate">
                     Dashboard Overview
                   </h1>
                   <div className="flex flex-wrap items-center gap-2 mt-2">
@@ -233,7 +233,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
               </div>
-              <p className="text-sm md:text-base lg:text-lg text-white/90 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+              <p className="text-sm md:text-base lg:text-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
                 Monitor your AWS infrastructure with AI-powered insights
               </p>
             </div>
@@ -243,7 +243,7 @@ export default function DashboardPage() {
               size="md"
               onClick={handleRefreshAll}
               leftIcon={<RefreshCw className="h-4 w-4" />}
-              className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm animate-slide-up w-full sm:w-auto"
+              className="bg-white/20 hover:bg-white/30 border-white/30 backdrop-blur-sm animate-slide-up w-full sm:w-auto"
               style={{ animationDelay: '0.2s' }}
               disabled={isCheckingConnection}
             >
@@ -287,7 +287,7 @@ export default function DashboardPage() {
             {/* Monthly Cost Metric */}
             <MetricsCard
               title="Monthly Cost"
-              value={formatCurrency(costSummary?.currentMonth || 0)}
+              value={formatCompactCurrency(costSummary?.currentMonth || 0)}
               change={costSummary?.percentageChange}
               trend={
                 costSummary?.percentageChange && costSummary.percentageChange > 0
@@ -408,7 +408,7 @@ export default function DashboardPage() {
                     {compliance && compliance.breakdown.critical > 0 && (
                       <div className="absolute -right-1 -top-1 flex h-5 w-5">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-error-400 opacity-75" />
-                        <span className="relative inline-flex h-5 w-5 items-center justify-center rounded-full bg-error-600 text-[10px] font-bold text-white">
+                        <span className="relative inline-flex h-5 w-5 items-center justify-center rounded-full bg-error-600 text-[10px] font-bold">
                           {compliance.breakdown.critical}
                         </span>
                       </div>
@@ -517,7 +517,7 @@ export default function DashboardPage() {
               
               <div className="relative">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 text-white shadow-lg flex-shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 shadow-lg flex-shrink-0">
                     <Activity className="h-5 w-5" />
                   </div>
                   <h3 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-neutral-100">
