@@ -362,7 +362,7 @@ export default function DashboardPage() {
         {/* Main Content Grid */}
         <div className="grid gap-4 md:gap-6 xl:grid-cols-3">
           {/* Resources Table - 2/3 width */}
-          <section 
+          {/* <section 
             className="xl:col-span-2 animate-slide-up" 
             style={{ animationDelay: '0.5s' }}
             aria-labelledby="resources-heading"
@@ -384,12 +384,12 @@ export default function DashboardPage() {
                 showActions
               />
             </div>
-          </section>
+          </section> */}
 
           {/* Sidebar - 1/3 width */}
-          <aside className="space-y-4 md:space-y-6">
+          {/* <aside className="space-y-4 md:space-y-6"> */}
             {/* Security Findings Card */}
-            <div 
+            {/* <div 
               className={cn(
                 "rounded-lg md:rounded-2xl border overflow-hidden animate-slide-up",
                 "bg-white dark:bg-neutral-900",
@@ -397,9 +397,9 @@ export default function DashboardPage() {
                 "shadow-sm hover:shadow-md transition-all duration-300"
               )}
               style={{ animationDelay: '0.6s' }}
-            >
+            > */}
               {/* Header */}
-              <div className="border-b border-neutral-200 dark:border-neutral-800 p-4 md:p-6 bg-gradient-to-br from-error-500/5 to-transparent">
+              {/* <div className="border-b border-neutral-200 dark:border-neutral-800 p-4 md:p-6 bg-gradient-to-br from-error-500/5 to-transparent">
                 <div className="flex items-center gap-3">
                   <div className="relative flex-shrink-0">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-error-100 dark:bg-error-950">
@@ -425,10 +425,10 @@ export default function DashboardPage() {
                     )}
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Body */}
-              <div className="p-4 md:p-6">
+              {/* <div className="p-4 md:p-6">
                 {securityLoading ? (
                   <div className="space-y-3">
                     {[1, 2, 3].map((i) => (
@@ -497,11 +497,11 @@ export default function DashboardPage() {
                     </p>
                   </div>
                 )}
-              </div>
-            </div>
+              </div>*/}
+            {/* </div>  */}
 
             {/* Quick Stats Card */}
-            <div 
+            {/* <div 
               className={cn(
                 "rounded-lg md:rounded-2xl border p-4 md:p-6 overflow-hidden animate-slide-up",
                 "bg-gradient-to-br from-primary-500/10 via-secondary-500/5 to-transparent",
@@ -511,9 +511,9 @@ export default function DashboardPage() {
                 "relative"
               )}
               style={{ animationDelay: '0.8s' }}
-            >
+            > */}
               {/* Background decoration */}
-              <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary-500/10 dark:bg-primary-500/5 blur-3xl" />
+              {/* <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary-500/10 dark:bg-primary-500/5 blur-3xl" />
               
               <div className="relative">
                 <div className="flex items-center gap-3 mb-4">
@@ -556,10 +556,10 @@ export default function DashboardPage() {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* System Health Card */}
-            <div 
+            {/* <div 
               className={cn(
                 "rounded-lg md:rounded-2xl border p-4 md:p-6 animate-slide-up",
                 "bg-white dark:bg-neutral-900",
@@ -599,8 +599,8 @@ export default function DashboardPage() {
                   value="98.5%"
                 />
               </div>
-            </div>
-          </aside>
+            </div> */}
+          {/* </aside> */}
         </div>
 
         {/* Portfolio Notes for Recruiters - Only visible in demo mode */}
