@@ -52,7 +52,7 @@ import DemoModeBanner, { DataSourceBadge } from '@/components/DemoModeBanner';
  */
 export default function DashboardPage() {
   const router = useRouter();
-  
+
   // Connection status state
   const [connectionStatus, setConnectionStatus] = useState<any>(null);
   const [isCheckingConnection, setIsCheckingConnection] = useState(true);
@@ -68,27 +68,27 @@ export default function DashboardPage() {
   const checkConnection = async () => {
     setIsCheckingConnection(true);
     setConnectionError(null);
-    
+
     try {
       const response = await fetch('/api/aws/connection-status');
-      
+
       if (!response.ok) {
         throw new Error(`API returned ${response.status}`);
       }
-      
+
       const data = await response.json();
       setConnectionStatus(data);
-      
+
       console.log('✅ Connection check successful:', data);
     } catch (error: any) {
       console.error('❌ Connection check failed:', error);
       setConnectionError(error.message);
-      
+
       // Set fallback demo status
       setConnectionStatus({
         success: false,
         mode: 'demo',
-        summary: { 
+        summary: {
           connectedServices: 0,
           totalServices: 5,
           servicesWithData: 0
@@ -193,11 +193,11 @@ export default function DashboardPage() {
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0 bg-grid-white/10" />
           </div>
-          
+
           {/* Floating gradient orbs */}
           <div className="absolute -right-20 -top-20 h-40 w-40 md:h-64 md:w-64 rounded-full bg-white/10 blur-3xl animate-float" />
           <div className="absolute -bottom-20 -left-20 h-40 w-40 md:h-64 md:w-64 rounded-full bg-white/10 blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-          
+
           {/* Content */}
           <div className="relative z-10 flex flex-col gap-4 md:gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex-1 min-w-0">
@@ -218,15 +218,15 @@ export default function DashboardPage() {
                     >
                       🚧 IN DEVELOPMENT 🚧
                     </Badge>
-                    
+
                     {/* Data Source Badge - Dynamic based on connection status */}
                     {!isCheckingConnection && (
-                      <DataSourceBadge 
-                        isLive={isLiveData} 
-                        className="bg-white/20 border-white/30 text-white backdrop-blur-sm" 
+                      <DataSourceBadge
+                        isLive={isLiveData}
+                        className="bg-white/20 border-white/30 text-white backdrop-blur-sm"
                       />
                     )}
-                    
+
                     <span className="text-xs md:text-sm text-white/80">
                       Real-time monitoring
                     </span>
@@ -293,8 +293,8 @@ export default function DashboardPage() {
                 costSummary?.percentageChange && costSummary.percentageChange > 0
                   ? 'up'
                   : costSummary?.percentageChange && costSummary.percentageChange < 0
-                  ? 'down'
-                  : 'neutral'
+                    ? 'down'
+                    : 'neutral'
               }
               icon={<DollarSign className="h-5 w-5 md:h-6 md:w-6" />}
               iconVariant="primary"
@@ -339,7 +339,7 @@ export default function DashboardPage() {
           <h2 id="cost-trend-heading" className="sr-only">
             Cost Trend
           </h2>
-          
+
           <div className={cn(
             "rounded-lg md:rounded-2xl border overflow-hidden",
             "bg-white dark:bg-neutral-900",
@@ -359,10 +359,17 @@ export default function DashboardPage() {
           </div>
         </section>
 
+        <ResourceTable
+          resources={resources}
+          isLoading={resourcesLoading}
+          onResourceClick={handleResourceClick}
+          showActions
+        />
+
         {/* Main Content Grid */}
-        <div className="grid gap-4 md:gap-6 xl:grid-cols-3">
-          {/* Resources Table - 2/3 width */}
-          {/* <section 
+        {/* <div className="grid gap-4 md:gap-6 xl:grid-cols-3"> */}
+        {/* Resources Table - 2/3 width */}
+        {/* <section 
             className="xl:col-span-2 animate-slide-up" 
             style={{ animationDelay: '0.5s' }}
             aria-labelledby="resources-heading"
@@ -386,10 +393,10 @@ export default function DashboardPage() {
             </div>
           </section> */}
 
-          {/* Sidebar - 1/3 width */}
-          {/* <aside className="space-y-4 md:space-y-6"> */}
-            {/* Security Findings Card */}
-            {/* <div 
+        {/* Sidebar - 1/3 width */}
+        {/* <aside className="space-y-4 md:space-y-6"> */}
+        {/* Security Findings Card */}
+        {/* <div 
               className={cn(
                 "rounded-lg md:rounded-2xl border overflow-hidden animate-slide-up",
                 "bg-white dark:bg-neutral-900",
@@ -398,8 +405,8 @@ export default function DashboardPage() {
               )}
               style={{ animationDelay: '0.6s' }}
             > */}
-              {/* Header */}
-              {/* <div className="border-b border-neutral-200 dark:border-neutral-800 p-4 md:p-6 bg-gradient-to-br from-error-500/5 to-transparent">
+        {/* Header */}
+        {/* <div className="border-b border-neutral-200 dark:border-neutral-800 p-4 md:p-6 bg-gradient-to-br from-error-500/5 to-transparent">
                 <div className="flex items-center gap-3">
                   <div className="relative flex-shrink-0">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-error-100 dark:bg-error-950">
@@ -427,8 +434,8 @@ export default function DashboardPage() {
                 </div>
               </div> */}
 
-              {/* Body */}
-              {/* <div className="p-4 md:p-6">
+        {/* Body */}
+        {/* <div className="p-4 md:p-6">
                 {securityLoading ? (
                   <div className="space-y-3">
                     {[1, 2, 3].map((i) => (
@@ -498,10 +505,10 @@ export default function DashboardPage() {
                   </div>
                 )}
               </div>*/}
-            {/* </div>  */}
+        {/* </div>  */}
 
-            {/* Quick Stats Card */}
-            {/* <div 
+        {/* Quick Stats Card */}
+        {/* <div 
               className={cn(
                 "rounded-lg md:rounded-2xl border p-4 md:p-6 overflow-hidden animate-slide-up",
                 "bg-gradient-to-br from-primary-500/10 via-secondary-500/5 to-transparent",
@@ -512,8 +519,8 @@ export default function DashboardPage() {
               )}
               style={{ animationDelay: '0.8s' }}
             > */}
-              {/* Background decoration */}
-              {/* <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary-500/10 dark:bg-primary-500/5 blur-3xl" />
+        {/* Background decoration */}
+        {/* <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary-500/10 dark:bg-primary-500/5 blur-3xl" />
               
               <div className="relative">
                 <div className="flex items-center gap-3 mb-4">
@@ -558,8 +565,8 @@ export default function DashboardPage() {
               </div>
             </div> */}
 
-            {/* System Health Card */}
-            {/* <div 
+        {/* System Health Card */}
+        {/* <div 
               className={cn(
                 "rounded-lg md:rounded-2xl border p-4 md:p-6 animate-slide-up",
                 "bg-white dark:bg-neutral-900",
@@ -600,8 +607,8 @@ export default function DashboardPage() {
                 />
               </div>
             </div> */}
-          {/* </aside> */}
-        </div>
+        {/* </aside> */}
+        {/* </div> */}
 
         {/* Portfolio Notes for Recruiters - Only visible in demo mode */}
         {!isCheckingConnection && isDemoMode && hasConnection && (
@@ -612,24 +619,24 @@ export default function DashboardPage() {
             </h3>
             <div className="text-xs md:text-sm text-blue-900 dark:text-blue-200 space-y-2">
               <p>
-                <strong>AWS SDK Integration:</strong> This dashboard uses AWS SDK v3 with real credential 
-                validation. The connection status card above confirms that all 5 AWS services (EC2, S3, 
+                <strong>AWS SDK Integration:</strong> This dashboard uses AWS SDK v3 with real credential
+                validation. The connection status card above confirms that all 5 AWS services (EC2, S3,
                 Lambda, RDS, DynamoDB) are properly configured and accessible.
               </p>
               <p>
-                <strong>Automatic Data Switching:</strong> The application intelligently detects available 
-                AWS resources and automatically switches between live and sample data modes. Currently 
-                displaying enterprise-scale sample data because the connected AWS Free Tier account 
+                <strong>Automatic Data Switching:</strong> The application intelligently detects available
+                AWS resources and automatically switches between live and sample data modes. Currently
+                displaying enterprise-scale sample data because the connected AWS Free Tier account
                 contains no production resources.
               </p>
               <p>
-                <strong>Production Ready:</strong> When pointed at an AWS account with actual resources, 
-                this application works immediately with <strong>zero code changes</strong>. All API routes, 
+                <strong>Production Ready:</strong> When pointed at an AWS account with actual resources,
+                this application works immediately with <strong>zero code changes</strong>. All API routes,
                 data models, and UI components are production-ready and follow AWS best practices.
               </p>
               <p className="hidden sm:block">
-                <strong>Sample Data Characteristics:</strong> The displayed data represents a realistic 
-                mid-size company infrastructure with 2,847 resources, $47K monthly spend, and typical 
+                <strong>Sample Data Characteristics:</strong> The displayed data represents a realistic
+                mid-size company infrastructure with 2,847 resources, $47K monthly spend, and typical
                 security posture based on industry standards.
               </p>
             </div>
