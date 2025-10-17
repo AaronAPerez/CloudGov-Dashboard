@@ -188,26 +188,26 @@ export default function DashboardPage() {
         )}
 
         {/* Hero Section with Gradient Background */}
-        <div className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-br from-primary-600 via-secondary-600 to-primary-700 p-6 md:p-8 shadow-xl dark:from-primary-700 dark:via-secondary-700 dark:to-primary-800 animate-fade-in">
+        <div className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-br from-primary-600 via-secondary-600 to-primary-700 p-6 md:p-8 shadow-xl dark:from-primary-700 dark:via-secondary-700 dark:to-primary-800 animate-fade-in" style={{ minHeight: '200px' }}>
           {/* Animated background pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0 bg-grid-white/10" />
           </div>
 
-          {/* Floating gradient orbs */}
-          <div className="absolute -right-20 -top-20 h-40 w-40 md:h-64 md:w-64 rounded-full bg-white/10 blur-3xl animate-float" />
-          <div className="absolute -bottom-20 -left-20 h-40 w-40 md:h-64 md:w-64 rounded-full bg-white/10 blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+          {/* Floating gradient orbs - fixed dimensions to prevent CLS */}
+          <div className="absolute -right-20 -top-20 rounded-full bg-white/10 blur-3xl animate-float" style={{ width: '160px', height: '160px' }} />
+          <div className="absolute -bottom-20 -left-20 rounded-full bg-white/10 blur-3xl animate-float" style={{ width: '160px', height: '160px', animationDelay: '1s' }} />
 
           {/* Content */}
           <div className="relative z-10 flex flex-col gap-4 md:gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex-1 min-w-0">
               <div className="flex items-start gap-3 mb-3">
-                <div className="relative flex-shrink-0">
-                  <Cloud className="h-8 w-8 md:h-10 md:w-10" />
+                <div className="relative flex-shrink-0" style={{ width: '40px', height: '40px' }}>
+                  <Cloud className="h-10 w-10" />
                   <div className="absolute -inset-2 bg-white/20 rounded-full blur-md animate-pulse-soft" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold animate-slide-up truncate">
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold animate-slide-up truncate" style={{ minHeight: '2.5rem' }}>
                     Dashboard Overview
                   </h1>
                   <div className="flex flex-wrap items-center gap-2 mt-2">
@@ -411,9 +411,9 @@ export default function DashboardPage() {
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+                <h2 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-neutral-100 truncate">
                   Security Findings
-                </h3>
+                </h2>
                 {compliance && (
                   <p className="text-xs md:text-sm text-neutral-600 dark:text-neutral-400 truncate">
                     Score: {compliance.score}% • Grade: {compliance.grade}
@@ -516,9 +516,9 @@ export default function DashboardPage() {
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 shadow-lg flex-shrink-0">
                 <Activity className="h-5 w-5" />
               </div>
-              <h3 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+              <h2 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-neutral-100">
                 Quick Stats
-              </h3>
+              </h2>
             </div>
 
             <div className="space-y-3">
@@ -568,9 +568,9 @@ export default function DashboardPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-success-100 dark:bg-success-950 flex-shrink-0">
               <Activity className="h-5 w-5 text-success-600 dark:text-success-400" />
             </div>
-            <h3 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+            <h2 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-neutral-100">
               System Health
-            </h3>
+            </h2>
           </div>
 
           <div className="space-y-4">
@@ -600,10 +600,10 @@ export default function DashboardPage() {
         {/* Portfolio Notes for Recruiters - Only visible in demo mode */}
         {!isCheckingConnection && isDemoMode && hasConnection && (
           <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg md:rounded-2xl p-4 md:p-6 animate-fade-in">
-            <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-3 flex items-center gap-2 text-sm md:text-base">
+            <h2 className="font-semibold text-blue-900 dark:text-blue-100 mb-3 flex items-center gap-2 text-sm md:text-base">
               <Cloud className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <span>Technical Implementation Notes for Recruiters</span>
-            </h3>
+            </h2>
             <div className="text-xs md:text-sm text-blue-900 dark:text-blue-200 space-y-2">
               <p>
                 <strong>AWS SDK Integration:</strong> This dashboard uses AWS SDK v3 with real credential

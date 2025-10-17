@@ -26,11 +26,15 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 /**
  * Font Configuration
  * Using Inter for optimal readability and modern appearance
+ * font-display: swap ensures text remains visible during webfont load
  */
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
+  adjustFontFallback: true,
 });
 
 /**
@@ -121,9 +125,12 @@ export const metadata: Metadata = {
 
   // Icons and theme
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' }
+    ],
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
   },
 
   // Manifest

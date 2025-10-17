@@ -112,6 +112,7 @@ export function MetricsCard({
       onClick={onClick}
       isLoading={isLoading}
       className="transition-all duration-200"
+      style={{ minHeight: '140px' }}
       aria-label={`${title}: ${value}${change !== undefined ? `, ${change > 0 ? 'up' : change < 0 ? 'down' : 'unchanged'} ${Math.abs(change).toFixed(1)}%` : ''}`}
     >
       <CardBody>
@@ -158,9 +159,10 @@ export function MetricsCard({
           {icon && (
             <div
               className={cn(
-                'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg',
+                'flex flex-shrink-0 items-center justify-center rounded-lg',
                 iconVariants[iconVariant]
               )}
+              style={{ width: '48px', height: '48px' }}
               aria-hidden="true"
             >
               {icon}
