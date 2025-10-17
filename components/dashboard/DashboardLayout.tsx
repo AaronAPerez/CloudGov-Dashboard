@@ -142,7 +142,7 @@ export function DashboardLayout({
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       {/* Header */}
       <Header
         onMenuToggle={handleToggleSidebar}
@@ -150,7 +150,7 @@ export function DashboardLayout({
       />
 
       {/* Main layout container */}
-      <div className="flex">
+      <div className="flex relative">
         {/* Sidebar */}
         <Sidebar
           isOpen={isSidebarOpen}
@@ -160,7 +160,7 @@ export function DashboardLayout({
 
         {/* Main content area */}
         <main
-          className="flex-1 w-full md:ml-64 transition-all duration-300"
+          className="flex-1 w-full md:ml-64 transition-all duration-300 min-w-0"
           role="main"
           id="main-content"
         >
