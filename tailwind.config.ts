@@ -296,6 +296,7 @@ const config: Config = {
         '20': '20',
         '30': '30',
         '40': '40',
+        '45': '45',
         '50': '50',
         'dropdown': '1000',
         'sticky': '1020',
@@ -304,6 +305,16 @@ const config: Config = {
         'modal': '1050',
         'popover': '1060',
         'tooltip': '1070',
+      },
+
+      // Responsive breakpoints (Tailwind default with additions)
+      screens: {
+        'xs': '475px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
       },
       
       // Spacing scale extensions

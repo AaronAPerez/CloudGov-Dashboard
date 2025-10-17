@@ -20,7 +20,7 @@ export default function NotFound() {
         {/* Animated 404 */}
         <div className="relative">
           <div className="absolute inset-0 flex items-center justify-center opacity-10">
-            <Cloud className="h-96 w-96 text-primary-600 animate-float" />
+            <Cloud className="h-96 w-96 text-primary-600 animate-float"/>
           </div>
           <div className="relative">
             <h1 className="text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-secondary-600 to-primary-600 animate-pulse">

@@ -73,58 +73,70 @@ export default function DemoModeBanner({
 
   // Default: banner variant
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex items-center justify-between flex-wrap gap-4">
+    <div className="relative overflow-hidden rounded-xl lg:rounded-2xl bg-gradient-to-br from-indigo-600 via-blue-600 to-primary-700 dark:from-indigo-700 dark:via-blue-700 dark:to-primary-800 shadow-lg border border-indigo-400/20 dark:border-indigo-500/30">
+      {/* Animated background pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-grid-white/10" />
+      </div>
+
+      {/* Floating gradient orbs */}
+      <div className="absolute -right-10 -top-10 h-32 w-32 md:h-48 md:w-48 rounded-full bg-white/10 blur-3xl animate-float" />
+      <div className="absolute -bottom-10 -left-10 h-32 w-32 md:h-48 md:w-48 rounded-full bg-white/10 blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+
+      <div className="relative z-10 px-4 sm:px-6 py-4 md:py-5">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           {/* Main Message */}
-          <div className="flex items-center gap-3">
-            <div className="flex-shrink-0 w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
-              <Cloud className="w-5 h-5" />
+          <div className="flex items-start gap-3 flex-1 min-w-0">
+            <div className="relative flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/30">
+              <Cloud className="w-5 h-5 md:w-6 md:h-6 text-white" />
+              <div className="absolute -inset-1 bg-white/20 rounded-xl blur-md animate-pulse-soft" />
             </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-semibold text-lg">Portfolio Demonstration Mode</span>
-                <span className="px-2 py-0.5 bg-white/20 rounded text-xs font-medium backdrop-blur-sm">
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                <h3 className="font-bold text-base md:text-lg text-white">Portfolio Demo Mode</h3>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/20 rounded-lg text-xs font-semibold text-white backdrop-blur-sm border border-white/30">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                   AWS SDK Connected
                 </span>
               </div>
-              <p className="text-sm text-blue-100">
-                Credentials validated. Displaying enterprise-scale sample data representing 
-                typical production environment with {enterpriseStats.resources} resources 
-                across {enterpriseStats.regions} AWS regions.
+              <p className="text-xs md:text-sm text-blue-50 leading-relaxed">
+                Credentials validated • Displaying enterprise-scale sample data representing
+                typical production environment with <strong className="text-white">{enterpriseStats.resources} resources</strong> across <strong className="text-white">{enterpriseStats.regions} AWS regions</strong>
               </p>
             </div>
           </div>
 
           {/* Stats */}
           {showStats && (
-            <div className="flex items-center gap-6 text-sm">
+            <div className="flex items-center gap-4 md:gap-6 text-sm flex-shrink-0">
               <div className="text-center">
-                <div className="font-bold text-xl">{enterpriseStats.resources}</div>
-                <div className="text-blue-100 text-xs">Resources</div>
+                <div className="font-bold text-xl md:text-2xl text-white">{enterpriseStats.resources}</div>
+                <div className="text-blue-100 text-xs font-medium">Resources</div>
               </div>
+              <div className="h-8 w-px bg-white/30" />
               <div className="text-center">
-                <div className="font-bold text-xl">{enterpriseStats.monthlySpend}</div>
-                <div className="text-blue-100 text-xs">Monthly</div>
+                <div className="font-bold text-xl md:text-2xl text-white">{enterpriseStats.monthlySpend}</div>
+                <div className="text-blue-100 text-xs font-medium">Monthly</div>
               </div>
-              <div className="text-center">
-                <div className="font-bold text-xl">{enterpriseStats.users}</div>
-                <div className="text-blue-100 text-xs">IAM Users</div>
+              <div className="h-8 w-px bg-white/30 hidden sm:block" />
+              <div className="text-center hidden sm:block">
+                <div className="font-bold text-xl md:text-2xl text-white">{enterpriseStats.users}</div>
+                <div className="text-blue-100 text-xs font-medium">IAM Users</div>
               </div>
             </div>
           )}
         </div>
 
         {/* Technical Note for Recruiters */}
-        <div className="mt-3 pt-3 border-t border-white/20">
-          <div className="flex items-start gap-2 text-xs text-blue-100">
-            <TrendingUp className="w-4 h-4 mt-0.5 flex-shrink-0" />
-            <p>
-              <strong className="text-white">Technical Implementation:</strong> 
-              This application automatically detects available AWS resources and seamlessly 
-              switches between live data (production) and sample data (demo). The AWS SDK 
-              integration is fully functional and production-ready. Sample data represents 
-              realistic enterprise workloads with proper IAM policies, cost allocation, 
+        <div className="mt-4 pt-4 border-t border-white/20">
+          <div className="flex items-start gap-2.5">
+            <TrendingUp className="w-4 h-4 text-blue-200 mt-0.5 flex-shrink-0" />
+            <p className="text-xs text-blue-100 leading-relaxed">
+              <strong className="text-white font-semibold">Technical Implementation:</strong>
+              This application automatically detects available AWS resources and seamlessly
+              switches between live data (production) and sample data (demo). The AWS SDK
+              integration is fully functional and production-ready. Sample data represents
+              realistic enterprise workloads with proper IAM policies, cost allocation,
               and security posture analysis.
             </p>
           </div>
