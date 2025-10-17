@@ -85,10 +85,10 @@ export const typeVariants: Record<string, 'primary' | 'success' | 'warning' | 'e
  * Region color variants
  */
 const regionVariants: Record<string, { color: string; bg: string }> = {
-  'us-east-1': { color: 'text-blue-700', bg: 'bg-blue-50' },
-  'us-west-2': { color: 'text-purple-700', bg: 'bg-purple-50' },
-  'eu-west-1': { color: 'text-green-700', bg: 'bg-green-50' },
-  'ap-southeast-1': { color: 'text-orange-700', bg: 'bg-orange-50' },
+  'us-east-1': { color: 'text-blue-700 dark:text-blue-300', bg: 'bg-blue-50 dark:bg-blue-950' },
+  'us-west-2': { color: 'text-purple-700 dark:text-purple-300', bg: 'bg-purple-50 dark:bg-purple-950' },
+  'eu-west-1': { color: 'text-green-700 dark:text-green-300', bg: 'bg-green-50 dark:bg-green-950' },
+  'ap-southeast-1': { color: 'text-orange-700 dark:text-orange-300', bg: 'bg-orange-50 dark:bg-orange-950' },
 };
 
 /**

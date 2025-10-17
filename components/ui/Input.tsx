@@ -98,8 +98,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              'text-sm font-medium text-neutral-700',
-              disabled && 'text-neutral-400'
+              'text-sm font-medium text-neutral-700 dark:text-neutral-300',
+              disabled && 'text-neutral-400 dark:text-neutral-600'
             )}
           >
             {label}
@@ -138,18 +138,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className={cn(
               // Base styles
               'w-full px-3 py-2 text-base border rounded-lg transition-colors',
-              'placeholder:text-neutral-400',
+              'placeholder:text-neutral-400 dark:placeholder:text-neutral-500',
               'focus:outline-none focus:ring-2 focus:ring-offset-1',
               // Normal state
               'border-neutral-300 bg-white text-neutral-900',
               'hover:border-neutral-400',
               'focus:border-primary-500 focus:ring-primary-500',
+              // Dark mode normal state
+              'dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100',
+              'dark:hover:border-neutral-600',
+              'dark:focus:border-primary-400 dark:focus:ring-primary-400',
               // Error state
               hasError &&
-                'border-error-500 focus:border-error-500 focus:ring-error-500',
+                'border-error-500 focus:border-error-500 focus:ring-error-500 dark:border-error-400 dark:focus:border-error-400 dark:focus:ring-error-400',
               // Disabled state
               disabled &&
-                'bg-neutral-100 text-neutral-500 cursor-not-allowed opacity-60',
+                'bg-neutral-100 text-neutral-500 cursor-not-allowed opacity-60 dark:bg-neutral-800 dark:text-neutral-400',
               // Addon padding adjustments
               leftAddon && 'pl-10',
               rightAddon && 'pr-10',
@@ -188,14 +192,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {error ? (
               <p
                 id={errorId}
-                className="text-error-600 flex items-center gap-1"
+                className="text-error-600 dark:text-error-400 flex items-center gap-1"
                 role="alert"
                 aria-live="polite"
               >
                 {error}
               </p>
             ) : (
-              <p id={helperTextId} className="text-neutral-600">
+              <p id={helperTextId} className="text-neutral-600 dark:text-neutral-400">
                 {helperText}
               </p>
             )}

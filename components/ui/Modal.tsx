@@ -194,7 +194,7 @@ export function Modal({
           aria-labelledby={title ? 'modal-title' : undefined}
           tabIndex={-1}
           className={cn(
-            'relative w-full bg-white rounded-lg shadow-xl animate-slide-up',
+            'relative w-full bg-white dark:bg-neutral-900 rounded-lg shadow-xl animate-slide-up',
             sizeStyles[size],
             className
           )}
@@ -202,12 +202,12 @@ export function Modal({
         >
           {/* Header */}
           {(title || !hideCloseButton) && (
-            <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 dark:border-neutral-800">
               {/* Title */}
               {title && (
                 <h2
                   id="modal-title"
-                  className="text-xl font-semibold text-neutral-900"
+                  className="text-xl font-semibold text-neutral-900 dark:text-neutral-100"
                 >
                   {title}
                 </h2>
@@ -233,7 +233,7 @@ export function Modal({
 
           {/* Footer */}
           {footer && (
-            <div className="flex items-center justify-end gap-2 px-6 py-4 border-t border-neutral-200 bg-neutral-50">
+            <div className="flex items-center justify-end gap-2 px-6 py-4 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800/50">
               {footer}
             </div>
           )}

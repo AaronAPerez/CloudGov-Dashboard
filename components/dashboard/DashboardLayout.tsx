@@ -41,9 +41,12 @@ import {
   User,
   Cloud,
   LogOut,
+  Moon,
+  Sun,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge, Button } from '@/components/ui';
+import { useTheme } from '@/contexts/ThemeContext';
 
 /**
  * Navigation item type
@@ -191,6 +194,7 @@ interface HeaderProps {
 function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
   const [notificationCount] = useState(3);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm">
@@ -244,8 +248,22 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
           </div>
         </div>
 
-        {/* Right section - Notifications and user menu */}
+        {/* Right section - Theme toggle, Notifications and user menu */}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
+          {/* Theme toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? (
+              <Sun className="h-5 w-5 text-yellow-500" />
+            ) : (
+              <Moon className="h-5 w-5 text-neutral-700" />
+            )}
+          </button>
+
           {/* Notifications */}
           <button
             className="relative p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"

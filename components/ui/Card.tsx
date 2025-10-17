@@ -95,10 +95,10 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           // Base styles
           'rounded-lg border border-neutral-200 dark:border-neutral-800 shadow-soft',
           // Default background (can be overridden by className)
-          !className?.includes('bg-') && 'bg-white dark:bg-neutral-900 text-gray-200',
+          !className?.includes('bg-') && 'bg-white dark:bg-neutral-900',
           // Hover effect
           hoverable &&
-            'transition-all duration-300 // Card lift on hover:-translate-y-1 hover:shadow-medium',
+            'transition-all duration-300 hover:-translate-y-1 hover:shadow-medium',
           // Interactive cursor
           interactive && 'cursor-pointer',
           // Loading state
@@ -129,7 +129,7 @@ export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
       <div
         ref={ref}
         className={cn(
-          'flex items-center justify-between px-6 py-4 border-b text-gray-200 border-neutral-200 dark:border-neutral-800',
+          'flex items-center justify-between px-6 py-4 border-b border-neutral-200 dark:border-neutral-800',
           className
         )}
         {...props}
@@ -178,7 +178,7 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
       <div
         ref={ref}
         className={cn(
-          'flex items-center px-6 py-4 text-gray-200 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800/50',
+          'flex items-center px-6 py-4 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800/50',
           alignRight ? 'justify-end' : 'justify-between',
           className
         )}

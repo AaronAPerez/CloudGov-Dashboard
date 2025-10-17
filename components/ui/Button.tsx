@@ -48,13 +48,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  */
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 active:bg-primary-800 disabled:bg-primary-300',
+    'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 active:bg-primary-800 disabled:bg-primary-300 dark:bg-primary-500 dark:hover:bg-primary-600 dark:disabled:bg-primary-800',
   secondary:
-    'bg-neutral-200 text-neutral-900 hover:bg-neutral-300 focus:ring-neutral-400 active:bg-neutral-400 disabled:bg-neutral-100 disabled:text-neutral-400',
+    'bg-neutral-200 text-neutral-900 hover:bg-neutral-300 focus:ring-neutral-400 active:bg-neutral-400 disabled:bg-neutral-100 disabled:text-neutral-400 dark:bg-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-600 dark:disabled:bg-neutral-800 dark:disabled:text-neutral-500',
   ghost:
-    'bg-transparent text-neutral-700 hover:bg-neutral-100 focus:ring-neutral-300 active:bg-neutral-200 disabled:text-neutral-400',
+    'bg-transparent text-neutral-700 hover:bg-neutral-100 focus:ring-neutral-300 active:bg-neutral-200 disabled:text-neutral-400 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:active:bg-neutral-700 dark:disabled:text-neutral-600',
   danger:
-    'bg-error-600 text-white hover:bg-error-700 focus:ring-error-500 active:bg-error-800 disabled:bg-error-300',
+    'bg-error-600 text-white hover:bg-error-700 focus:ring-error-500 active:bg-error-800 disabled:bg-error-300 dark:bg-error-500 dark:hover:bg-error-600 dark:disabled:bg-error-800',
 };
 
 /**
