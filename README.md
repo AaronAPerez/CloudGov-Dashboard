@@ -877,11 +877,11 @@ This project demonstrates enterprise-grade development skills:
 
 ## 📞 Contact
 
-**Developer**: [Your Name]  
-**Email**: [your.email@example.com]  
-**LinkedIn**: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)  
-**Portfolio**: [yourportfolio.com](https://yourportfolio.com)  
-**GitHub**: [@yourusername](https://github.com/yourusername)
+**Developer**: [Aaron Perez]  
+**Email**: [aaronperezdev@gmail.com]  
+**LinkedIn**: [https://www.linkedin.com/in/aaronaperezdev](https://www.linkedin.com/in/aaronaperezdev)  
+**Portfolio**: [https://www.aaronaperez.dev](https://www.aaronaperez.dev) 
+**GitHub**: [@AaronAPerez](https://github.com/AaronAPerez/CloudGov-Dashboard)
 
 **Live Demo**: 🔗 [https://cloudgov-dashboard.vercel.app](https://cloudgov-dashboard.vercel.app)
 
@@ -1042,11 +1042,11 @@ This project also demonstrates:
 | Resource | Link |
 |----------|------|
 | 🌐 **Live Demo** | [https://cloudgov-dashboard.vercel.app](https://cloudgov-dashboard.vercel.app) |
-| 💻 **Source Code** | [GitHub Repository](https://github.com/yourusername/cloudgov-dashboard) |
+| 💻 **Source Code** | [GitHub Repository](https://github.com/AaronAPerez/CloudGov-Dashboard) |
 | 📖 **Documentation** | [docs/](docs/) |
-| 🐛 **Issue Tracker** | [GitHub Issues](https://github.com/yourusername/cloudgov-dashboard/issues) |
-| 💬 **Discussions** | [GitHub Discussions](https://github.com/yourusername/cloudgov-dashboard/discussions) |
-| 📊 **Project Board** | [GitHub Projects](https://github.com/yourusername/cloudgov-dashboard/projects) |
+| 🐛 **Issue Tracker** | [GitHub Issues](https://github.com/AaronAPerez/CloudGov-Dashboard/issues) |
+| 💬 **Discussions** | [GitHub Discussions](https://github.com/AaronAPerez/CloudGov-Dashboard/discussions) |
+| 📊 **Project Board** | [GitHub Projects](https://github.com/AaronAPerez/CloudGov-Dashboard/projects) |
 | 📝 **Changelog** | [CHANGELOG.md](CHANGELOG.md) |
 | 🤝 **Contributing** | [CONTRIBUTING.md](CONTRIBUTING.md) |
 
