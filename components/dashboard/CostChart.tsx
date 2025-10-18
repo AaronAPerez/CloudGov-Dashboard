@@ -107,7 +107,7 @@ export function CostChart({
         <CardBody>
           <div className="flex flex-col items-center justify-center py-12">
             <p className="text-lg font-medium text-neutral-300">No data available</p>
-            <p className="mt-2 text-sm text-neutral-400">
+            <p className="mt-2 text-sm text-neutral-800 dark:text-neutral-400">
               Cost data will appear here once resources are monitored
             </p>
           </div>
@@ -122,8 +122,8 @@ export function CostChart({
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           {/* Title and description */}
           <div>
-            <h3 className="text-lg font-semibold text-neutral-300">{title}</h3>
-            <p className="text-sm text-neutral-400">{description}</p>
+            <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-300">{title}</h3>
+            <p className="text-sm text-neutral-800 dark:text-neutral-400">{description}</p>
           </div>
 
           {/* Time range selector */}
@@ -239,12 +239,12 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
 
   return (
     <div className="rounded-lg border border-neutral-200 bg-white p-3 shadow-lg">
-      <p className="text-sm font-medium text-neutral-300">{data.date}</p>
+      <p className="text-sm font-medium text-neutral-900 dark:text-neutral-300">{data.date}</p>
       <p className="mt-1 text-lg font-bold text-primary-400">
         {formatCurrency(data.cost)}
       </p>
       {data.service && (
-        <p className="mt-1 text-xs text-neutral-400">Service: {data.service}</p>
+        <p className="mt-1 text-xs text-neutral-800 dark:text-neutral-400">Service: {data.service}</p>
       )}
     </div>
   );
@@ -263,8 +263,8 @@ interface StatItemProps {
 function StatItem({ label, value }: StatItemProps) {
   return (
     <div className="text-center">
-      <p className="text-xs font-medium text-neutral-400">{label}</p>
-      <p className="mt-1 text-md md:text-lg font-bold text-neutral-300">{value}</p>
+      <p className="text-xs font-medium text-neutral-800 dark:text-neutral-400">{label}</p>
+      <p className="mt-1 text-md md:text-lg font-bold text-neutral-800 dark:text-neutral-300 ">{value}</p>
     </div>
   );
 }
@@ -328,8 +328,8 @@ export function MultiLineChart({
   return (
     <Card>
       <CardHeader>
-        <h3 className="text-lg font-semibold text-neutral-300">{title}</h3>
-        <p className="text-sm text-neutral-400">{description}</p>
+        <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-300">{title}</h3>
+        <p className="text-sm text-neutral-800 dark:text-neutral-400">{description}</p>
       </CardHeader>
       <CardBody>
         <ResponsiveContainer width="100%" height={height}>

@@ -36,9 +36,9 @@
 
 import React from 'react';
 import { useState } from 'react';
-import { 
-  ChevronUp, 
-  ChevronDown, 
+import {
+  ChevronUp,
+  ChevronDown,
   ExternalLink,
   MoreVertical
 } from 'lucide-react';
@@ -303,14 +303,13 @@ export function ResourceTable({
                   key={resource.id}
                   className={cn(
                     'transition-colors',
-                    onResourceClick && 'cursor-pointer hover:bg-neutral-800'
+                    onResourceClick && 'cursor-pointer hover:bg-neutral-300'
                   )}
                   onClick={() => onResourceClick?.(resource)}
                 >
                   {/* Name */}
                   <td className="px-4 py-3">
-                    <div className="font-medium 
-        text-gray-900 dark:text-gray-100">
+                    <div className="font-mediumtext-gray-900 dark:text-gray-100">
                       {resource.name}
                     </div>
                     <div className="text-xs">{resource.id}</div>
@@ -351,8 +350,8 @@ export function ResourceTable({
                         resource.monthlyCost >= 500
                           ? 'text-error-700'
                           : resource.monthlyCost >= 200
-                          ? 'text-warning-700'
-                          : 'text-success-700'
+                            ? 'text-warning-700'
+                            : 'text-success-700'
                       )}
                     >
                       {formatCurrency(resource.monthlyCost)}
@@ -392,7 +391,7 @@ export function ResourceTable({
                         <Button
                           variant="ghost"
                           size="sm"
-                             className=' bg-gray-100 text-gray-900 dark:text-gray-100'
+                          className=' bg-gray-100 text-gray-900 dark:text-gray-100'
                           onClick={e => {
                             e.stopPropagation();
                             console.log('View details:', resource.id);
