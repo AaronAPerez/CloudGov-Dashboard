@@ -303,13 +303,13 @@ export function ResourceTable({
                   key={resource.id}
                   className={cn(
                     'transition-colors',
-                    onResourceClick && 'cursor-pointer hover:bg-neutral-300'
+                    onResourceClick && 'cursor-pointer hover:bg-neutral-700 dark:hover:bg-neutral-800'
                   )}
                   onClick={() => onResourceClick?.(resource)}
                 >
                   {/* Name */}
                   <td className="px-4 py-3">
-                    <div className="font-mediumtext-gray-900 dark:text-gray-100">
+                    <div className="font-medium text-gray-900 dark:text-gray-100">
                       {resource.name}
                     </div>
                     <div className="text-xs">{resource.id}</div>
@@ -472,16 +472,16 @@ export function ResourceTableSkeleton() {
   return (
     <Card>
       <CardHeader>
-        <div className="h-6 w-32 animate-pulse rounded bg-neutral-200" />
+        <div className="h-6 w-32 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
       </CardHeader>
       <CardBody>
         <div className="space-y-3">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="flex items-center gap-4">
-              <div className="h-4 w-32 animate-pulse rounded bg-neutral-200" />
-              <div className="h-4 w-24 animate-pulse rounded bg-neutral-200" />
-              <div className="h-4 w-20 animate-pulse rounded bg-neutral-200" />
-              <div className="h-4 w-28 animate-pulse rounded bg-neutral-200" />
+              <div className="h-4 w-32 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
+              <div className="h-4 w-24 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
+              <div className="h-4 w-20 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
+              <div className="h-4 w-28 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
             </div>
           ))}
         </div>

@@ -63,41 +63,41 @@ interface NavItem {
  * Navigation configuration
  */
 const navigation: NavItem[] = [
-  { 
-    name: 'Dashboard', 
-    href: '/', 
-    icon: LayoutDashboard 
+  {
+    name: 'Dashboard',
+    href: '/',
+    icon: LayoutDashboard
   },
-  { 
-    name: 'Resources', 
-    href: '/resources', 
-    icon: Server 
+  {
+    name: 'Resources',
+    href: '/resources',
+    icon: Server
   },
-  { 
-    name: 'IAM Security', 
-    href: '/iam', 
+  {
+    name: 'IAM Security',
+    href: '/iam',
     icon: Shield,
-    badge: 12 
+    badge: 12
   },
-  { 
-    name: 'Cost Analytics', 
-    href: '/costs', 
-    icon: DollarSign 
+  {
+    name: 'Cost Analytics',
+    href: '/costs',
+    icon: DollarSign
   },
-  { 
-    name: 'AI Usage', 
-    href: '/ai-usage', 
-    icon: Database 
+  {
+    name: 'AI Usage',
+    href: '/ai-usage',
+    icon: Database
   },
-  { 
-    name: 'WorkSpaces', 
-    href: '/workspaces', 
-    icon: Users 
+  {
+    name: 'WorkSpaces',
+    href: '/workspaces',
+    icon: Users
   },
-  { 
-    name: 'Settings', 
-    href: '/settings', 
-    icon: Settings 
+  {
+    name: 'Settings',
+    href: '/settings',
+    icon: Settings
   },
 ];
 
@@ -122,7 +122,7 @@ export function DashboardLayout({
 }: DashboardLayoutProps) {
   // State for mobile sidebar visibility
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   // Get current pathname for active link highlighting
   const pathname = usePathname();
   const currentPath = activeRoute || pathname;
@@ -143,14 +143,12 @@ export function DashboardLayout({
 
   return (
     <div className="min-h-screen overflow-x-hidden">
-      {/* Header */}
-      <Header
-        onMenuToggle={handleToggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-      />
+     
 
       {/* Main layout container */}
       <div className="flex relative">
+
+        
         {/* Sidebar */}
         <Sidebar
           isOpen={isSidebarOpen}
@@ -164,8 +162,14 @@ export function DashboardLayout({
           role="main"
           id="main-content"
         >
+        {/* Header */}
+        <Header
+          onMenuToggle={handleToggleSidebar}
+          isSidebarOpen={isSidebarOpen}
+        />
+   
           {/* Content wrapper with responsive padding */}
-          <div className="p-4 sm:p-5 md:p-6 max-w-[1920px] mx-auto w-full">
+          <div className="p-4 max-w-[1920px] mx-auto w-full">
             {children}
           </div>
         </main>
@@ -191,16 +195,16 @@ interface HeaderProps {
   isSidebarOpen: boolean;
 }
 
-function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
+export function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
   const [notificationCount] = useState(3);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm">
-      <div className="flex h-16 items-center justify-between gap-3 px-4 sm:gap-4 md:px-6 lg:px-8">
-        {/* Left section - Mobile menu button, logo, and IN DEVELOPMENT badge */}
-        <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+      <div className="flex h-16 items-center justify-between gap-2 px-4 md:px-6 lg:px-8 max-w-full overflow-hidden">
+        {/* Left section - Mobile menu button and IN DEVELOPMENT badge */}
+        <div className="flex items-center gap-2 md:gap-3 flex-shrink-0 min-w-0">
           {/* Mobile menu button */}
           <button
             onClick={onMenuToggle}
@@ -214,22 +218,12 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
             )}
           </button>
 
-          {/* Logo and title (always visible) */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500">
-              <Cloud className="h-8 w-8" />
-            </div>
-            <span className="font-semibold text-neutral-900 dark:text-neutral-100 text-lg whitespace-nowrap">
-              CloudGov
-            </span>
-          </div>
-
-          {/* IN DEVELOPMENT Badge (desktop only) */}
-          <div className="hidden md:flex items-center">
+          {/* IN DEVELOPMENT Badge */}
+          <div className="hidden lg:flex items-center flex-shrink-0">
             <Badge
               variant="error"
               size="sm"
-              className="bg-gradient-to-r from-red-600 to-orange-600 text-white font-extrabold border-2 border-yellow-400 shadow-lg animate-pulse px-3 py-1 text-xs uppercase tracking-wider"
+              className="bg-gradient-to-r from-red-600 to-orange-600 text-white font-extrabold border-2 border-yellow-400 shadow-lg animate-pulse px-2 py-1 text-xs uppercase tracking-wider whitespace-nowrap"
             >
               🚧 IN DEVELOPMENT 🚧
             </Badge>
@@ -237,12 +231,12 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
         </div>
 
         {/* Center section - Search bar */}
-        <div className="hidden md:flex flex-1 justify-start max-w-md lg:max-w-lg">
+        <div className="hidden md:flex flex-1 justify-center max-w-md mx-4 min-w-0">
           <div className="relative w-full">
             <label htmlFor="resource-search" className="sr-only">
               Search resources
             </label>
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none text-neutral-500 dark:text-neutral-400" />
             <input
               id="resource-search"
               type="search"
@@ -253,25 +247,11 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
           </div>
         </div>
 
-        {/* Right section - Theme toggle, Notifications and user menu */}
-        <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {theme === 'dark' ? (
-              <Sun className="h-5 w-5 text-yellow-500" />
-            ) : (
-              <Moon className="h-5 w-5 text-sky-400" />
-            )}
-          </button>
-
+        {/* Right section - Notifications and user menu */}
+        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
           {/* Notifications */}
           <button
-            className="relative p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            className="relative p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors flex-shrink-0"
             aria-label="Notifications"
           >
             <Bell className="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
@@ -283,7 +263,7 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
           </button>
 
           {/* User menu */}
-          <div className="relative">
+          <div className="relative flex-shrink-0">
             <button
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
               className="flex items-center gap-2 p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
@@ -291,17 +271,17 @@ function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
               aria-expanded={isUserMenuOpen}
             >
               <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex-shrink-0 shadow-md">
-                <User className="h-4 w-4" />
+                <User className="h-6 w-6" />
               </div>
-              <div className="hidden md:block text-left">
-                <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 whitespace-nowrap">
+              <div className="hidden lg:block text-left min-w-0">
+                <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 whitespace-nowrap truncate max-w-[150px]">
                   Admin User
                 </p>
-                <p className="text-xs text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
+                <p className="text-xs text-neutral-600 dark:text-neutral-400 whitespace-nowrap truncate max-w-[150px]">
                   admin@cloudgov.dev
                 </p>
               </div>
-              <ChevronDown className="hidden md:block h-4 w-4 text-neutral-600 dark:text-neutral-400" />
+              <ChevronDown className="hidden md:block h-4 w-4 text-neutral-600 dark:text-neutral-400 flex-shrink-0" />
             </button>
 
             {/* Dropdown menu */}
@@ -412,8 +392,8 @@ function SidebarContent({ currentPath, onLinkClick }: SidebarContentProps) {
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         <div className="space-y-1">
           {navigation.map((item) => {
-            const isActive = currentPath === item.href || 
-                           (item.href !== '/' && currentPath.startsWith(item.href));
+            const isActive = currentPath === item.href ||
+              (item.href !== '/' && currentPath.startsWith(item.href));
             const Icon = item.icon;
 
             return (
@@ -440,7 +420,7 @@ function SidebarContent({ currentPath, onLinkClick }: SidebarContentProps) {
                   )}
                 />
                 <span className="flex-1 truncate">{item.name}</span>
-                
+
                 {/* Badge */}
                 {item.badge && (
                   <Badge

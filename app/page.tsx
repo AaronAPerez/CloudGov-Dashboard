@@ -39,7 +39,7 @@ import { CostChart } from '@/components/dashboard/CostChart';
 import { ResourceTable } from '@/components/dashboard/ResourceTable';
 import { Badge, Button } from '@/components/ui';
 import { useResources, useCosts, useSecurity } from '@/hooks';
-import { cn, formatCurrency, formatCompactCurrency } from '@/lib/utils';
+import { cn, formatCompactCurrency } from '@/lib/utils';
 import type { AWSResource } from '@/lib/types';
 import HealthItem from '@/components/dashboard/HealthItem';
 import StatItem from '@/components/dashboard/StatItem';
@@ -211,13 +211,13 @@ export default function DashboardPage() {
                     Dashboard Overview
                   </h1>
                   <div className="flex flex-wrap items-center gap-2 mt-2">
-                    <Badge
+                    {/* <Badge
                       variant="error"
                       size="sm"
                       className="bg-gradient-to-r from-red-600 to-orange-600 text-white font-extrabold border-2 border-yellow-400 shadow-lg animate-pulse px-2 py-1 text-xs uppercase tracking-wider"
                     >
                       🚧 IN DEVELOPMENT 🚧
-                    </Badge>
+                    </Badge> */}
 
                     {/* Data Source Badge - Dynamic based on connection status */}
                     {!isCheckingConnection && (
@@ -249,6 +249,9 @@ export default function DashboardPage() {
             >
               {isCheckingConnection ? 'Checking...' : 'Refresh All'}
             </Button>
+          </div>
+          <div>
+
           </div>
         </div>
 

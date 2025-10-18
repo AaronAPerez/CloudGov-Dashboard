@@ -238,7 +238,7 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
   const data = payload[0].payload;
 
   return (
-    <div className="rounded-lg border border-neutral-200 bg-white p-3 shadow-lg">
+    <div className="rounded-lg border border-neutral-200 bg-neutral-600 p-3 shadow-lg">
       <p className="text-sm font-medium text-neutral-900 dark:text-neutral-300">{data.date}</p>
       <p className="mt-1 text-lg font-bold text-primary-400">
         {formatCurrency(data.cost)}
