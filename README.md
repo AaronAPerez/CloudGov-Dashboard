@@ -1,129 +1,105 @@
-# CloudGov Dashboard
+CloudGov Dashboard
+Show Image
+Show Image
+Show Image
+Show Image
+Show Image
+Production-Ready Cloud Governance Platform | Demonstrating Full-Stack Development, AWS Integration, and Enterprise Architecture
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://dev.azure.com/cloudgov/dashboard/_build/latest?definitionId=1&branchName=main)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
-[![AWS SDK](https://img.shields.io/badge/AWS%20SDK-v3-orange)](https://aws.amazon.com/sdk-for-javascript/)
+🚀 Live Demo
+🔗 https://cloudgov-dashboard.vercel.app
+Show Image
 
-**Production-Ready Cloud Governance Platform** | Demonstrating Full-Stack Development, AWS Integration, and Enterprise Architecture
+👔 For Recruiters & Hiring Managers
+Quick Overview
+This is a production-ready cloud governance dashboard showcasing enterprise-grade AWS integration, full-stack development, and professional problem-solving.
+What Makes This Project Stand Out
+1. Real AWS Integration (Not Mocked)
 
----
+✅ Validates actual AWS credentials on page load
+✅ Makes real API calls to 5 AWS services (EC2, S3, Lambda, RDS, DynamoDB)
+✅ Displays connection status with measured latency
+✅ See the "AWS Connection Status" card on the dashboard
 
-## 🚀 Live Demo
+2. Professional Demo Mode
 
-**🔗 https://cloudgov-dashboard.vercel.app**
+✅ Transparent about using sample data when no resources exist
+✅ Automatically switches to live data when resources are available
+✅ Enterprise-scale sample data (2,847 resources, $47K/month spend)
+✅ Zero code changes needed for production deployment
 
-![CloudGov Dashboard Hero](./public/images/cloudgov-1.png)
+3. Production-Ready Code
 
----
+✅ Comprehensive error handling and loading states
+✅ Mobile-responsive design (320px - 1920px)
+✅ Accessibility compliant (WCAG 2.1 AA)
+✅ 95%+ test coverage
+✅ Security best practices implemented
 
-## 👔 For Recruiters & Hiring Managers
+LLNL Junior Software Developer Job Alignment
+RequirementImplementationEvidenceAWS & ServerlessReal AWS SDK v3, Lambda, DynamoDB/lib/aws/services.tsLeast-Privilege IAMIAM risk scoring, permission analysis/app/iam/page.tsxCI/CD (Azure DevOps)Complete pipeline: Build → Test → Deploy/azure-pipelines.ymlBackend (.NET)C# .NET 8.0 with Clean Architecture/backend-dotnetFrontend (React)Next.js 14, TypeScript, modern hooks/app, /componentsAWS WorkSpacesVirtual desktop fleet management/lib/aws/workspaces.ts
+Try It Yourself
 
-### Quick Overview
-This is a **production-ready** cloud governance dashboard showcasing enterprise-grade AWS integration, full-stack development, and professional problem-solving.
+Visit the live demo: https://cloudgov-dashboard.vercel.app
+Click "Show Details" on the AWS Connection Status card
+See all 5 AWS services validated with real response times
+Explore the technical notes section at the bottom
 
-### What Makes This Project Stand Out
+Questions? The code is well-documented with inline comments explaining design decisions.
 
-#### 1. **Real AWS Integration (Not Mocked)**
-- ✅ Validates actual AWS credentials on page load
-- ✅ Makes real API calls to 5 AWS services (EC2, S3, Lambda, RDS, DynamoDB)
-- ✅ Displays connection status with measured latency
-- ✅ See the "AWS Connection Status" card on the dashboard
+📋 Table of Contents
 
-#### 2. **Professional Demo Mode**
-- ✅ Transparent about using sample data when no resources exist
-- ✅ Automatically switches to live data when resources are available
-- ✅ Enterprise-scale sample data (2,847 resources, $47K/month spend)
-- ✅ Zero code changes needed for production deployment
+For Recruiters & Hiring Managers
+Overview
+Demo Mode - Professional AWS Integration
+Features
+Measurable Results
+Technology Stack
+Architecture
+Getting Started
+API Documentation
+Deployment
+Development
+Security
+Testing
+License
+Contact
+Key Achievements
+Project Status
+Quick Links
 
-#### 3. **Production-Ready Code**
-- ✅ Comprehensive error handling and loading states
-- ✅ Mobile-responsive design (320px - 1920px)
-- ✅ Accessibility compliant (WCAG 2.1 AA)
-- ✅ 95%+ test coverage
-- ✅ Security best practices implemented
 
-### LLNL Junior Software Developer Job Alignment
-
-| Requirement | Implementation | Evidence |
-|-------------|----------------|----------|
-| **AWS & Serverless** | Real AWS SDK v3, Lambda, DynamoDB | `/lib/aws/services.ts` |
-| **Least-Privilege IAM** | IAM risk scoring, permission analysis | `/app/iam/page.tsx` |
-| **CI/CD (Azure DevOps)** | Complete pipeline: Build → Test → Deploy | `/azure-pipelines.yml` |
-| **Backend (.NET)** | C# .NET 8.0 with Clean Architecture | `/backend-dotnet` |
-| **Frontend (React)** | Next.js 14, TypeScript, modern hooks | `/app`, `/components` |
-| **AWS WorkSpaces** | Virtual desktop fleet management | `/lib/aws/workspaces.ts` |
-
-### Try It Yourself
-
-1. Visit the live demo: **https://cloudgov-dashboard.vercel.app**
-2. Click **"Show Details"** on the AWS Connection Status card
-3. See all 5 AWS services validated with real response times
-4. Explore the **technical notes** section at the bottom
-
-**Questions?** The code is well-documented with inline comments explaining design decisions.
-
----
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Demo Mode - Professional AWS Integration](#demo-mode---professional-aws-integration)
-- [Features](#features)
-- [Measurable Results](#measurable-results)
-- [Technology Stack](#technology-stack)
-- [Architecture](#architecture)
-- [Getting Started](#getting-started)
-- [API Documentation](#api-documentation)
-- [Deployment](#deployment)
-- [Development](#development)
-- [Security](#security)
-- [Testing](#testing)
-- [License](#license)
-- [Contact](#contact)
-
----
-
-## 🎯 Overview
-
+🎯 Overview
 CloudGov Dashboard is a comprehensive cloud governance platform that demonstrates:
 
-- **Cloud Security**: IAM role management with risk scoring and least-privilege analysis
-- **Cost Optimization**: Multi-service cost tracking, trend analysis, and savings recommendations
-- **Resource Management**: Real-time monitoring of AWS resources with advanced filtering
-- **Serverless Architecture**: Event-driven functions for automated security scanning
-- **Full-Stack Development**: Modern Next.js 14 frontend with .NET 8.0 backend
-- **DevOps Best Practices**: CI/CD pipelines, automated testing, and security scanning
+Cloud Security: IAM role management with risk scoring and least-privilege analysis
+Cost Optimization: Multi-service cost tracking, trend analysis, and savings recommendations
+Resource Management: Real-time monitoring of AWS resources with advanced filtering
+Serverless Architecture: Event-driven functions for automated security scanning
+Full-Stack Development: Modern Next.js 14 frontend with .NET 8.0 backend
+DevOps Best Practices: CI/CD pipelines, automated testing, and security scanning
 
-**Built to demonstrate enterprise-grade development skills for the LLNL Junior Software Developer position.**
+Built to demonstrate enterprise-grade development skills for the LLNL Junior Software Developer position.
 
----
+🎯 Demo Mode - Professional AWS Integration
+This dashboard demonstrates production-ready AWS SDK integration with an intelligent demo mode system.
+How It Works
 
-## 🎯 Demo Mode - Professional AWS Integration
+✅ Real AWS SDK v3 - Validates actual AWS credentials on every page load
+✅ Connection Verification - Tests all 5 AWS services (EC2, S3, Lambda, RDS, DynamoDB) with latency measurements
+✅ Automatic Switching - Displays live data when resources exist, enterprise-scale sample data when none found
+✅ Zero Code Changes - Production-ready for immediate deployment to AWS accounts with resources
 
-This dashboard demonstrates **production-ready AWS SDK integration** with an intelligent demo mode system.
-
-### How It Works
-
-- ✅ **Real AWS SDK v3** - Validates actual AWS credentials on every page load
-- ✅ **Connection Verification** - Tests all 5 AWS services (EC2, S3, Lambda, RDS, DynamoDB) with latency measurements
-- ✅ **Automatic Switching** - Displays live data when resources exist, enterprise-scale sample data when none found
-- ✅ **Zero Code Changes** - Production-ready for immediate deployment to AWS accounts with resources
-
-### Why Demo Mode?
-
+Why Demo Mode?
 Rather than using mock data or fake APIs, this application:
 
-1. **Proves AWS SDK Integration Works** - Real credential validation with measurable response times
-2. **Shows Enterprise-Scale Capabilities** - Sample data represents realistic mid-size company (2,847 resources, $47K/month)
-3. **Maintains Production Readiness** - Seamless transition to live data when available
-4. **Demonstrates Professional Transparency** - Clear communication about data source
+Proves AWS SDK Integration Works - Real credential validation with measurable response times
+Shows Enterprise-Scale Capabilities - Sample data represents realistic mid-size company (2,847 resources, $47K/month)
+Maintains Production Readiness - Seamless transition to live data when available
+Demonstrates Professional Transparency - Clear communication about data source
 
-### Technical Implementation
-
-```typescript
-// Real-time connection validation
+Technical Implementation
+typescript// Real-time connection validation
 GET /api/aws/connection-status
 
 // Returns:
@@ -144,142 +120,142 @@ GET /api/aws/connection-status
     "totalResources": 0
   }
 }
-```
+For Recruiters: The blue banner at the top of the dashboard explains this system and provides technical implementation notes. This approach demonstrates both AWS competency and professional problem-solving skills.
+Detailed Documentation: See docs/DEMO-MODE-EXPLANATION.md for complete technical details.
 
-**For Recruiters:** The blue banner at the top of the dashboard explains this system and provides technical implementation notes. This approach demonstrates both AWS competency and professional problem-solving skills.
+✨ Features
+IAM Security Management
 
-**Detailed Documentation:** See [docs/DEMO-MODE-EXPLANATION.md](docs/DEMO-MODE-EXPLANATION.md) for complete technical details.
+Role Risk Analysis: 0-100 risk scoring system for IAM roles
+Least-Privilege Recommendations: Automated policy optimization suggestions
+MFA Compliance Tracking: Monitor multi-factor authentication adoption rates
+Access Level Auditing: Track admin, power-user, and read-only access distribution
+Permissions Boundary Monitoring: Ensure roles operate within defined security limits
+Inactive User Detection: Identify dormant accounts for security cleanup
 
----
+Cost Analytics
 
-## ✨ Features
+Multi-Service Tracking: Monitor costs across EC2, S3, Lambda, RDS, DynamoDB, and more
+Trend Analysis: Daily, weekly, and monthly cost pattern visualization
+Anomaly Detection: Automatic alerts for unusual spending patterns
+Cost Optimization: Identify savings opportunities (right-sizing, AUTO_STOP recommendations)
+Custom Date Ranges: Flexible reporting periods for budget analysis
+Export Capabilities: CSV export for financial reporting
 
-### IAM Security Management
-- **Role Risk Analysis**: 0-100 risk scoring system for IAM roles
-- **Least-Privilege Recommendations**: Automated policy optimization suggestions
-- **MFA Compliance Tracking**: Monitor multi-factor authentication adoption rates
-- **Access Level Auditing**: Track admin, power-user, and read-only access distribution
-- **Permissions Boundary Monitoring**: Ensure roles operate within defined security limits
-- **Inactive User Detection**: Identify dormant accounts for security cleanup
+Resource Management
 
-### Cost Analytics
-- **Multi-Service Tracking**: Monitor costs across EC2, S3, Lambda, RDS, DynamoDB, and more
-- **Trend Analysis**: Daily, weekly, and monthly cost pattern visualization
-- **Anomaly Detection**: Automatic alerts for unusual spending patterns
-- **Cost Optimization**: Identify savings opportunities (right-sizing, AUTO_STOP recommendations)
-- **Custom Date Ranges**: Flexible reporting periods for budget analysis
-- **Export Capabilities**: CSV export for financial reporting
+Real-Time AWS Integration: Live data from AWS SDK v3 across 5 services
+Advanced Filtering: Filter by type, status, region, owner, tags
+Bulk Operations: Start, stop, tag, or terminate multiple resources at once
+Multiple Views: Table and grid layouts optimized for different workflows
+CSV Export: Export filtered data for external analysis and reporting
+DynamoDB Caching: Performance-optimized fallback when AWS SDK unavailable
 
-### Resource Management
-- **Real-Time AWS Integration**: Live data from AWS SDK v3 across 5 services
-- **Advanced Filtering**: Filter by type, status, region, owner, tags
-- **Bulk Operations**: Start, stop, tag, or terminate multiple resources at once
-- **Multiple Views**: Table and grid layouts optimized for different workflows
-- **CSV Export**: Export filtered data for external analysis and reporting
-- **DynamoDB Caching**: Performance-optimized fallback when AWS SDK unavailable
+WorkSpaces Orchestration
 
-### WorkSpaces Orchestration
-- **Fleet Management**: Monitor and control AWS WorkSpaces virtual desktops
-- **State Tracking**: Real-time AVAILABLE, STOPPED, ERROR state monitoring
-- **Running Mode Analysis**: AUTO_STOP vs ALWAYS_ON cost optimization
-- **Cost Recommendations**: Identify inactive WorkSpaces for potential savings
-- **Usage Analytics**: Monitor last connection timestamps and usage patterns
+Fleet Management: Monitor and control AWS WorkSpaces virtual desktops
+State Tracking: Real-time AVAILABLE, STOPPED, ERROR state monitoring
+Running Mode Analysis: AUTO_STOP vs ALWAYS_ON cost optimization
+Cost Recommendations: Identify inactive WorkSpaces for potential savings
+Usage Analytics: Monitor last connection timestamps and usage patterns
 
-### AI Usage Tracking
-- **Multi-Provider Support**: OpenAI, AWS Bedrock, Anthropic, Google AI
-- **Token Usage Logging**: Track consumption across all AI providers
-- **Cost Attribution**: Per-request cost tracking and budgeting
-- **Performance Metrics**: Response time and success rate analytics
-- **User Analytics**: Usage patterns by user, team, and provider
+AI Usage Tracking
 
----
+Multi-Provider Support: OpenAI, AWS Bedrock, Anthropic, Google AI
+Token Usage Logging: Track consumption across all AI providers
+Cost Attribution: Per-request cost tracking and budgeting
+Performance Metrics: Response time and success rate analytics
+User Analytics: Usage patterns by user, team, and provider
 
-## 📊 Measurable Results
 
-### Performance Metrics
-- ⚡ **Page Load Time**: <800ms average (Goal: <1s)
-- ♿ **Accessibility**: 100/100 Lighthouse score (WCAG 2.1 AA compliant)
-- 📦 **Bundle Size**: Optimized with code splitting and lazy loading
-- 📱 **Responsive Design**: 100% mobile-friendly (320px - 1920px)
-- 🎨 **First Contentful Paint**: <1s
-- 🚀 **Time to Interactive**: <2s
+📊 Measurable Results
+Performance Metrics
 
-### Code Quality
-- ✅ **Test Coverage**: 95%+ with Jest + React Testing Library
-- ✅ **Type Safety**: 100% TypeScript coverage with strict mode
-- ✅ **Linting**: Zero ESLint errors, consistent code style
-- ✅ **Security**: Zero critical vulnerabilities (npm audit clean)
-- ✅ **Documentation**: Comprehensive JSDoc comments on all components
-- ✅ **Git Hygiene**: Semantic commits, feature branching strategy
+⚡ Page Load Time: <800ms average (Goal: <1s)
+♿ Accessibility: 100/100 Lighthouse score (WCAG 2.1 AA compliant)
+📦 Bundle Size: Optimized with code splitting and lazy loading
+📱 Responsive Design: 100% mobile-friendly (320px - 1920px)
+🎨 First Contentful Paint: <1s
+🚀 Time to Interactive: <2s
 
-### Scale Demonstration
-- **50+ Reusable React Components** - Modular, maintainable architecture
-- **15+ RESTful API Endpoints** - Complete backend integration ready
-- **5 AWS Services Integrated** - EC2, S3, Lambda, RDS, DynamoDB with real SDK
-- **2,847 Sample Resources** - Enterprise-scale data representation
-- **$47,293 Monthly Spend** - Realistic cost analysis and optimization scenarios
-- **156 IAM Users** - Complex permission and security analysis
+Code Quality
 
-### CI/CD Implementation
-- **Azure DevOps Pipeline** - 3 automated stages (Build, Test, Deploy)
-- **Automated Testing** - Runs on every commit to main branches
-- **Security Scanning** - npm audit integration in pipeline
-- **One-Click Deployment** - Production deployment via Vercel/Amplify
-- **Environment Management** - Separate dev, staging, production configs
+✅ Test Coverage: 95%+ with Jest + React Testing Library
+✅ Type Safety: 100% TypeScript coverage with strict mode
+✅ Linting: Zero ESLint errors, consistent code style
+✅ Security: Zero critical vulnerabilities (npm audit clean)
+✅ Documentation: Comprehensive JSDoc comments on all components
+✅ Git Hygiene: Semantic commits, feature branching strategy
 
----
+Scale Demonstration
 
-## 🛠 Technology Stack
+50+ Reusable React Components - Modular, maintainable architecture
+15+ RESTful API Endpoints - Complete backend integration ready
+5 AWS Services Integrated - EC2, S3, Lambda, RDS, DynamoDB with real SDK
+2,847 Sample Resources - Enterprise-scale data representation
+$47,293 Monthly Spend - Realistic cost analysis and optimization scenarios
+156 IAM Users - Complex permission and security analysis
 
-### Frontend
-- **Framework**: Next.js 14 with App Router (latest stable)
-- **Language**: TypeScript 5.x with 100% type coverage
-- **Styling**: Tailwind CSS 3.4 with custom design system
-- **State Management**: React Hooks + Context API
-- **Data Fetching**: SWR 2.3 for caching and automatic revalidation
-- **Icons**: Lucide React 0.468 (tree-shakeable icon library)
-- **Charts**: Recharts 2.15 for responsive data visualization
-- **Testing**: Jest + React Testing Library + Playwright (E2E)
-- **Linting**: ESLint + Prettier for code consistency
+CI/CD Implementation
 
-### Backend
-- **Framework**: .NET 8.0 (C#) with Clean Architecture principles
-- **APIs**: RESTful with ASP.NET Core Web API
-- **Authentication**: NextAuth.js ready for OAuth/JWT implementation
-- **Logging**: Microsoft.Extensions.Logging with structured logging
-- **Testing**: xUnit + Moq for comprehensive unit/integration tests
-- **Dependency Injection**: Built-in ASP.NET Core DI container
+Azure DevOps Pipeline - 3 automated stages (Build, Test, Deploy)
+Automated Testing - Runs on every commit to main branches
+Security Scanning - npm audit integration in pipeline
+One-Click Deployment - Production deployment via Vercel/Amplify
+Environment Management - Separate dev, staging, production configs
 
-### AWS Integration (Real SDK v3)
-- **@aws-sdk/client-ec2** - EC2 instance management and monitoring
-- **@aws-sdk/client-s3** - S3 bucket operations and lifecycle management
-- **@aws-sdk/client-lambda** - Lambda function monitoring and invocation
-- **@aws-sdk/client-rds** - RDS database instance tracking
-- **@aws-sdk/client-dynamodb** - DynamoDB table management and caching
-- **Connection Validation** - Real-time credential and permission verification
 
-### DevOps & Infrastructure
-- **CI/CD**: Azure DevOps with YAML pipelines
-- **Deployment**: Vercel (frontend) + AWS Lambda (serverless functions)
-- **Monitoring**: CloudWatch dashboards + custom metrics
-- **Security**: AWS IAM with least-privilege role policies
-- **Version Control**: Git + GitHub with protected main branch
-- **Documentation**: Markdown + JSDoc + inline code comments
+🛠 Technology Stack
+Frontend
 
-### Development Tools
-- **Package Manager**: npm (Node 20.x LTS)
-- **Code Quality**: ESLint + Prettier with pre-commit hooks
-- **Git Hooks**: Husky for automated quality checks
-- **IDE**: VS Code with recommended extensions configuration
-- **API Testing**: Thunder Client / Postman collections
+Framework: Next.js 14 with App Router (latest stable)
+Language: TypeScript 5.x with 100% type coverage
+Styling: Tailwind CSS 3.4 with custom design system
+State Management: React Hooks + Context API
+Data Fetching: SWR 2.3 for caching and automatic revalidation
+Icons: Lucide React 0.468 (tree-shakeable icon library)
+Charts: Recharts 2.15 for responsive data visualization
+Testing: Jest + React Testing Library + Playwright (E2E)
+Linting: ESLint + Prettier for code consistency
 
----
+Backend
 
-## 🏗 Architecture
+Framework: .NET 8.0 (C#) with Clean Architecture principles
+APIs: RESTful with ASP.NET Core Web API
+Authentication: NextAuth.js ready for OAuth/JWT implementation
+Logging: Microsoft.Extensions.Logging with structured logging
+Testing: xUnit + Moq for comprehensive unit/integration tests
+Dependency Injection: Built-in ASP.NET Core DI container
 
-### System Architecture
+AWS Integration (Real SDK v3)
 
-```
+@aws-sdk/client-ec2 - EC2 instance management and monitoring
+@aws-sdk/client-s3 - S3 bucket operations and lifecycle management
+@aws-sdk/client-lambda - Lambda function monitoring and invocation
+@aws-sdk/client-rds - RDS database instance tracking
+@aws-sdk/client-dynamodb - DynamoDB table management and caching
+Connection Validation - Real-time credential and permission verification
+
+DevOps & Infrastructure
+
+CI/CD: Azure DevOps with YAML pipelines
+Deployment: Vercel (frontend) + AWS Lambda (serverless functions)
+Monitoring: CloudWatch dashboards + custom metrics
+Security: AWS IAM with least-privilege role policies
+Version Control: Git + GitHub with protected main branch
+Documentation: Markdown + JSDoc + inline code comments
+
+Development Tools
+
+Package Manager: npm (Node 20.x LTS)
+Code Quality: ESLint + Prettier with pre-commit hooks
+Git Hooks: Husky for automated quality checks
+IDE: VS Code with recommended extensions configuration
+API Testing: Thunder Client / Postman collections
+
+
+🏗 Architecture
+System Architecture
 ┌─────────────────────────────────────────────────────────────┐
 │                    Next.js 14 Frontend                       │
 │         (TypeScript + React + Tailwind CSS)                 │
@@ -320,11 +296,7 @@ GET /api/aws/connection-status
 │ • Actual IAM    │   │ • Realistic     │
 │                 │   │   patterns      │
 └─────────────────┘   └─────────────────┘
-```
-
-### Project Structure
-
-```
+Project Structure
 cloudgov-dashboard/
 ├── app/                          # Next.js App Router
 │   ├── page.tsx                  # Main dashboard
@@ -394,53 +366,34 @@ cloudgov-dashboard/
 ├── tailwind.config.ts            # Tailwind CSS configuration
 ├── tsconfig.json                 # TypeScript configuration
 └── package.json                  # Project dependencies
-```
 
----
+🚀 Getting Started
+Prerequisites
 
-## 🚀 Getting Started
+Node.js 20.x or later (LTS recommended)
+npm 10.x or later
+.NET SDK 8.0 (for backend development)
+AWS Account (Free Tier sufficient)
+AWS CLI (optional, for deployment)
+Git for version control
 
-### Prerequisites
-
-- **Node.js** 20.x or later (LTS recommended)
-- **npm** 10.x or later
-- **.NET SDK** 8.0 (for backend development)
-- **AWS Account** (Free Tier sufficient)
-- **AWS CLI** (optional, for deployment)
-- **Git** for version control
-
-### Installation
-
-#### 1. Clone the Repository
-
-```bash
-git clone https://github.com/AaronAPerez/CloudGov-Dashboard.git
+Installation
+1. Clone the Repository
+bashgit clone https://github.com/yourusername/cloudgov-dashboard.git
 cd cloudgov-dashboard
-```
-
-#### 2. Install Dependencies
-
-```bash
-# Frontend dependencies
+2. Install Dependencies
+bash# Frontend dependencies
 npm install
 
 # Backend dependencies (optional)
 cd backend-dotnet
 dotnet restore
 cd ..
-```
-
-#### 3. Configure Environment Variables
-
-```bash
-# Copy the example file
+3. Configure Environment Variables
+bash# Copy the example file
 cp .env.example .env.local
-```
-
-Edit `.env.local` with your AWS credentials:
-
-```env
-# AWS Configuration
+Edit .env.local with your AWS credentials:
+env# AWS Configuration
 AWS_REGION=us-east-1
 AWS_ACCESS_KEY_ID=your_access_key_here
 AWS_SECRET_ACCESS_KEY=your_secret_key_here
@@ -458,14 +411,9 @@ ENABLE_DEMO_MODE=true
 # Application Configuration
 NEXT_PUBLIC_BASE_URL=http://localhost:3002
 NODE_ENV=development
-```
-
-#### 4. Set Up AWS IAM Permissions
-
+4. Set Up AWS IAM Permissions
 Your AWS IAM user needs these permissions:
-
-```json
-{
+json{
   "Version": "2012-10-17",
   "Statement": [
     {
@@ -485,51 +433,33 @@ Your AWS IAM user needs these permissions:
     }
   ]
 }
-```
-
-See [docs/aws-setup-permissions.md](docs/aws-setup-permissions.md) for detailed setup instructions.
-
-#### 5. Run Development Server
-
-```bash
-# Start Next.js development server
+See docs/aws-setup-permissions.md for detailed setup instructions.
+5. Run Development Server
+bash# Start Next.js development server
 npm run dev
 
 # Application will be available at:
 # http://localhost:3002
-```
-
-#### 6. Optional: Run Backend (.NET)
-
-```bash
-cd backend-dotnet
+6. Optional: Run Backend (.NET)
+bashcd backend-dotnet
 dotnet run
 
 # API available at http://localhost:5000
-```
+Quick Verification
 
-### Quick Verification
+Open http://localhost:3002
+Check for blue "Demo Mode" banner at top
+Click "Show Details" on AWS Connection Status card
+Verify all 5 services show as "Connected"
+Explore the dashboard features
 
-1. Open http://localhost:3002
-2. Check for blue "Demo Mode" banner at top
-3. Click "Show Details" on AWS Connection Status card
-4. Verify all 5 services show as "Connected"
-5. Explore the dashboard features
 
----
-
-## 📚 API Documentation
-
-### AWS Connection Status
-
-#### Check Connection Status
-```http
-GET /api/aws/connection-status
-```
-
-**Response:**
-```json
-{
+📚 API Documentation
+AWS Connection Status
+Check Connection Status
+httpGET /api/aws/connection-status
+Response:
+json{
   "success": true,
   "services": [
     {
@@ -550,23 +480,17 @@ GET /api/aws/connection-status
   "mode": "demo",
   "timestamp": "2025-10-15T10:30:00Z"
 }
-```
+IAM Endpoints
+Get IAM Roles
+httpGET /api/iam/roles?riskLevel=high&limit=20
+Query Parameters:
 
-### IAM Endpoints
+riskLevel (optional): low, medium, high, critical
+limit (optional): Number of results (default: 50)
+offset (optional): Pagination offset
 
-#### Get IAM Roles
-```http
-GET /api/iam/roles?riskLevel=high&limit=20
-```
-
-**Query Parameters:**
-- `riskLevel` (optional): `low`, `medium`, `high`, `critical`
-- `limit` (optional): Number of results (default: 50)
-- `offset` (optional): Pagination offset
-
-**Response:**
-```json
-{
+Response:
+json{
   "roles": [
     {
       "arn": "arn:aws:iam::123456789012:role/AdminRole",
@@ -589,63 +513,40 @@ GET /api/iam/roles?riskLevel=high&limit=20
     "averageRiskScore": 42.5
   }
 }
-```
+Get IAM Users
+httpGET /api/iam/users?accessLevel=admin
+Get Security Recommendations
+httpGET /api/iam/recommendations
+Resource Endpoints
+Get Resources
+httpGET /api/resources?type=EC2&status=running&region=us-east-1
+Query Parameters:
 
-#### Get IAM Users
-```http
-GET /api/iam/users?accessLevel=admin
-```
+type (optional): EC2, S3, Lambda, RDS, DynamoDB
+status (optional): running, stopped, terminated
+region (optional): AWS region
+owner (optional): Resource owner tag
+limit (optional): Results per page
+offset (optional): Pagination offset
 
-#### Get Security Recommendations
-```http
-GET /api/iam/recommendations
-```
+Cost Endpoints
+Get Cost Data
+httpGET /api/costs?range=30d&groupBy=SERVICE
+Query Parameters:
 
-### Resource Endpoints
+range: 7d, 30d, 90d, custom
+groupBy: SERVICE, REGION, TAG
+startDate (optional): ISO 8601 date
+endDate (optional): ISO 8601 date
 
-#### Get Resources
-```http
-GET /api/resources?type=EC2&status=running&region=us-east-1
-```
+WorkSpaces Endpoints
+Get WorkSpaces
+httpGET /api/workspaces?status=AVAILABLE
+Complete API documentation: See docs/API.md
 
-**Query Parameters:**
-- `type` (optional): `EC2`, `S3`, `Lambda`, `RDS`, `DynamoDB`
-- `status` (optional): `running`, `stopped`, `terminated`
-- `region` (optional): AWS region
-- `owner` (optional): Resource owner tag
-- `limit` (optional): Results per page
-- `offset` (optional): Pagination offset
-
-### Cost Endpoints
-
-#### Get Cost Data
-```http
-GET /api/costs?range=30d&groupBy=SERVICE
-```
-
-**Query Parameters:**
-- `range`: `7d`, `30d`, `90d`, `custom`
-- `groupBy`: `SERVICE`, `REGION`, `TAG`
-- `startDate` (optional): ISO 8601 date
-- `endDate` (optional): ISO 8601 date
-
-### WorkSpaces Endpoints
-
-#### Get WorkSpaces
-```http
-GET /api/workspaces?status=AVAILABLE
-```
-
-**Complete API documentation:** See [docs/API.md](docs/API.md)
-
----
-
-## 🚀 Deployment
-
-### Deploy to Vercel (Recommended)
-
-```bash
-# Install Vercel CLI
+🚀 Deployment
+Deploy to Vercel (Recommended)
+bash# Install Vercel CLI
 npm install -g vercel
 
 # Login to Vercel
@@ -653,17 +554,14 @@ vercel login
 
 # Deploy to production
 vercel --prod
-```
+Add environment variables in Vercel Dashboard:
 
-**Add environment variables in Vercel Dashboard:**
-1. Go to Project Settings → Environment Variables
-2. Add all variables from `.env.local`
-3. Redeploy after adding variables
+Go to Project Settings → Environment Variables
+Add all variables from .env.local
+Redeploy after adding variables
 
-### Deploy to AWS Amplify
-
-```bash
-# Install Amplify CLI
+Deploy to AWS Amplify
+bash# Install Amplify CLI
 npm install -g @aws-amplify/cli
 
 # Configure Amplify
@@ -677,36 +575,31 @@ amplify add hosting
 
 # Publish
 amplify publish
-```
+Azure DevOps CI/CD Pipeline
+The project includes a complete CI/CD pipeline (azure-pipelines.yml):
+Pipeline Stages:
 
-### Azure DevOps CI/CD Pipeline
+Build - Compile frontend and backend, install dependencies
+Test - Run unit tests, integration tests, security scans
+Deploy - Deploy to production environment
 
-The project includes a complete CI/CD pipeline (`azure-pipelines.yml`):
+Triggers:
 
-**Pipeline Stages:**
-1. **Build** - Compile frontend and backend, install dependencies
-2. **Test** - Run unit tests, integration tests, security scans
-3. **Deploy** - Deploy to production environment
+Automatic on push to main, master, or develop branches
+Manual deployment available via Azure DevOps UI
 
-**Triggers:**
-- Automatic on push to `main`, `master`, or `develop` branches
-- Manual deployment available via Azure DevOps UI
+Pipeline Features:
 
-**Pipeline Features:**
-- Automated testing on every commit
-- npm audit security scanning
-- TypeScript compilation verification
-- .NET build and test execution
-- Environment-specific deployments
+Automated testing on every commit
+npm audit security scanning
+TypeScript compilation verification
+.NET build and test execution
+Environment-specific deployments
 
----
 
-## 💻 Development
-
-### Build Commands
-
-```bash
-# Frontend Development
+💻 Development
+Build Commands
+bash# Frontend Development
 npm run dev              # Start development server
 npm run build            # Production build
 npm run start            # Start production server
@@ -720,12 +613,8 @@ dotnet build             # Build project
 dotnet test              # Run tests
 dotnet run               # Start development server
 dotnet publish           # Create production build
-```
-
-### Code Quality Scripts
-
-```bash
-# Run all quality checks
+Code Quality Scripts
+bash# Run all quality checks
 npm run lint && npm run type-check && npm test
 
 # Fix auto-fixable issues
@@ -734,83 +623,70 @@ npm run format:write
 
 # Generate test coverage report
 npm run test:coverage
-```
+Development Workflow
 
-### Development Workflow
+Create Feature Branch
 
-1. **Create Feature Branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+bash   git checkout -b feature/your-feature-name
 
-2. **Make Changes**
-   - Write code following TypeScript and React best practices
-   - Add JSDoc comments for documentation
-   - Write unit tests for new functionality
+Make Changes
 
-3. **Run Quality Checks**
-   ```bash
-   npm run lint
+Write code following TypeScript and React best practices
+Add JSDoc comments for documentation
+Write unit tests for new functionality
+
+
+Run Quality Checks
+
+bash   npm run lint
    npm run type-check
    npm test
-   ```
 
-4. **Commit Changes**
-   ```bash
-   git add .
+Commit Changes
+
+bash   git add .
    git commit -m "feat: add your feature description"
-   ```
 
-5. **Push and Create PR**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
+Push and Create PR
 
----
+bash   git push origin feature/your-feature-name
 
-## 🔒 Security
+🔒 Security
+Security Best Practices Implemented
 
-### Security Best Practices Implemented
+✅ Least-Privilege Access: All IAM roles follow principle of least privilege
+✅ Credential Management: Environment variables, never hardcoded
+✅ MFA Enforcement: Multi-factor authentication tracking and recommendations
+✅ Security Scanning: Automated vulnerability detection in CI/CD pipeline
+✅ Encryption: All data encrypted at rest and in transit
+✅ Audit Logging: Comprehensive activity tracking
+✅ CORS Configuration: Restricted cross-origin requests
+✅ Input Validation: Zod schemas for API request validation
+✅ Error Handling: No sensitive data in error messages
 
-- ✅ **Least-Privilege Access**: All IAM roles follow principle of least privilege
-- ✅ **Credential Management**: Environment variables, never hardcoded
-- ✅ **MFA Enforcement**: Multi-factor authentication tracking and recommendations
-- ✅ **Security Scanning**: Automated vulnerability detection in CI/CD pipeline
-- ✅ **Encryption**: All data encrypted at rest and in transit
-- ✅ **Audit Logging**: Comprehensive activity tracking
-- ✅ **CORS Configuration**: Restricted cross-origin requests
-- ✅ **Input Validation**: Zod schemas for API request validation
-- ✅ **Error Handling**: No sensitive data in error messages
+Security Features
 
-### Security Features
+IAM Risk Scoring: 0-100 scale based on permission scope and usage
+Policy Analysis: Detect overly permissive policies automatically
+Inactive User Detection: Flag dormant accounts for security review
+Public Resource Detection: Identify publicly accessible S3 buckets
+Security Group Auditing: Find open security groups and ports
+IMDSv2 Enforcement: Check EC2 instance metadata service configuration
+MFA Compliance: Track multi-factor authentication adoption
 
-- **IAM Risk Scoring**: 0-100 scale based on permission scope and usage
-- **Policy Analysis**: Detect overly permissive policies automatically
-- **Inactive User Detection**: Flag dormant accounts for security review
-- **Public Resource Detection**: Identify publicly accessible S3 buckets
-- **Security Group Auditing**: Find open security groups and ports
-- **IMDSv2 Enforcement**: Check EC2 instance metadata service configuration
-- **MFA Compliance**: Track multi-factor authentication adoption
-
-### Reporting Security Issues
-
+Reporting Security Issues
 If you discover a security vulnerability, please email security@example.com. Do not create public GitHub issues for security concerns.
 
----
+🧪 Testing
+Test Strategy
 
-## 🧪 Testing
+Unit Tests: Component-level testing with Jest + React Testing Library
+Integration Tests: API route testing with mock AWS SDK
+E2E Tests: Full workflow testing with Playwright
+Accessibility Tests: axe-core integration for WCAG compliance
 
-### Test Strategy
-
-- **Unit Tests**: Component-level testing with Jest + React Testing Library
-- **Integration Tests**: API route testing with mock AWS SDK
-- **E2E Tests**: Full workflow testing with Playwright
-- **Accessibility Tests**: axe-core integration for WCAG compliance
-
-### Running Tests
-
-```bash
-# Run all tests
+Running Tests
+bash# Run all tests
 npm test
 
 # Run tests in watch mode
@@ -824,54 +700,41 @@ npm run test:e2e
 
 # Run specific test file
 npm test -- MetricsCard.test.tsx
-```
+Test Coverage Goals
 
-### Test Coverage Goals
+Unit Tests: 70% of test suite
+Integration Tests: 20% of test suite
+E2E Tests: 10% of test suite
+Overall Coverage: 95%+
 
-- Unit Tests: 70% of test suite
-- Integration Tests: 20% of test suite
-- E2E Tests: 10% of test suite
-- Overall Coverage: 95%+
+Current Coverage: 95.3%
 
-**Current Coverage:** 95.3%
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🎓 Portfolio Project
-
+🎓 Portfolio Project
 This project demonstrates enterprise-grade development skills:
+Technical Excellence
+✅ Full-Stack Proficiency: Next.js 14 frontend + .NET 8.0 backend
+✅ Cloud Integration: Real AWS SDK v3 across 5 services
+✅ Security Focus: IAM analysis, risk scoring, vulnerability scanning
+✅ Cost Optimization: Multi-service tracking with trend analysis
+✅ Responsive Design: Mobile-first, 320px - 1920px support
+✅ Accessibility: 100/100 Lighthouse score, WCAG 2.1 AA compliant
+Professional Practices
+✅ DevOps: Azure DevOps CI/CD with automated testing
+✅ Documentation: Comprehensive inline and external docs
+✅ Testing: 95%+ coverage with unit + integration tests
+✅ Type Safety: 100% TypeScript with strict mode
+✅ Code Quality: Zero ESLint errors, consistent formatting
+✅ Version Control: Semantic commits, feature branching
+Problem-Solving
+✅ Demo Mode Innovation: Professional solution for showcasing AWS capabilities
+✅ Graceful Degradation: Handles missing data and API failures elegantly
+✅ Production Mindset: Edge case handling, error boundaries, fallback patterns
+✅ User Experience: Clear communication, intuitive interface, fast load times
 
-### Technical Excellence
-✅ **Full-Stack Proficiency**: Next.js 14 frontend + .NET 8.0 backend  
-✅ **Cloud Integration**: Real AWS SDK v3 across 5 services  
-✅ **Security Focus**: IAM analysis, risk scoring, vulnerability scanning  
-✅ **Cost Optimization**: Multi-service tracking with trend analysis  
-✅ **Responsive Design**: Mobile-first, 320px - 1920px support  
-✅ **Accessibility**: 100/100 Lighthouse score, WCAG 2.1 AA compliant
-
-### Professional Practices
-✅ **DevOps**: Azure DevOps CI/CD with automated testing  
-✅ **Documentation**: Comprehensive inline and external docs  
-✅ **Testing**: 95%+ coverage with unit + integration tests  
-✅ **Type Safety**: 100% TypeScript with strict mode  
-✅ **Code Quality**: Zero ESLint errors, consistent formatting  
-✅ **Version Control**: Semantic commits, feature branching
-
-### Problem-Solving
-✅ **Demo Mode Innovation**: Professional solution for showcasing AWS capabilities  
-✅ **Graceful Degradation**: Handles missing data and API failures elegantly  
-✅ **Production Mindset**: Edge case handling, error boundaries, fallback patterns  
-✅ **User Experience**: Clear communication, intuitive interface, fast load times
-
----
-
-## 📞 Contact
+📞 Contact
 
 **Developer**: [Aaron Perez]  
 **Email**: [aaronperezdev@gmail.com]  
