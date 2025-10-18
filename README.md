@@ -379,7 +379,7 @@ Git for version control
 
 Installation
 1. Clone the Repository
-bashgit clone https://github.com/yourusername/cloudgov-dashboard.git
+bashgit clone https://github.com/AaronAPerez/CloudGov-Dashboard.git
 cd cloudgov-dashboard
 2. Install Dependencies
 bash# Frontend dependencies
