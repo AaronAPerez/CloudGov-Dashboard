@@ -196,6 +196,6 @@ A: AWS Free Tier is limited, and I want to avoid costs. Sample data lets me show
 Q: Is the sample data realistic?
 A: Yes, it's based on real AWS usage patterns, cost distributions, and security configurations from mid-size companies.
 
-Last Updated: October 14, 2025
-Author: Your Name
+Last Updated: October 17, 2025
+Author: Aaron Perez
 Purpose: LLNL Junior Software Developer Portfolio
